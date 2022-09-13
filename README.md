@@ -18,9 +18,9 @@ product_sale        number(1) default 0,           -상품 카테고리 - 세일
 product_hit         number(5));		-상품 조회수
 ```
 ### DB추가
-product_feed_or_snack number(1)		-상품 카테고리 - 간식 0:사료, 1:간식
-product_date	date default sysdate	-상품 등록일 sysdate
-product_sample	number(1)		-상품 샘플 여부 0:false , 1:true
+product_feed_or_snack number(1)		-상품 카테고리 - 간식 0:사료, 1:간식  
+product_date	date default sysdate	-상품 등록일 sysdate  
+product_sample	number(1)		-상품 샘플 여부 0:false , 1:true  
 
 주문목록 추가
 order_user_idx

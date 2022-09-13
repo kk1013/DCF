@@ -1,6 +1,6 @@
 @charset "UTF-8";
     *{margin: 0; padding: 0;}
-    #headerwrap{width: 100%;}
+    #headerwrap{width: 100%; position: sticky;top:0; background-color: white; z-index: 5;}
     a{text-decoration: none;}
     /* ul{list-style: none;padding-left: 0;} */
 
@@ -14,7 +14,6 @@
         justify-content: flex-end;
         position: relative;
         left: 0px;
-        margin-bottom: 30px;
     }
     #top > ul{
         list-style: none;
@@ -68,7 +67,7 @@
     /* Menu */
     #menu{
         width: 100%;
-        margin-top: 40px;
+        margin-top: 10px;
         display: flex;
         justify-content: center;
         border-bottom: 3px solid #ebebeb;

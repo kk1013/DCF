@@ -19,8 +19,8 @@
                     <p>반려견</p>
                 </div>
                 <div class="type-button">
-                    <img src="/img/icons/productlist_cat.png" class="button" alt="2">
-                    <img src="/img/icons/productlist_cat_over.png" class="button" alt="3">
+                    <img src="/img/icons/productlist_cat.png" style="margin-top: 6.5px;" class="button" alt="2">
+                    <img src="/img/icons/productlist_cat_over.png" style="margin-top: 5.5px;" class="button" alt="3">
                     <p>반려묘</p>
                 </div>
             </div>
@@ -162,23 +162,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$(".product").click(function(){
-			location.href="productAction";
-		})
-		
-		
 		$(".button").click(function() {
-            console.log($(this));
             var type_button = $(this).attr("alt");
+            var all_button = document.getElementsByClassName("button");
             var button = document.getElementsByClassName("button")[type_button];
             if(button.classList.contains("display_none") == false){
+                for( var i = 0 ; i<all_button.length;i++){
+                    all_button[i].classList.remove("display_none");
+                }
                 button.classList.add("display_none");
             }else{
                 button.classList.remove("display_none");
             }
-            console.log(type_button);
 		});
-
-
     });
 </script>

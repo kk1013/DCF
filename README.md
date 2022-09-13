@@ -22,10 +22,10 @@ product_feed_or_snack number(1)		-상품 카테고리 - 간식 0:사료, 1:간�
 product_date	date default sysdate	-상품 등록일 sysdate  
 product_sample	number(1)		-상품 샘플 여부 0:false , 1:true  
 
-주문목록 추가
-order_user_idx
-DB추가테이블
-one2one_reply
+주문목록 추가  
+order_user_idx  
+DB추가테이블  
+one2one_reply  
 
 ### 반려견, 반려묘 나이 값
 {"value":0,"title":"모든 연령","age":"0"},
@@ -70,10 +70,11 @@ one2one_reply
 {"value":520,"title":"10세","age":"520"}
                                     
 ### 현재 남아있는 일!!!
-샘플신청 페이지 검색 기능!
-헤더 마이페이지->서브메뉴, 장바구니 아이콘으로 변경
-장바구니 페이지디자인을 HTML구현
-git 정리
-1:1문의 목록 보기 HTML구현
-카테고리 검색후 type버튼 및에 div 추가후 카테고리 보기 추가!!
-상품정보 카테고리 구현
+샘플신청 페이지 검색 기능!  
+헤더 마이페이지->서브메뉴, 장바구니 아이콘으로 변경  
+장바구니 페이지디자인을 HTML구현  
+git 정리  
+1:1문의 목록 보기 HTML구현  
+카테고리 검색후 type버튼 및에 div 추가후 카테고리 보기 추가!!  
+상품정보 카테고리 구현  
+ 

@@ -82,6 +82,12 @@ public class MyController {
 		model.addAttribute("mainPage", "Product/sample.jsp");
 		return "index";
 	}
+	
+	@RequestMapping("/loginAction")
+	public String adminPage(Model model) {
+		model.addAttribute("adminPage", "../Admin/admin_about_member.jsp");
+		return "Admin/admin_index";
+	}
 }
 
 

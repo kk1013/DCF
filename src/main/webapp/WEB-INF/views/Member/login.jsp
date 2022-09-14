@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/css/Member/login.css">
 <link rel="stylesheet" href="/css/checkbox.css">
-<form action="#">
+<form action="loginAction">
 <div id="page-nav-wrap">
     <div id="page-nav">
         <p>HOME > 로그인</p>

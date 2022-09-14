@@ -14,20 +14,22 @@
         <div id="product-aside">
             <div id="type-button">
                 <div class="type-button">
-                    <img src="/img/icons/productlist_dog.png" style="margin-top: 5.5px;" class="button" alt="0">
+                    <img src="/img/icons/productlist_dog.png" style="margin-top: 5.5px; " class="button" alt="0">
                     <img src="/img/icons/productlist_dog_over.png" style="margin-top: 5.5px;" class="button" alt="1">
                     <p>반려견</p>
                 </div>
                 <div class="type-button">
-                    <img src="/img/icons/productlist_cat.png" style="margin-top: 6.5px;" class="button" alt="2">
-                    <img src="/img/icons/productlist_cat_over.png" style="margin-top: 5.5px;" class="button" alt="3">
+                    <img src="/img/icons/productlist_cat.png" style="margin-top: 6.5px; width:83px; height: 86px;" class="button" alt="2">
+                    <img src="/img/icons/productlist_cat_over.png" style="margin-top: 5.5px; width:83px; height: 86px;" class="button" alt="3">
                     <p>반려묘</p>
                 </div>
             </div>
             <p class="age-wrap">
+            <div id="ageoutput">
                 <span class="age">age</span>
-                <span class="age" id="output_age">0년</span>
-                <input type="range" id="agebar" min="1" max="100" value="50" oninput="document.getElementById('output_age').innerHTML=this.value+'년'">
+                <span class="age" id="output_age">모든연령</span>
+           	</div>
+                <input type="range" id="agebar" min="0" max="40" step="1" value="0" oninput="agebar(this);">
             </p>
             <div id="feed-type">
                 <p>type</p>
@@ -175,5 +177,56 @@
                 button.classList.remove("display_none");
             }
 		});
-    });
+
+    }); 
+    var before_value = 0;
+    var week = 0;
+    var month = 1;
+    var year = 2;
+    function agebar(e){
+        var value = e.value;
+        var output = document.getElementById("output_age");
+        
+        if(value == 0){output.innerHTML = "모든연령";}
+        if(value == 1){output.innerHTML = "생후 1 주";}
+        if(value == 2){output.innerHTML = "생후 2 주";}
+        if(value == 3){output.innerHTML = "생후 3 주";}
+        if(value == 4){output.innerHTML = "생후 4 주";}
+        if(value == 5){output.innerHTML = "생후 5 주";}
+        if(value == 6){output.innerHTML = "생후 6 주";}
+        if(value == 7){output.innerHTML = "생후 7 주";}
+        if(value == 8){output.innerHTML = "생후 8 주";}
+        if(value == 9){output.innerHTML = "생후 2 개월";}
+        if(value == 10){output.innerHTML = "생후 3 개월";}
+        if(value == 11){output.innerHTML = "생후 4 개월";}
+        if(value == 12){output.innerHTML = "생후 5 개월";}
+        if(value == 13){output.innerHTML = "생후 6 개월";}
+        if(value == 14){output.innerHTML = "생후 7 개월";}
+        if(value == 15){output.innerHTML = "생후 8 개월";}
+        if(value == 16){output.innerHTML = "생후 9 개월";}
+        if(value == 17){output.innerHTML = "생후 10 개월";}
+        if(value == 18){output.innerHTML = "생후 11 개월";}
+        if(value == 19){output.innerHTML = "생후 12 개월";}
+        if(value == 20){output.innerHTML = "생후 13 개월";}
+        if(value == 21){output.innerHTML = "생후 14 개월";}
+        if(value == 22){output.innerHTML = "생후 15 개월";}
+        if(value == 23){output.innerHTML = "생후 16 개월";}
+        if(value == 24){output.innerHTML = "생후 17 개월";}
+        if(value == 25){output.innerHTML = "생후 18 개월";}
+        if(value == 26){output.innerHTML = "생후 19 개월";}
+        if(value == 27){output.innerHTML = "생후 20 개월";}
+        if(value == 28){output.innerHTML = "생후 21 개월";}
+        if(value == 29){output.innerHTML = "생후 22 개월";}
+        if(value == 30){output.innerHTML = "생후 23 개월";}
+        if(value == 31){output.innerHTML = "생후 24 개월";}
+        if(value == 32){output.innerHTML = "3세";}
+        if(value == 33){output.innerHTML = "4세";}
+        if(value == 34){output.innerHTML = "5세";}
+        if(value == 35){output.innerHTML = "6세";}
+        if(value == 36){output.innerHTML = "7세";}
+        if(value == 37){output.innerHTML = "8세";}
+        if(value == 38){output.innerHTML = "9세";}
+        if(value == 39){output.innerHTML = "10세";}
+        if(value == 40){output.innerHTML = "11세";}
+    }
 </script>

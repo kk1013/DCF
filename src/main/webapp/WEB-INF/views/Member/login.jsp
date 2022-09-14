@@ -26,7 +26,7 @@
                 <a href="pwfind">비밀번호찾기</a>
             </li>
             <li>
-                <a href="#">회원가입</a>
+                <a href="join">회원가입</a>
             </li>
         </ul>
     </div>

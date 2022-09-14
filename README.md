@@ -10,7 +10,7 @@ product_price       number(10),		-상품 가격
 product_image       varchar2(30),		-상품 이미지
 product_content     varchar2(1000),		-상품 내용
 product_age         number(10),		-상품 카테고리 - 0:전체연령, 1:베이비, 2:어덜트, 3:시니어
-product_type        number(1),              	-상품 카테고리 - 사료타입 건식:0, 습식:1
+product_feed_type        number(1),              	-상품 카테고리 - 사료타입 건식:0, 습식:1
 product_size        varchar2(10),		-상품 카테고리 - 반려동물 0:초소형 , 1:소형, 2:중형, 3:대형, 4:초대형
 product_animal      number(1),              	-상품 카테고리 - 반려동물타입 반려견:0, 반려묘:1
 product_new         number(1) default 0,          -상품 카테고리 - 신상품 Off: 0,     On : 1
@@ -18,9 +18,8 @@ product_sale        number(1) default 0,           -상품 카테고리 - 세일
 product_hit         number(5));		-상품 조회수
 ```
 ### DB추가
-product_feed_or_snack number(1)		-상품 카테고리 - 간식 0:사료, 1:간식  
+product_type number(1)		-상품 카테고리 - 간식 0:사료, 1:간식, 2:샘플  
 product_date	date default sysdate	-상품 등록일 sysdate  
-product_sample	number(1)		-상품 샘플 여부 0:false , 1:true  
 
 주문목록 추가  
 order_user_idx  

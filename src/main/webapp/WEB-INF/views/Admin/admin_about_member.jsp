@@ -6,6 +6,12 @@
     <input type="button" class="btn" value="정보수정">
     <input type="button" class="btn" value="회원삭제">
     <div class="customer-search">
+    	<select name="search" id="search">
+    		<option value="id">아이디</option>
+    		<option value="name">이름</option>
+    		<option value="email">이메일</option>
+    		<option value="phone">휴대전화</option>
+    	</select>
         <input type="text" class="searchbar">
         <input type="button" class="searchbutton" value="검색">
     </div>

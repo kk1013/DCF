@@ -18,12 +18,12 @@
         <img src="/img/logo.png" id="aside-logo">
         <ul class="aside-menu">
             <li class="aside-menu-item">
-                <a href="admin_about_member" class="bold">회원관리</a>
+                <a href="loginAction" class="bold">회원관리</a>
             </li>
             <li class="aside-menu-item">
                 <a href="#" class="bold">상품관리</a>
                 <ul class="asidebar">
-                    <li><a href="#">상품 등록</a></li>
+                    <li><a href="admin_product">상품 등록</a></li>
                     <li><a href="#">상품 목록</a></li>
                 </ul>
             </li>

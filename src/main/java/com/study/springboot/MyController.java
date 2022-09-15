@@ -88,6 +88,11 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_about_member.jsp");
 		return "Admin/admin_index";
 	}
+	@RequestMapping("/admin_product")
+	public String admin_product(Model model) {
+		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
+		return "Admin/admin_index";
+	}
 }
 
 

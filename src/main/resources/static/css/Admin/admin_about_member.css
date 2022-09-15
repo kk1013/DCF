@@ -59,6 +59,13 @@
     .customer-search{
         float: right;
     }
+    #search{
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    font-size: 14px;
+    color: #292929;
+    }
     .searchbar {
     width: 200px;
     height: 30px;

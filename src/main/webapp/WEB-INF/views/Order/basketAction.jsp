@@ -67,7 +67,7 @@
             </table>
         </div>
         <div class="bottom-button">
-            <input type="button" class="btn" value="주문결제">
+            <input type="button" onclick="location.href='paymentsAction'" class="btn" value="주문결제">
             <input type="button" class="btn" value="취소">
         </div>
     </div>

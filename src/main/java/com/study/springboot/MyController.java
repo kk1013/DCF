@@ -88,9 +88,13 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_about_member.jsp");
 		return "Admin/admin_index";
 	}
+	
 	@RequestMapping("/admin_product")
 	public String admin_product(Model model) {
 		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
+		return "Admin/admin_index";
+	}
+	
 	@RequestMapping("/faq")
 	public String faq ( Model model) {
 		model.addAttribute("mainPage", "Customer/faq.jsp");
@@ -124,6 +128,18 @@ public class MyController {
 	@RequestMapping("/cart")
 	public String cart ( Model model) {
 		model.addAttribute("mainPage", "Mypage/cart.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/payments")
+	public String payments(Model model) {
+		model.addAttribute("mainPage", "Order/basketAction.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/paymentsAction")
+	public String paymentsAction(Model model) {
+		model.addAttribute("mainPage", "Order/orderAction.jsp");
 		return "index";
 	}
 	

@@ -80,7 +80,7 @@
             </tr>
             <tr class="line-top line-bottom">
                 <td class="item"><p>상품 상세설명</p></td>
-                <td><textarea name="bo_content" id="" cols="30" rows="10"></textarea></td>
+                <td><textarea name="bo_content" id="textarea" cols="30" rows="10"></textarea></td>
             </tr>
         </table>
         <div id="btn-box">

@@ -11,10 +11,10 @@
             <a href="join">회원가입</a>
         </li>
         <li>
-            <a href="#">장바구니</a>
+            <a href="cart">장바구니</a>
         </li>
         <li>
-            <a href="#">마이페이지</a>
+            <a href="mypage">마이페이지</a>
         </li>
     </ul>
 </div>
@@ -31,16 +31,16 @@
             <h1><a href="product" class="linkhover">반려묘</a></h1>
         </li>
         <li>
-            <h1><a href="#" class="linkhover">신상품</a></h1>
+            <h1><a href="product" class="linkhover">신상품</a></h1>
         </li>
         <li>
-            <h1><a href="#" class="linkhover">베스트</a></h1>
+            <h1><a href="product" class="linkhover">베스트</a></h1>
         </li>
         <li>
             <h1><a href="sample" class="linkhover">샘플신청</a></h1>
         </li>
         <li>
-            <h1><a href="#" class="linkhover">고객센터</a></h1>
+            <h1><a href="notice" class="linkhover">고객센터</a></h1>
         </li>
     </ul>
 </div>

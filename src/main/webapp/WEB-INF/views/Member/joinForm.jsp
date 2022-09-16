@@ -25,7 +25,7 @@
             </div>
     
             <div>
-                <form action="">
+                <form action="joinAction" method="get">
                 <table class="joinform-table">
                     <tr class="joinform-tr">
                         <td class="joinform-subtitle">
@@ -124,7 +124,7 @@
     
                 <div class="joinform-buttonwrap">
                     <button class="joinform-button joinform-cancel">취소</button>
-                    <button onClick="location.href='joinAction'" class="joinform-button joinform-confirm">회원가입</button>
+                    <button class="joinform-button joinform-confirm">회원가입</button>
                 </div>
                 
                 </form>

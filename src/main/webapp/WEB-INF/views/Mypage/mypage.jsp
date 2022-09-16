@@ -52,7 +52,7 @@
             <a href="orderlist"><span>주문목록</span></a>
         </div>
         <div class="mypage-filter">
-            <a href="noetoonelist"><span>문의내역</span></a>
+            <a href="onetoonelist"><span>문의내역</span></a>
         </div>
         <div class="mypage-filter">
             <a href="cart"><span>장바구니</span></a>

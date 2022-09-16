@@ -22,7 +22,7 @@
         
         <div class="board-buttondiv">
             <div>
-                <input class="board-btn btn1" type="button" value="글등록">
+                <input class="board-btn btn1" onclick="location.href='adminNoticeWrite'" type="button" value="글등록">
                 <input class="board-btn btn2" type="button" value="글삭제">
             </div>
             <div class="searchdiv">

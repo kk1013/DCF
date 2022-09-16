@@ -91,7 +91,7 @@
         
         <div class="orderbuttondiv">
             <input class="order-button order-button1" type="button" value="선택상품주문">
-            <input class="order-button order-button2" type="button" value="전체상품주문">
+            <input class="order-button order-button2" onclick="location.href='payments'" type="button" value="전체상품주문">
         </div>
 
     </div>

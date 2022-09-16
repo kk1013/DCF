@@ -4,7 +4,7 @@
 
 <div id="footerwrap">
     <div id="footer">
-        <div class="content">
+        <div class="footer-content">
             <img src="/img/icons/footer_logo.png"> <br>
             <h4>사업자등록번호 : 111-12-33501</h4><br>
             <h4>경기도 의정부시 의정부2동 신흥로258번길 25<br>
@@ -12,7 +12,7 @@
             </h4>
         </div>
         
-        <div class="content">
+        <div class="footer-content">
             <ul>
                 <li>
                     <a href="#">회사소개</a>
@@ -29,12 +29,12 @@
             </ul>
         </div>
         
-        <div id="sns" class="content">
-            <img src="/img/icons/youtube.png" >
-            <img src="/img/icons/facebook.png"><br>
-            <img src="/img/icons/kakao.png">
-            <img src="/img/icons/instagram.png">
-            <img src="/img/icons/twitter.png">
+        <div id="sns" class="footer-content">
+            <a href="#"><img src="/img/icons/youtube.png" ></a>
+            <a href="#"><img src="/img/icons/facebook.png"></a><br>
+            <a href="#"><img src="/img/icons/kakao.png"></a>
+            <a href="#"><img src="/img/icons/instagram.png"></a>
+            <a href="#"><img src="/img/icons/twitter.png"></a>
         </div>
     </div>
 </div>

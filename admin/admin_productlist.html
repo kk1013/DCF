@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="kr">
+<style>
+    *{
+        margin:0; padding:0; box-sizing: border-box; border:none;
+    }
+
+    .content-wrap{
+        margin-top: 170px;
+        margin-left: 20px;
+        width:800px;        
+        float:left;
+       
+    }
+    .fontcolor292929{
+        color:#292929;
+    }
+    div > .admin-title{
+       font-size: 24px;
+       font-weight: bold;                
+    }  
+    /*상단 버튼 랩*/
+    div.btn-wrap{
+        width: 100%; height:50px;
+        padding-top:5px; margin-top: 50px;
+    }  
+    .btn-wrap label >input:first-child{
+        width:150px; height: 30px; line-height:30px; background-color:#ffff;
+        border:1px solid #292929; color:#292929; border-radius: 5px; 
+    }
+    .customer-search{
+        float: right;
+    }
+    .searchbar {
+    width: 200px;
+    height: 30px;
+    color: #292929;
+    border:1px solid #292929;
+    }
+    .searchbutton {
+        width: 60px;
+        height: 30px;
+        background-color: #292929;
+        color: white;
+        border: 0;
+        border-radius: 5px;
+        margin-left: 5px;
+        cursor: pointer;
+}
+    /*table style*/
+    .content-wrap table{
+        width: 100%; 
+        border-spacing:0px; border-collapse:collapse;
+    }
+    thead{
+        width: 100%; height: 35px; line-height: 35px; background-color: #ebebeb;       
+    }
+    /*table title style*/
+    .content-wrap table thead th{
+        color:#292929; font-weight: bold; 
+    }
+
+    /*table content style*/
+    .content-wrap tbody tr{
+        border-bottom:1px solid #ebebeb;
+    }
+    .content-wrap tbody tr td{       
+        text-align: center;
+        height:100px; 
+        color:#505050;
+        
+    }
+    .content-wrap tbody tr td:first-child{           
+        width:60px; 
+    }
+    .content-wrap tbody tr td:nth-child(2){
+      width: 130px;
+    }
+    div.admin-product-img{
+        width:100%; 
+        display: flex; align-items: center;
+        
+    }
+    .admin-product-img span:nth-child(1){
+        /*상품명 이미지랩*/
+        width: 70px; height: 70px; overflow:hidden; padding:0;        
+    }
+    .admin-product-img span:nth-child(1) img{
+        /*이미지 width*/
+        width: 100%;        
+    }
+    div.admin-product-img span:nth-child(2){
+        /*상품명 이름*/
+        display: block;
+        padding-left: 10px; box-sizing: border-box;
+        border: 1px solid red;
+    }
+    .content-wrap tbody tr td:last-child{
+        border-right: none;
+        width:110px; 
+    } 
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+
+<body>
+    <div class="content-wrap">
+        <p class="admin-title">상품관리</p>
+        <div class="btn-wrap">
+            <label for=""><input type="button" value="상품삭제"></label> 
+            <div class="customer-search">
+                <input type="text" class="searchbar">
+                <input type="button" class="searchbutton" value="검색">
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>&ensp;</th>
+                    <th>No</th>
+                    <th>상품명</th>
+                    <th>가격</th>
+                    <th>등록일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>134546</td>
+                    <td>
+                        <div class="admin-product-img">
+                            <span><img src="/img/ono2onoanswerimg.jpg" alt=""></span>
+                            <span>상품명임상품명임</span>
+                        </div>
+                    </td>
+                    <td>123,456</td>
+                    <td>2022-01-01</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>134546</td>
+                    <td>
+                        <div class="admin-product-img">
+                            <img src="/img/ono2onoanswerimg.jpg" alt="">
+                            <span>상품명임</span>
+                        </div>
+                    </td>
+                    <td>123,456</td>
+                    <td>2022-01-01</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>134546</td>
+                    <td>
+                        <div class="admin-product-img">
+                            <img src="/img/ono2onoanswerimg.jpg" alt="">
+                            <span>상품명임 5kg상품명임 5kg상품명임 5kg상품명임 5kg 상품명김</span>
+                        </div>
+                    </td>
+                    <td>123,456</td>
+                    <td>2022-01-01</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>134546</td>
+                    <td>
+                        <div class="admin-product-img">
+                            <img src="/img/ono2onoanswerimg.jpg" alt="">
+                            <span>상품명임 3kg</span>
+                        </div>
+                    </td>
+                    <td>123,456</td>
+                    <td>2022-01-01</td>
+                </tr>
+               
+            </tbody>
+
+        </table>
+
+    </div><!--content-wrap-->
+
+
+</body>
+</html>

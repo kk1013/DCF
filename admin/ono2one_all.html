@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kr">
 <style>
     *{
-        margin:0; padding:0; box-sizing: border-box;
+        margin:0; padding:0; box-sizing: border-box; border:none;
     }
     .content-wrap{
         margin-top: 170px;
@@ -16,10 +16,54 @@
     }
     div > .admin-title{
        font-size: 24px;
-       font-weight: bold;
-                
+       font-weight: bold;                
+    }    
+    /*table style*/
+    .content-wrap table{
+        width: 100%;  margin-top: 50px;
+        border-spacing:0px; border-collapse:collapse;
     }
-    
+    thead{
+        width: 100%; height: 35px; line-height: 35px; background-color: #ebebeb;
+       
+    }
+    /*table title style*/
+    .content-wrap table thead th{
+        color:#292929; font-weight: bold;
+
+    }
+    .content-wrap thead th{       
+        border-collapse:collapse;
+        border: none;
+        
+    }
+    .content-wrap tr{
+        width: 100%;    
+    }
+    /*table content style*/
+    .content-wrap tbody tr td{
+        border:1px solid #ebebeb;
+        text-align: center;
+        height:30px;
+        color:#505050;
+        
+    }
+    .content-wrap tbody tr td:first-child{
+        border-left: none;        
+        width:90px;
+    }
+    .content-wrap tbody tr td:nth-child(2){
+        width: 130px;
+    }
+    .content-wrap tbody tr td:nth-child(3){
+        width:50%;
+        padding: 0 15px; box-sizing:border-box; 
+        text-align: left; 
+    }
+    .content-wrap tbody tr td:last-child{
+        border-right: none;
+        width:110px; 
+    } 
 </style>
 <head>
     <meta charset="UTF-8">
@@ -31,8 +75,45 @@
 
 <body>
     <div class="content-wrap">
+        <input type="button" value="검색"> 검색버튼넣기
         <p class="admin-title">1:1문의</p>
-       
+        <table>
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>아이디</th>
+                    <th>제목</th>
+                    <th>작성일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>이지현</td>
+                    <td>fwheujfhjwe</td>
+                    <td>배송문의 합니다</td>
+                    <td>2022-01-01</td>
+                </tr>
+                <tr>
+                    <td>이지현</td>
+                    <td>fwheujfhjwe</td>
+                    <td>배송문의 합니다</td>
+                    <td>2022-01-01</td>
+                </tr>
+                <tr>
+                    <td>이지현</td>
+                    <td>fwheujfhjwe</td>
+                    <td>배송문의 합니다배송문의 합니다배송문의 합니다배송문의 합니다. test 넘김 긴문장</td>
+                    <td>2022-01-01</td>
+                </tr>
+                <tr>
+                    <td>이지현</td>
+                    <td>fwheujfhjwe</td>
+                    <td>배송문의 합니다</td>
+                    <td>2022-01-01</td>
+                </tr>
+            </tbody>
+
+        </table>
 
     </div><!--content-wrap-->
 

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="kr">
+<style>
+    *{
+        margin:0; padding:0; box-sizing: border-box;
+    }
+    .content-wrap{
+        margin-top: 170px;
+        margin-left: 20px;
+        width:800px;        
+        float:left;
+       
+    }
+    div > .admin-title{
+       font-size: 24px;
+       font-weight: bold;                
+    }
+
+
+    /*컨텐트랩*/
+    #one2one-answer-wrap{       
+        width:600px; margin: 0 auto;
+        margin-top: 50px;      
+    }
+    #one2one-answer-wrap table{
+        width: 100%;
+        border-collapse:collapse;
+        box-sizing: border-box;
+        display:flex; flex:row wrap;
+       
+    }
+    #one2one-answer-wrap table tr{
+        width: 100%;
+        border:1px solid #292929; box-sizing:border-box;
+        border-left:none;
+        border-right:none;
+  
+
+    }
+    #one2one-answer-wrap table tr td{
+        padding:10px;
+    }
+    #one2one-answer-wrap table tr>td:first-child{
+        width: 100px; color:#505050; background-color:#ebebeb;
+        text-align: center;
+    }
+    .one2one-answer-img{
+        width: 70px; height: 70px;
+        background-color: #ebebeb;
+        overflow: hidden;
+        margin:10px 0;
+    }
+    .one2one-answer-img img{
+        width:100%;
+    }
+
+    /*답변 wrap css*/
+    div#answerform-wrap{
+      width:100%;  padding:20px; 
+      display:flex; flex-direction:column ; flex-shrink: 0;
+      justify-content: center;
+      background-color:#ebebeb;
+    }
+    div#answerform-wrap div{
+        display:flex; flex:row wrap;
+       
+    }
+    div#answerform-wrap div:first-child{
+        margin-bottom:10px; 
+    }
+    div#answerform-wrap div p:first-child{
+       width:100px;  float: left; 
+    }
+    div#answerform-wrap div p:last-child{
+        width:440px; float: left; 
+    }
+    div#answerform-wrap div p:last-child >input{
+        width:100%;  border: none; height:25px; padding:5px;
+    }
+    #answerform-wrap textarea{
+        width:100%; height:80px; resize:none;
+        padding:5px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        border: none;
+        text-align:justify;
+        align-items:flex-start;
+        
+    }
+    #answerform-wrap input[type="submit"]{
+        width: 100px; height:35px; line-height: 35px;
+        color:#292929;
+        border: 1px solid #505050;
+        margin-top: 10px; margin-left: 100px;
+    }   
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+
+<body>
+    <div class="content-wrap">
+        <p class="admin-title">1:1문의</p>
+        <div id="one2one-answer-wrap">          
+            <table>
+                <tr class="taps" style="width:50%;">
+                    <td>이름</td>
+                    <td>이름이름</td>                    
+                </tr>
+                <tr class="taps" style="width:50%;">
+                    <td>작성일</td>
+                    <td>2022-01-01</td>
+                    
+                </tr>
+                <tr>
+                    <td>제목</td>
+                    <td>제목이름</td>
+                </tr>
+                <tr>
+                    <td>내용</td>
+                    <td>1:!문의 내용박스 
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus corporis pariatur dolorem dolor labore tempore illum voluptatem sint est quae sapiente ratione laudantium provident, sunt ad omnis animi, ipsa repellendus.
+                    </td>
+                </tr>
+                <tr>
+                    <td>사진</td>
+                    <td>
+                        <div class="one2one-answer-img">
+                            <img src="/img/ono2onoanswerimg.jpg" alt="">
+                        </div>
+                    </td>
+                </tr>               
+            </table>
+
+            <div id="answerform-wrap">
+                <form>
+                    <div>
+                        <p>제목</p>
+                        <p><input type="text" id="title" name="one2one-title" id="answerform_title"></p>
+                    </div>
+                    <div>
+                        <p>내용</p>
+                        <p>
+                            <textarea name="one2one-text" id="" >
+                            
+                            </textarea>
+                        </p>
+                    </div>
+                <input type="submit" value="답변하기">
+                </form>
+            </div><!--answerform-wrap 답변부분 랩-->
+        </div><!--one2one-answer-wrap-->
+    </div>
+
+</body>
+</html>

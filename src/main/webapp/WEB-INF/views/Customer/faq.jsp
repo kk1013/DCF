@@ -115,7 +115,7 @@
             <div class="customer-search">
                 <input type="text" class="searchbar">
                 <input type="button" class="searchbutton" value="검색">
-                <input onClick="location.href='onetoone'" type="button" class="onetoone" value="1:1문의하기">
+                <input onClick="location.href='one2one'" type="button" class="onetoone" value="1:1문의하기">
             </div>
         </div>
     </div>

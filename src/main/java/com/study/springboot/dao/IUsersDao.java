@@ -1,5 +1,12 @@
 package com.study.springboot.dao;
 
-public interface IUsersDao {
+import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import com.study.springboot.dto.UsersDto;
+
+@Mapper
+public interface IUsersDao {
+	public List<UsersDto> list_member();
 }

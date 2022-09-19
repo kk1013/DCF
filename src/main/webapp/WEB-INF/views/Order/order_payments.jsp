@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <link rel="stylesheet" href="/css/Order/Orderpayments.css">
+    <link rel="stylesheet" href="/css/Order/order_payments.css">
 <div id="page-nav-wrap">
     <div id="page-nav">
         <p>HOME > 주문결제</p>

@@ -6,5 +6,7 @@
 <!-- SQL 끝에 ; 세미콜론을 넣지 마세요! -->
 
 <mapper namespace="com.study.springboot.dao.IUsersDao">
-
+	<select id="list_member" resultType="com.study.springboot.dto.UsersDto">
+		SELECT * FROM DCF_USERS
+	</select>
 </mapper>

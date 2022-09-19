@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data
 public class OrderDto {
-	private int Order_idx;
-	private int Order_PD_idx;
-	private Date Order_date;
-	private int Order_quantity;
+	private int order_idx;
+	private int order_PD_idx;
+	private Date order_date;
+	private int order_quantity;
 }

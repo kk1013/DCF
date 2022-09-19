@@ -53,6 +53,7 @@
     }
     .btn:hover{
         background-color: #fee469;
+        border: 0;
         color: #292929;
     }
 

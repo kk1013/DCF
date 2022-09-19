@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <link rel="stylesheet" href="/css/Admin/admin_ono2one_all.css">
+    <link rel="stylesheet" href="/css/Admin/admin_one2one.css">
 <div class="content-wrap">
         <p class="admin-title">1:1문의</p>
         <div class="btn-wrap">

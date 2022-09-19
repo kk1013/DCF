@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<%@ page trimDirectiveWhitespaces="true" %> 
     <style>
     *{margin: 0; padding: 0; list-style: none; box-sizing:border-box;}
     #index{

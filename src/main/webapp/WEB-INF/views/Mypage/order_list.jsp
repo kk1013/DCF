@@ -3,7 +3,7 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ page trimDirectiveWhitespaces="true" %>
-<link rel="stylesheet" href="/css/Mypage/orderlist.css">
+<link rel="stylesheet" href="/css/Mypage/order_list.css">
 
 <div id="page-nav-wrap">
         <div id="page-nav">

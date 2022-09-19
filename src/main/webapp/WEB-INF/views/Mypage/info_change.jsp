@@ -3,7 +3,7 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ page trimDirectiveWhitespaces="true" %>
-<link rel="stylesheet" href="/css/Mypage/infoChange.css">
+<link rel="stylesheet" href="/css/Mypage/info_change.css">
 
 <div class="wrapper">
         <div id="page-nav-wrap">
@@ -33,7 +33,7 @@
                             아이디
                         </td>
                         <td class="btndiv">
-                            <input class="joinform-input2" type="text" placeholder="자기아이디"> <button class="checkbutton">중복확인</button>
+                            <input class="joinform-input2" type="text" placeholder="자기아이디" disabled>
                         </td>
                     </tr>
                     <tr class="joinform-tr">

@@ -6,10 +6,10 @@ import lombok.Data;
 
 @Data
 public class One2OneDto {
-	private int One2One_idx;
-	private String One2One_title;
-	private String One2One_content;
-	private String One2One_image;
-	private Date One2One_date;
-	private int One2One_User_idx;
+	private int one2one_idx;
+	private String one2one_title;
+	private String one2one_content;
+	private String one2one_image;
+	private Date one2one_date;
+	private int one2one_User_idx;
 }

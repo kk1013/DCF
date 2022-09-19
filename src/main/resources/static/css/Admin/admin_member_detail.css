@@ -60,17 +60,18 @@
         color:#505050;
         
     }
-    #user-infowrap > div{
+    #user-infowrap  div{
         text-align: center;
         margin-top: 20px;
     }
-    #user-infowrap > div input {
+    #user-infowrap  div input {
         border:1px solid #292929;
         border-radius: 5px;
         width: 100px; height: 35px; line-height: 35px; text-align: center;
         background-color:#ffffff;
         cursor: pointer;
+        transition: 0.2s;
     }
-    #user-infowrap > div input:hover {
-        background-color:#fee469; border:none; transition: 0.2s;
+    #user-infowrap  div input:hover {
+        background-color:#fee469; border:none;
     }

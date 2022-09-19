@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class FaqDto {
-	private int Faq_idx;
-	private String Faq_title;
-	private String Faq_content;
+	private int faq_idx;
+	private String faq_title;
+	private String faq_content;
 }

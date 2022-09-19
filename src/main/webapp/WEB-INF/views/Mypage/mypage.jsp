@@ -49,16 +49,16 @@
             <div><span class="condition-status condition-status4">배송완료</span></div>
         </div>
         <div class="mypage-filter">
-            <a href="orderlist"><span>주문목록</span></a>
+            <a href="order_list"><span>주문목록</span></a>
         </div>
         <div class="mypage-filter">
-            <a href="onetoonelist"><span>문의내역</span></a>
+            <a href="one2one_list"><span>문의내역</span></a>
         </div>
         <div class="mypage-filter">
             <a href="cart"><span>장바구니</span></a>
         </div>
         <div class="mypage-filter mypage-filter2">
-            <a href="infoChange"><span>회원정보변경</span></a>
+            <a href="info_change"><span>회원정보변경</span></a>
         </div>
     </div>
     </form>

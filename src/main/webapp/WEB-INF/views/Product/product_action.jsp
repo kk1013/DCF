@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="/css/product/productAction.css">
+<link rel="stylesheet" href="/css/product/product_action.css">
 <div id="productActionpage-wrap">
     <div id="productActionpage-topwrap">
         <div id="productActionpage-img">

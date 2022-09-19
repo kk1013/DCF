@@ -123,9 +123,12 @@
       if(type === 'plus') {
         number = parseInt(number) + 1;
       }else if(type === 'minus')  {
+    	  if(parseInt(number) == 1){
+    		  return;
+    	  }
         number = parseInt(number) - 1;
       }
-
+	
       resultElement.innerText = number;
     }
 </script>

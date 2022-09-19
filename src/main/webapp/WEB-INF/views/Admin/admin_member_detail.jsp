@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="/css/Admin/admin_user_detail.css">
+<link rel="stylesheet" href="/css/Admin/admin_member_detail.css">
 <div class="content-wrap">
         <p class="admin-title">회원정보 조회</p>
         <div id="user-infowrap">

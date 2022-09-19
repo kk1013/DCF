@@ -3,7 +3,7 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ page trimDirectiveWhitespaces="true" %>
-<link rel="stylesheet" href="/css/Member/joinForm.css">
+<link rel="stylesheet" href="/css/Member/join_form.css">
 
 <div id="page-nav-wrap">
      <div id="page-nav">
@@ -25,7 +25,7 @@
             </div>
     
             <div>
-                <form action="joinAction" method="get" onsubmit="validation()">
+                <form action="join_action" method="get" onsubmit="validation()">
                 <table class="joinform-table">
                     <tr class="joinform-tr">
                         <td class="joinform-subtitle">

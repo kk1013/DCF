@@ -27,7 +27,7 @@
             <span class="step-font">STEP3.가입완료</span>
         </div>
         <!-- -------------------------------------------------------------------------------------------------------- -->
-        <form action="joinForm" method="POST" id="form_wrap">
+        <form action="join_form" method="POST" id="form_wrap">
         <div class="join-check">
             <div id="join-agree">
                 <input type="checkbox" name="yellowCheckbox1" id="yellowCheckbox1">

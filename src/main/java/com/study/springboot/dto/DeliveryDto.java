@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data
 public class DeliveryDto {
-	private int Dt_idx;
-	private int Dt_status;
-	private Date Dt_date;
-	private int Dt_PD_idx;
+	private int dt_idx;
+	private int dt_status;
+	private Date dt_date;
+	private int dt_PD_idx;
 }

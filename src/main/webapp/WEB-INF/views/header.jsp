@@ -6,16 +6,25 @@
 <div id="top">
     <ul>
         <li>
-            <a href="login">로그인</a>
+            <a href="#">로그인</a>
         </li>
         <li>
-            <a href="join">회원가입</a>
+            <a href="#">회원가입</a>
+        </li>
+        <li id="ds_none">
+            <img src="/img/icons/main-header-maypage.png" class="header-icon">
+            <img src="/img/icons/mypagearrow.png" class="triangle ds-none" alt="">
+            <div class="mypage-submenu ds-none">
+                <ul>
+                    <li><a href="#">주문목록</a></li>
+                    <li><a href="#">1:1문의</a></li>
+                    <li><a href="#">회원정보변경</a></li>
+                    <li><a href="#">장바구니</a></li>
+                </ul>
+            </div>
         </li>
         <li>
-            <a href="cart">장바구니</a>
-        </li>
-        <li>
-            <a href="mypage">마이페이지</a>
+            <a href="#"><img src="/img/icons/main-header-basket.png" class="header-icon"></a>
         </li>
     </ul>
 </div>
@@ -46,3 +55,18 @@
     </ul>
 </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $("#ds_none").click(function () {
+        var triangle = document.getElementsByClassName("triangle");
+        var submenu = document.getElementsByClassName("mypage-submenu");
+
+        if(triangle[0].classList.contains("ds-none") && submenu[0].classList.contains("ds-none")){
+            triangle[0].classList.remove("ds-none");
+            submenu[0].classList.remove("ds-none");
+        }else{
+            triangle[0].classList.add("ds-none");
+            submenu[0].classList.add("ds-none");
+        }
+    });
+</script>

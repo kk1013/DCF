@@ -155,6 +155,98 @@
                                 <p class="price">2000원</p>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <div class="product">
+                                    <img src="/img/product-img/dogfood1.jpg" alt="사료1">
+                                </div>
+                                <p class="product-name">맥시어덜트 사료 250g</p>
+                                <p class="price">2000원</p>
+                            </td>
+                            <td>
+                                <div class="product">
+                                    <img src="/img/product-img/dogfood2.jpg" class="product" alt="사료2">
+                                </div>
+                                <p class="product-name">맥시어덜트 사료 250g</p>
+                                <p class="price">2000원</p>
+                            </td>
+                            <td>
+                                <div class="product">
+                                    <img src="/img/product-img/dogfood3.jpg" class="product" alt="사료3">
+                                </div>
+                                <p class="product-name">맥시어덜트 사료 250g</p>
+                                <p class="price">2000원</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="product">
+                                    <img src="/img/product-img/dogfood5.jpg" class="product" alt="사료5">
+                                </div>
+                                <p class="product-name">맥시어덜트 사료 250g</p>
+                                <p class="price">2000원</p>
+                            </td>
+                            <td>
+                                <div class="product">
+                                    <img src="/img/product-img/dogfood6.jpg" class="product" alt="사료6">
+                                </div>
+                                <p class="product-name">맥시어덜트 사료 250g</p>
+                                <p class="price">2000원</p>
+                            </td>
+                            <td>
+                                <div class="product">
+                                    <img src="/img/product-img/dogfood7.jpg" class="product" alt="사료7">
+                                </div>
+                                <p class="product-name">맥시어덜트 사료 250g</p>
+                                <p class="price">2000원</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="product">
+                                    <img src="/img/product-img/dogfood1.jpg" alt="사료1">
+                                </div>
+                                <p class="product-name">맥시어덜트 사료 250g</p>
+                                <p class="price">2000원</p>
+                            </td>
+                            <td>
+                                <div class="product">
+                                    <img src="/img/product-img/dogfood2.jpg" class="product" alt="사료2">
+                                </div>
+                                <p class="product-name">맥시어덜트 사료 250g</p>
+                                <p class="price">2000원</p>
+                            </td>
+                            <td>
+                                <div class="product">
+                                    <img src="/img/product-img/dogfood3.jpg" class="product" alt="사료3">
+                                </div>
+                                <p class="product-name">맥시어덜트 사료 250g</p>
+                                <p class="price">2000원</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="product">
+                                    <img src="/img/product-img/dogfood5.jpg" class="product" alt="사료5">
+                                </div>
+                                <p class="product-name">맥시어덜트 사료 250g</p>
+                                <p class="price">2000원</p>
+                            </td>
+                            <td>
+                                <div class="product">
+                                    <img src="/img/product-img/dogfood6.jpg" class="product" alt="사료6">
+                                </div>
+                                <p class="product-name">맥시어덜트 사료 250g</p>
+                                <p class="price">2000원</p>
+                            </td>
+                            <td>
+                                <div class="product">
+                                    <img src="/img/product-img/dogfood7.jpg" class="product" alt="사료7">
+                                </div>
+                                <p class="product-name">맥시어덜트 사료 250g</p>
+                                <p class="price">2000원</p>
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>

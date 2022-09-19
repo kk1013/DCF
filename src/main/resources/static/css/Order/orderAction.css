@@ -52,6 +52,7 @@
     cursor: pointer;
     background-color: white;
     color: #292929;
+    transition: 0.2s;
 }
 .orderAction-button:hover {	
     background-color: #fee469;

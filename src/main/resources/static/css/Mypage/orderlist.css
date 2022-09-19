@@ -87,13 +87,18 @@
 .order-button {
     width: 100px;
     height: 35px;
-    margin-top: 5px;
+    margin-bottom: 5px;
     border: 1px solid #292929;
     border-radius: 5px;
     font-size: 16px;
     background-color: white;
     color: #292929;
+    transition: 0.2s;
     cursor: pointer;
+}
+.order-button:hover {
+	background-color: #fee469;
+	border: 1px solid #fee469;
 }
 .price-top {
     width: 1000px;

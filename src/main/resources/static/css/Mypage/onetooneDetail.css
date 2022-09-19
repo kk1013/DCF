@@ -71,6 +71,7 @@
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 50px;
+    transition: 0.2s;
 }
 .onetoone-button1 {
     margin-right: 10px;

@@ -36,103 +36,109 @@ public class MyController {
 	}
 	
 	@RequestMapping("/index")
-	public String main( Model model) {
+	public String main( Model model ) {
 		model.addAttribute("mainPage", "main.jsp");
 		return "index"; //"index.jsp" 디스패치함.
 	}
 	
 	@RequestMapping("/faq")
-	public String faq ( Model model) {
+	public String faq ( Model model ) {
 		model.addAttribute("mainPage", "Customer/faq.jsp");
 		return "index";
 	}
 	
 	@RequestMapping("/notice")
-	public String notice ( Model model) {
+	public String notice ( Model model ) {
 		model.addAttribute("mainPage", "Customer/notice.jsp");
 		return "index";
 	}
 
 	@RequestMapping("/onetoone")
-	public String onetoone ( Model model) {
+	public String onetoone ( Model model ) {
 		model.addAttribute("mainPage", "Customer/onetoone.jsp");
 		return "index";
 	}
 	
 	@RequestMapping("/joinAction")
-	public String joinAction ( Model model) {
+	public String joinAction ( Model model ) {
 		model.addAttribute("mainPage", "Member/joinAction.jsp");
 		return "index";
 	}
 	
 	@RequestMapping("/joinForm")
-	public String joinForm ( Model model) {
+	public String joinForm ( Model model ) {
 		model.addAttribute("mainPage", "Member/joinForm.jsp");
 		return "index";
 	}
 	
 	@RequestMapping("/cart")
-	public String cart ( Model model) {
+	public String cart ( Model model ) {
 		model.addAttribute("mainPage", "Mypage/cart.jsp");
 		return "index";
 	}
 	
 	@RequestMapping("/infoChange")
-	public String infoChange ( Model model) {
+	public String infoChange ( Model model ) {
 		model.addAttribute("mainPage", "Mypage/infoChange.jsp");
 		return "index";
 	}
 	
 	@RequestMapping("/mypage")
-	public String mypage ( Model model) {
+	public String mypage ( Model model ) {
 		model.addAttribute("mainPage", "Mypage/mypage.jsp");
 		return "index";
 	}
 	
 	@RequestMapping("/onetooneDetail")
-	public String onetooneDetail ( Model model) {
+	public String onetooneDetail ( Model model ) {
 		model.addAttribute("mainPage", "Mypage/onetooneDetail.jsp");
 		return "index";
 	}
 	
 	@RequestMapping("/onetoonelist")
-	public String onetoonelist ( Model model) {
+	public String onetoonelist ( Model model ) {
 		model.addAttribute("mainPage", "Mypage/onetoonelist.jsp");
 		return "index";
 	}
 	
 	@RequestMapping("/orderlist")
-	public String orderlist ( Model model) {
+	public String orderlist ( Model model ) {
 		model.addAttribute("mainPage", "Mypage/orderlist.jsp");
 		return "index";
 	}
 	
 	@RequestMapping("/review")
-	public String review ( Model model) {
+	public String review ( Model model ) {
 		model.addAttribute("mainPage", "Mypage/review.jsp");
 		return "index";
 	}
 	
 	@RequestMapping("/orderAction")
-	public String orderAction ( Model model) {
+	public String orderAction ( Model model ) {
 		model.addAttribute("mainPage", "Order/orderAction.jsp");
 		return "index";
 	}
 	
+	@RequestMapping("/orderDetail")
+	public String orderDetail ( Model model ) {
+		model.addAttribute("mainPage", "Order/orderDetail.jsp");
+		return "index";
+	}
+	
 	@RequestMapping("/adminNoticeAdmin")
-	public String adminNoticeAdmin( Model model) {
+	public String adminNoticeAdmin( Model model ) {
 		model.addAttribute("adminPage", "../Admin/admin_noticeAdmin.jsp");
 		return "Admin/admin_index";
 	}
 	
 	@RequestMapping("/adminNoticeWrite")
-	public String adminNoticeWrite( Model model) {
+	public String adminNoticeWrite( Model model ) {
 		model.addAttribute("adminPage", "../Admin/admin_noticeWrite.jsp");
 		return "Admin/admin_index";
 	}
 	
 	@RequestMapping("/adminOrderAction")
-	public String adminOrderAction( Model model) {
+	public String adminOrderAction( Model model ) {
 		model.addAttribute("adminPage", "../Admin/admin_orderAction.jsp");
 		return "Admin/admin_index";
 	}

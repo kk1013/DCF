@@ -36,22 +36,28 @@
     border-top-right-radius: 5px;
     margin-bottom: 20px;
 }
-.onetoone-confirm {
+.review-confirm {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 5px;
+    margin-top: 35px;
 }
 .imgupload {
     display: flex;
     justify-content: center;
-    width: 354px;
+    width: 300px;
     height: 40px;
     text-align: center;
     border: 1px solid #505050;
     border-radius: 5px;
     line-height: 40px;
     cursor: pointer;
+}
+.onetoone-confirm {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
 }
 .onetoone-confirm input[type="file"] {
   position: absolute;
@@ -62,29 +68,36 @@
   overflow: hidden;
   border: 0;
 }
-.onetoone-confirm .uploadname {
-  display: inline-block;
-  width: 330px;
-  padding: .5em .75em;  /* label의 패딩값과 일치 */
-  font-size: inherit;
-  font-family: inherit;
-  line-height: normal;
-  vertical-align: middle;
-  background-color: #f5f5f5;
-  border: 1px solid #ebebeb;
-  border-bottom-color: #e2e2e2;
-  border-radius: .25em;
-  -webkit-appearance: none; /* 네이티브 외형 감추기 */
-  -moz-appearance: none;
-  appearance: none;
+.uploaddiv {
+	box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #292929;
+    border-radius: 5px;
+    width: 350px;
+    height: 30px;
 }
-.uploadname {
+.uploadlabel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    cursor: pointer;
+}
+#fileName {
+	box-sizing: border-box;
+    width: 350px;
+    height: 30px;
+    border: 1px solid #292929;
+    background-color: #ebebeb;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding-left: 10px;
     margin-top: 5px;
-}
-.uploadimg {
-    width: 20px;
-    height: 16px;
-    margin-top: 13px;
 }
 .onetoone-button {
     display: flex;
@@ -130,7 +143,6 @@
     font-size: 14px;
     color: #505050;
     margin-top: 20px;
-    margin-left: 135px;
     text-align: justify;
 }
 .provision2 {
@@ -145,6 +157,7 @@
     border: 1px solid #151515;
     color: #151515;
     cursor: pointer;
+    transition: 0.2s;
 }
 .onetoone-submit:hover {
     background-color: #fee469;
@@ -158,7 +171,9 @@
     color: #151515;
     border-radius: 5px;
     cursor: pointer;
-}.onetoone-cancel:hover {
+    transition: 0.2s;
+}
+.onetoone-cancel:hover {
     background-color: #fee469;
     border: none;
 }

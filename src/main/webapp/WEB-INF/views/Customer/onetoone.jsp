@@ -41,10 +41,12 @@
             </div>
 
             <div class="onetoone-confirm">
-                <label for="imgupload" class="imgupload"><img src="/img/icons/camelaicon.jpg" class="uploadimg">사진첨부</label>
-                <input type="file" name="filename" id="imgupload" class="imgupload">
-                <input class="uploadname" value="첨부파일" placeholder="첨부파일" readonly="readonly">
+            
+            <div class="uploaddiv">
+                <label class="uploadlabel" for="chooseFile"><img id="img" src="/img/icons/camelaicon.jpg" class="uploadimg">사진첨부</label>
+                <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
             </div>
+            <div id="fileName">첨부파일</div>
     
             <div class="onetoone-provision">
                 <span>
@@ -64,18 +66,19 @@
 
         
     </div>
+   </div>
 </form>
     
 <script type="text/javascript">
 
-    var uploadFile = $('.onetoone-confirm .imgupload');
-    uploadFile.on('change', function(){
-    	if(window.FileReader){
-    		var filename = $(this)[0].files[0].name;
-    	} else {
-    		var filename = $(this).val().split('/').pop().split('\\').pop();
-    	}
-    	$(this).siblings('.uploadname').val(filename);
-    });
+function loadFile(input) {
+    var file = input.files[0];
+
+    var name = document.getElementById('fileName');
+    name.textContent = file.name;
+
+     
+
+};
 
 </script>

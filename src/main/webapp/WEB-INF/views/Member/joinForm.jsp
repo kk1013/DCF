@@ -39,7 +39,7 @@
                         <td class="joinform-subtitle">
                             아이디
                         </td>
-                        <td>
+                        <td class="btndiv">
                             <input class="joinform-input2" type="text" placeholder="5~6자, 영문, 숫자 또는 영문+숫자 조합"> <button class="checkbutton">중복확인</button>
                         </td>
                     </tr>

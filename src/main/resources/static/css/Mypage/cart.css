@@ -126,6 +126,7 @@
     background-color: white;
     border: 1px solid #292929;
     border-radius: 5px;
+    transition: 0.2s;
     cursor: pointer;
 }
 .cartlist-button1 {
@@ -133,6 +134,7 @@
 }
 .cartlist-button:hover {
     background-color: #fee469;
+    border: none;
 }
 .cartlist-delete {
     border-top: 1px solid #505050;
@@ -189,9 +191,11 @@
     border: 1px solid #292929;
     border-radius: 5px;
     margin-bottom: 40px;
+    transition: 0.2s;
 }
 .order-button:hover {
     background-color: #fee469;
+    border: none;
 }
 .order-button1 {
     margin-right: 10px;

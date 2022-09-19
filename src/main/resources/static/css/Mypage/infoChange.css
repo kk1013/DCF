@@ -58,15 +58,26 @@
 .joinform-table {
     padding: 12px 0 20px 27px;
 }
+.btndiv {
+	display: flex;
+}
 .checkbutton {
+	display: flex;
+	justify-content: center;
+  	align-items: center;
     border: 1px solid #505050;
     border-radius: 10px;
-    line-height: 0px;
     width: 123px;
     height: 35px;
     font-size: 16px;
+    margin-left: 7px;
     background-color: white;
     cursor: pointer;
+    transition: 0.2s;
+}
+.checkbutton:hover {
+	background-color: #fee469;
+	border: none;
 }
 .joinform-button {
     font-weight: 500;

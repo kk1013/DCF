@@ -85,7 +85,7 @@
                 <td>
                     <div id="label-box">
                         <div class="wd-80" id="image-show">
-                            <img src="https://via.placeholder.com/80x80" id="product-image"/>
+                            <img src="../img/product-img/${ dto.product_image }" id="product-image" class="wd-80"/>
                         </div>
                         <label class="uploadlabel" for="chooseFile">첨부</label><input type="button" class="uploadlabel" id="deletebtn" onclick="deletefile()" value="삭제">
                         <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
@@ -112,11 +112,20 @@
 <script>
 
 window.onload = function(){
-	 document.querySelector("#animal input[value='${dto.product_animal}']").setAttribute('checked' , true);
-	 document.querySelector("#age input[value='${dto.product_age}']").setAttribute('checked' , true);
-	 document.querySelector("#feed-type input[value='${dto.product_feed_type}']").setAttribute('checked' , true);
-	 document.querySelector("#category-type input[value='${dto.product_category_type}']").setAttribute('checked' , true);
-	 document.querySelector("#size input[value='${dto.product_size}']").setAttribute('checked' , true);
+	$("#animal input[value=${ dto.product_animal }]").attr('checked' , true);
+	$("#age input[value=${ dto.product_age }]").attr('checked' , true);
+	$("#feed-type input[value=${ dto.product_feed_type }]").attr('checked' , true);
+	$("#category-type [value=${ dto.product_type }]").attr('checked' , true);
+	if('${ dto.product_sample }' == "1"){
+		$("#sample").attr('checked' , true);
+	}
+	if('${dto.product_best}' == "1"){
+		$("#best").attr('checked' , true);
+	}
+	if('${dto.product_new}' == "1"){
+		$("#new").attr('checked' , true);
+	}
+	$("#size input[value=${ dto.product_size }]").attr('checked' , true);
 }
 
 

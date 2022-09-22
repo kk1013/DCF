@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data
 public class BasketDto {
-	private int Basket_idx;
-	private int Basket_count;
-	private Date Basket_date;
-	private int Product_idx;
+	private int basket_idx;
+	private int basket_count;
+	private Date basket_date;
+	private int basket_pd_idx;
 }

@@ -1,5 +1,12 @@
 package com.study.springboot.dao;
 
-public interface IFaqDao {
+import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import com.study.springboot.dto.FaqDto;
+
+@Mapper
+public interface IFaqDao {
+	public List<FaqDto> list();
 }

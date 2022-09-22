@@ -10,8 +10,8 @@
                 <img src="/img/maincat.jpg" width="310"><br>
             </div>
             <div class="main_first">
-                <a href="#"><button class="productlist">더보기</button></a>
-                <a href="#"><button class="productlist">더보기</button></a>
+                <a href="product"><button class="productlist">더보기</button></a>
+                <a href="product"><button class="productlist">더보기</button></a>
             </div>
         </div>
         <div id="main_md" class="main">

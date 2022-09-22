@@ -4,6 +4,7 @@
 }
 #footerwrap{
     width: 100%;
+    background-color: #555;
 }
 #footer{
     display: flex;

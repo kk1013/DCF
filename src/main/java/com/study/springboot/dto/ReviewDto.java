@@ -6,10 +6,10 @@ import lombok.Data;
 
 @Data
 public class ReviewDto {
-	private int Review_idx;
-	private String Review_content;
-	private String Review_image;
-	private Date Review_date;
-	private int Review_score;
-	private int Review_Item_idx;
+	private int review_idx;
+	private String review_content;
+	private String review_image;
+	private Date review_date;
+	private int review_score;
+	private int review_Item_idx;
 }

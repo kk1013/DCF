@@ -8,6 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.study.springboot.dao.IFaqDao;
+import com.study.springboot.dao.INoticeDao;
+import com.study.springboot.dao.IOne2OneDao;
+import com.study.springboot.dao.IOrderDao;
+import com.study.springboot.dao.IProductDao;
+import com.study.springboot.dao.IUsersDao;
+import com.study.springboot.dto.FaqDto;
+import com.study.springboot.dto.NoticeDto;
+import com.study.springboot.dto.One2OneDto;
+import com.study.springboot.dto.ProductDto;
+import com.study.springboot.dto.UsersDto;
 
 import com.study.springboot.dao.IUsersDao;
 import com.study.springboot.dto.UsersDto;
@@ -16,25 +29,35 @@ import com.study.springboot.dto.UsersDto;
 public class MyController {
 	@Autowired
 	IUsersDao iUsersdao;
+	@Autowired
+	IOne2OneDao iOne2onedao;
+	@Autowired
+	IProductDao iProductdao;
+	@Autowired
+	IOrderDao iOrderdao;
+	@Autowired
+	INoticeDao iNoticedao;
+	@Autowired
+	IFaqDao iFaqdao;
 	/*
 	 * 
-	 * @Autowired IUsersDao iSampledao;
+	 * @Autowired ISampleDao iSampledao;
 	 * 
-	 * @Autowired IUsersDao iReviewdao;
+	 * @Autowired IReviewDao iReviewdao;
 	 * 
-	 * @Autowired IUsersDao iProductdao;
 	 * 
-	 * @Autowired IUsersDao iOrderdao;
 	 * 
-	 * @Autowired IUsersDao iOne2onedao;
 	 * 
-	 * @Autowired IUsersDao iNoticedao;
 	 * 
-	 * @Autowired IUsersDao iFaqdao;
 	 * 
-	 * @Autowired IUsersDao iDeliverydao;
 	 * 
-	 * @Autowired IUsersDao iBasketdao;
+	 * 
+	 * 
+	 *
+	 * 
+	 * 
+	 * 
+	 * @Autowired IBasketDao iBasketdao;
 	 */
 
 	@RequestMapping("/")
@@ -92,12 +115,16 @@ public class MyController {
 
 	@RequestMapping("/faq")
 	public String faq(Model model) {
+		List<FaqDto> faqlist = iFaqdao.list();
+		model.addAttribute("list", faqlist);
 		model.addAttribute("mainPage", "Customer/faq.jsp");
 		return "index";
 	}
 
 	@RequestMapping("/notice")
 	public String notice(Model model) {
+		List<NoticeDto> noticelist = iNoticedao.list();
+		model.addAttribute("list", noticelist);
 		model.addAttribute("mainPage", "Customer/notice.jsp");
 		return "index";
 	}
@@ -181,17 +208,37 @@ public class MyController {
 	}
 
 	@RequestMapping("/loginAction")
-	public String admin_member(HttpServletRequest request, Model model) {
+	public String admin_member(@RequestParam("user_id") String user_id,
+							   @RequestParam("user_pw") String user_pw, HttpServletRequest request, Model model) {
 		List<UsersDto> list = iUsersdao.list_member();
 		request.setAttribute("list", list);
-
-		model.addAttribute("adminPage", "../Admin/admin_member.jsp");
-		return "Admin/admin_index";
+		int result = iUsersdao.login(user_id, user_pw);
+		request.getSession().setAttribute("user_id", user_id);
+		if(result >= 1) {
+			if(user_id.equals("admin")) {
+				model.addAttribute("adminPage", "../Admin/admin_member.jsp");
+				return "Admin/admin_index";
+			}else {
+				model.addAttribute("mainPage", "main.jsp");
+				return "index";
+			}
+			
+		}
+		model.addAttribute("mainPage", "main.jsp");
+		return "index";
 	}
 
 	@RequestMapping("/admin_product_registration")
 	public String admin_product_registration(Model model) {
 		model.addAttribute("adminPage", "../Admin/admin_product_registration.jsp");
+		return "Admin/admin_index";
+	}
+	
+	@RequestMapping("/admin_product_update")
+	public String admin_product_update(@RequestParam("product_idx") int product_idx, Model model) {
+		ProductDto update_view = iProductdao.update_view(product_idx);
+		model.addAttribute("dto", update_view);
+		model.addAttribute("adminPage", "../Admin/admin_product_update.jsp");
 		return "Admin/admin_index";
 	}
 
@@ -215,18 +262,47 @@ public class MyController {
 
 	@RequestMapping("/admin_one2one")
 	public String admin_one2one(Model model) {
+		List<One2OneDto> list = iOne2onedao.list();
+		model.addAttribute("list", list);
+		model.addAttribute("adminPage", "../Admin/admin_one2one.jsp");
+		return "Admin/admin_index";
+	}
+	
+	@RequestMapping("/admin_one2one_search")
+	public String admin_one2one_search(@RequestParam("keyword") String keyword, Model model) {
+		List<One2OneDto> search = iOne2onedao.search(keyword);
+		model.addAttribute("list", search);
 		model.addAttribute("adminPage", "../Admin/admin_one2one.jsp");
 		return "Admin/admin_index";
 	}
 
 	@RequestMapping("/admin_one2one_detail")
-	public String admin_one2one_detail(Model model) {
+	public String admin_one2one_detail(@RequestParam("one2one_idx") int one2one_idx, Model model) {
+		One2OneDto content_detail = iOne2onedao.content_detail(one2one_idx);
+		model.addAttribute("dto", content_detail);
 		model.addAttribute("adminPage", "../Admin/admin_one2one_detail.jsp");
 		return "Admin/admin_index";
 	}
+	
+	@RequestMapping("/admin_one2one_detail_form")
+	public String admin_one2one_detail_form(@RequestParam("one2one_idx") int one2one_idx,
+											@RequestParam("one2one_reply") String one2one_reply) {
+		int reply = iOne2onedao.reply(one2one_reply, one2one_idx);
+		return "redirect:/admin_one2one";
+	}
 
 	@RequestMapping("/admin_order")
-	public String admin_order(Model model) {
+	public String admin_order( Model model) {
+		int order_status0 = iOrderdao.beforeDTO();
+		int order_status1 = iOrderdao.duringDTO();
+		int order_status2 = iOrderdao.afterDTO();
+		int order_status3 = iOrderdao.cancelDTO();
+		int order_status = iOrderdao.orderAllDTO();
+		model.addAttribute("before", order_status0 );
+		model.addAttribute("during", order_status1 );
+		model.addAttribute("after", order_status2 );
+		model.addAttribute("cancel", order_status3 );
+		model.addAttribute("orderAll", order_status );		
 		model.addAttribute("adminPage", "../Admin/admin_order.jsp");
 		return "Admin/admin_index";
 	}
@@ -245,7 +321,33 @@ public class MyController {
 
 	@RequestMapping("/admin_product")
 	public String admin_product(Model model) {
+		List<ProductDto> list = iProductdao.list();
+		model.addAttribute("list", list);
 		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
 		return "Admin/admin_index";
 	}
+	
+	@RequestMapping("/admin_product_search")
+	public String admin_product_search(@RequestParam("keyword") String keyword, Model model) {
+		List<ProductDto> search = iProductdao.search(keyword);
+		model.addAttribute("list", search);
+		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
+		return "Admin/admin_index";
+	}
+	
+	@RequestMapping("/admin_product_update_form")
+	public String admin_product_update_form(@RequestParam("product_name") String product_name, @RequestParam("product_price") int product_price,
+											@RequestParam("product_image") String product_image, @RequestParam("product_content") String product_content,
+											@RequestParam("product_age") int product_age, @RequestParam("product_feet_type") int product_feet_type,
+											@RequestParam("product_size") int product_size, @RequestParam("product_animal") int product_animal,
+											@RequestParam("product_new") int product_new, @RequestParam("product_best") int product_best,
+											@RequestParam("product_category_type") int product_category_type, @RequestParam("product_sample") int product_sample,
+											@RequestParam("product_idx") int product_idx) {
+		int update = iProductdao.update(product_name, product_price, product_image, product_content, product_age, product_feet_type,
+					 product_size, product_animal, product_new, product_best, product_category_type, product_sample, product_idx);
+		return "redirect:/admin_product";
+	}
+	
+	
+	
 }

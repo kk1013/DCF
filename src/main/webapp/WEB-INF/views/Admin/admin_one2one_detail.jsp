@@ -7,21 +7,19 @@
             <table>
                 <tr class="taps" style="width:50%;">
                     <td>이름</td>
-                    <td>이름이름</td>                    
+                    <td>${ dto.user_name }</td>                    
                 </tr>
                 <tr class="taps" style="width:50%;">
                     <td>작성일</td>
-                    <td>2022-01-01</td>                    
+                    <td>${ dto.one2one_date }</td>                    
                 </tr>
                 <tr>
                     <td>제목</td>
-                    <td>제목이름</td>
+                    <td>${ dto.one2one_title }</td>
                 </tr>
                 <tr>
                     <td>내용</td>
-                    <td>1:!문의 내용박스 
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus corporis pariatur dolorem dolor labore tempore illum voluptatem sint est quae sapiente ratione laudantium provident, sunt ad omnis animi, ipsa repellendus.
-                    </td>
+                    <td>${ dto.one2one_content }</td>
                 </tr>
                 <tr>
                     <td>사진</td>
@@ -34,17 +32,12 @@
             </table>
 
             <div id="answerform-wrap">
-                <form>
-                    <div>
-                        <p>제목</p>
-                        <p><input type="text" id="title" name="one2one-title" id="answerform_title"></p>
-                    </div>
+                <form action="admin_one2one_detail_form">
                     <div>
                         <p>내용</p>
                         <p>
-                            <textarea name="one2one-text" id="" >
-                            
-                            </textarea>
+                        	<input type="hidden" name="one2one_idx" value="${ dto.one2one_idx }">
+                            <textarea name="one2one_reply" id="">${ dto.one2one_reply }</textarea>
                         </p>
                     </div>
                 <input type="submit" value="답변하기">

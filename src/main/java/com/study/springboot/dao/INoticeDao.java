@@ -1,5 +1,12 @@
 package com.study.springboot.dao;
 
-public interface INoticeDao {
+import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import com.study.springboot.dto.NoticeDto;
+
+@Mapper
+public interface INoticeDao {
+	public List<NoticeDto> list();
 }

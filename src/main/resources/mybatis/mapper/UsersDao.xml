@@ -9,4 +9,8 @@
 	<select id="list_member" resultType="com.study.springboot.dto.UsersDto">
 		SELECT * FROM DCF_USERS
 	</select>
+	
+	<select id="login" resultType="_int">
+		SELECT * FROM dcf_users WHERE user_id=#{param1} and user_pw=#{param2}
+	</select>
 </mapper>

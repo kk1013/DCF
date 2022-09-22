@@ -9,5 +9,5 @@ public class BasketDto {
 	private int basket_idx;
 	private int basket_count;
 	private Date basket_date;
-	private int product_idx;
+	private int basket_pd_idx;
 }

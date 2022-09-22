@@ -1,8 +1,11 @@
 package com.study.springboot;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -216,6 +219,15 @@ public class MyController {
 		request.getSession().setAttribute("user_id", user_id);
 		if(result >= 1) {
 			if(user_id.equals("admin")) {
+				for(int i = 0; i<list.size(); i++) {
+					if(list.get(i).getUser_gender().equals("0")) {
+						list.get(i).setUser_gender("여자");
+					}else if(list.get(i).getUser_gender().equals("1")) {
+						list.get(i).setUser_gender("남자");
+					}
+				}
+
+				request.setAttribute("list", list);
 				model.addAttribute("adminPage", "../Admin/admin_member.jsp");
 				return "Admin/admin_index";
 			}else {
@@ -255,7 +267,34 @@ public class MyController {
 	}
 
 	@RequestMapping("/admin_order_action")
-	public String admin_order_action(Model model) {
+	public String admin_order_action(
+			@RequestParam(value = "order_idx", required = false, defaultValue = "") String order_idx,
+			HttpServletResponse resp,
+			Model model) throws IOException {
+		int total_quantity = 0;
+		int total_price = 0;
+		OrderDto result = iOrderdao.single_select(Integer.parseInt(order_idx));
+		model.addAttribute("dto", result);
+		result.setProduct_price( result.getOrder_quantity()*result.getProduct_price());
+		
+		List<OrderDto> product = iOrderdao.product(Integer.parseInt(order_idx));
+		for(int i = 0; i<product.size();i++) {
+			product.get(i).setProduct_price(product.get(i).getOrder_quantity()*product.get(i).getProduct_price());
+			total_quantity += product.get(i).getOrder_quantity();
+			total_price += product.get(i).getProduct_price();
+		}
+		model.addAttribute("list", product);
+		model.addAttribute("total_quantity", total_quantity);
+		model.addAttribute("total_price", total_price);
+		
+		if(product.size() < 1) {
+			resp.setContentType("text/html; charset=UTF-8");
+			PrintWriter out;
+			out = resp.getWriter();
+			out.println("<script>alert('정보가없습니다.');</script>");
+			out.flush(); 
+		}	
+		
 		model.addAttribute("adminPage", "../Admin/admin_order_action.jsp");
 		return "Admin/admin_index";
 	}
@@ -309,6 +348,26 @@ public class MyController {
 
 	@RequestMapping("/admin_order_list")
 	public String admin_order_list(Model model) {
+		List<OrderDto> order_list = iOrderdao.order_list();
+		
+		
+		for(int i = 0; i<order_list.size(); i++) {
+			if(order_list.get(i).getOrder_status().equals("0")) {
+				order_list.get(i).setOrder_status("배송전");
+			}
+			else if(order_list.get(i).getOrder_status().equals("1")) {
+				order_list.get(i).setOrder_status("배송중");
+			}
+			else if(order_list.get(i).getOrder_status().equals("2")) {
+				order_list.get(i).setOrder_status("배송완료");
+			}
+			else if(order_list.get(i).getOrder_status().equals("3")) {
+				order_list.get(i).setOrder_status("배송전");
+			}
+		}
+		
+		model.addAttribute("list", order_list);
+		
 		model.addAttribute("adminPage", "../Admin/admin_order_list.jsp");
 		return "Admin/admin_index";
 	}
@@ -321,33 +380,94 @@ public class MyController {
 
 	@RequestMapping("/admin_product")
 	public String admin_product(Model model) {
-		List<ProductDto> list = iProductdao.list();
-		model.addAttribute("list", list);
+		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
+		return "Admin/admin_index";
+	}
+
+	@Autowired
+	fileUploadService fileUploadService;
+	@RequestMapping(value="/admin_product_registration_form", method = RequestMethod.POST)
+	public String admin_product_registration_form(
+			@RequestParam(value = "animal", required = false, defaultValue = "") String animal,
+			@RequestParam(value = "age", required = false, defaultValue = "") String age,
+			@RequestParam(value = "feed-type", required = false, defaultValue = "") String feed_type,
+			@RequestParam(value = "type", required = false, defaultValue = "") String type,
+			@RequestParam(value = "sample", required = false, defaultValue = "0") String sample,
+			@RequestParam(value = "best", required = false, defaultValue = "0") String best,
+			@RequestParam(value = "new", required = false, defaultValue = "0") String new_,
+			@RequestParam(value = "size", required = false, defaultValue = "") String size,
+			@RequestParam(value = "name", required = false, defaultValue = "") String name,
+			@RequestParam(value = "chooseFile", required=false) MultipartFile file,
+			@RequestParam(value = "price", required = false, defaultValue = "") String price,
+			@RequestParam(value = "bo_content", required = false, defaultValue = "") String content, 
+			Model model) {
+		String upload_url = fileUploadService.restore(file);
+		ProductDto dto = new ProductDto();
+		dto.setProduct_animal(Integer.parseInt(animal));
+		dto.setProduct_age(Integer.parseInt(age));
+		dto.setProduct_feed_type(Integer.parseInt(feed_type));
+		dto.setProduct_type(Integer.parseInt(type));
+		if (Integer.parseInt(sample) == 2) {
+			dto.setProduct_sample(1);
+		} else {
+			dto.setProduct_sample(Integer.parseInt(sample));
+		}
+		dto.setProduct_best(Integer.parseInt(best));
+		dto.setProduct_new(Integer.parseInt(new_));
+		dto.setProduct_size(Integer.parseInt(size));
+		dto.setProduct_price(Integer.parseInt(price));
+		dto.setProduct_name(name);
+		dto.setProduct_image(upload_url);
+		dto.setProduct_content(content);
+		
+		int result = iProductdao.insertProduct( dto );
+		
 		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
 		return "Admin/admin_index";
 	}
 	
-	@RequestMapping("/admin_product_search")
-	public String admin_product_search(@RequestParam("keyword") String keyword, Model model) {
-		List<ProductDto> search = iProductdao.search(keyword);
-		model.addAttribute("list", search);
-		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
+	@RequestMapping("/admin_product_update")
+	public String admin_product_update(@RequestParam("product_idx") int product_idx, Model model) {
+		ProductDto update_view = iProductdao.update_view(product_idx);
+		model.addAttribute("dto", update_view);
+		model.addAttribute("adminPage", "../Admin/admin_product_update.jsp");
 		return "Admin/admin_index";
 	}
-	
-	@RequestMapping("/admin_product_update_form")
-	public String admin_product_update_form(@RequestParam("product_name") String product_name, @RequestParam("product_price") int product_price,
-											@RequestParam("product_image") String product_image, @RequestParam("product_content") String product_content,
-											@RequestParam("product_age") int product_age, @RequestParam("product_feet_type") int product_feet_type,
-											@RequestParam("product_size") int product_size, @RequestParam("product_animal") int product_animal,
-											@RequestParam("product_new") int product_new, @RequestParam("product_best") int product_best,
-											@RequestParam("product_category_type") int product_category_type, @RequestParam("product_sample") int product_sample,
-											@RequestParam("product_idx") int product_idx) {
-		int update = iProductdao.update(product_name, product_price, product_image, product_content, product_age, product_feet_type,
-					 product_size, product_animal, product_new, product_best, product_category_type, product_sample, product_idx);
+
+	@RequestMapping(value="/admin_product_update_form", method = RequestMethod.POST)
+	public String admin_product_update_form(			
+			@RequestParam(value = "animal", required = false, defaultValue = "") String animal,
+			@RequestParam(value = "age", required = false, defaultValue = "") String age,
+			@RequestParam(value = "feed-type", required = false, defaultValue = "") String feed_type,
+			@RequestParam(value = "type", required = false, defaultValue = "") String type,
+			@RequestParam(value = "sample", required = false, defaultValue = "0") String sample,
+			@RequestParam(value = "best", required = false, defaultValue = "0") String best,
+			@RequestParam(value = "new", required = false, defaultValue = "0") String new_,
+			@RequestParam(value = "size", required = false, defaultValue = "") String size,
+			@RequestParam(value = "name", required = false, defaultValue = "") String name,
+			@RequestParam(value = "chooseFile", required=false) MultipartFile file,
+			@RequestParam(value = "price", required = false, defaultValue = "") String price,
+			@RequestParam(value = "bo_content", required = false, defaultValue = "") String content) {
+		String upload_url = fileUploadService.restore(file);
+		ProductDto dto = new ProductDto();
+		dto.setProduct_animal(Integer.parseInt(animal));
+		dto.setProduct_age(Integer.parseInt(age));
+		dto.setProduct_feed_type(Integer.parseInt(feed_type));
+		dto.setProduct_type(Integer.parseInt(type));
+		if (Integer.parseInt(sample) == 2) {
+			dto.setProduct_sample(1);
+		} else {
+			dto.setProduct_sample(Integer.parseInt(sample));
+		}
+		dto.setProduct_best(Integer.parseInt(best));
+		dto.setProduct_new(Integer.parseInt(new_));
+		dto.setProduct_size(Integer.parseInt(size));
+		dto.setProduct_price(Integer.parseInt(price));
+		dto.setProduct_name(name);
+		dto.setProduct_image(upload_url);
+		dto.setProduct_content(content);
+		
+		int update = iProductdao.update(dto);
 		return "redirect:/admin_product";
 	}
-	
-	
-	
 }

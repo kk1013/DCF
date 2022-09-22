@@ -22,11 +22,41 @@
 	<select id="search" resultType="com.study.springboot.dto.ProductDto">
 	  SELECT * FROM dcf_product WHERE product_name LIKE '%'||#{ param1 }||'%' OR product_price LIKE '%'||#{ param1 }||'%' ORDER BY product_idx DESC
 	</select>
-	
-	<update id="update" parameterType="com.study.springboot.dto.ProductDto">
-	  UPDATE dcf_product SET product_name=#{ param1 }, product_price=#{ param2 }, product_image=#{ param3 }, product_content=#{ param4 },
-	  product_age=#{ param5 }, product_feed_type=#{ param6 }, product_size=#{ param7 }, product_animal=#{ param8 }, product_new=#{ param9 },
-	  product_best=#{ param10 }, product_category_type=#{ param11 }, product_sample=#{ param12 } WHERE product_idx=#{ param13 };
-	</update>
 
+	<insert id="insertProduct" parameterType="com.study.springboot.dto.ProductDto">
+		INSERT INTO DCF_PRODUCT 
+		VALUES( product_idx_seq.nextval, 
+		#{ product_name }, 
+		#{ product_price },  
+		#{ product_image },  
+		#{ product_content },  
+		#{ product_age },  
+		#{ product_feed_type }, 
+		#{ product_size }, 
+		#{ product_animal }, 
+		#{ product_new },  
+		#{ product_best }, 
+		0, 
+		#{ product_type }, 
+		sysdate, 
+		#{ product_sample }) 
+	</insert>
+	<update id="update" parameterType="com.study.springboot.dto.ProductDto">
+	  UPDATE dcf_product SET 
+	  product_name=#{ product_name },
+	  product_price=#{ product_price },
+	  product_image=#{ product_image },
+	  product_content=#{ product_content },
+	  product_age=#{ product_age },
+	  product_feed_type=#{ product_feed_type },
+	  product_size=#{ product_size },
+	  product_animal=#{ product_animal },
+	  product_new=#{ product_new },
+	  product_best=#{ product_best },
+	  product_sample=#{ product_sample }
+	  WHERE product_idx=#{ product_idx }
+	</update>
+	<select id="update_view" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_idx=#{ param1 }
+	</select>
 </mapper>

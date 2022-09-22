@@ -6,5 +6,40 @@
 <!-- SQL 끝에 ; 세미콜론을 넣지 마세요! -->
 
 <mapper namespace="com.study.springboot.dao.IProductDao">
-
+	<insert id="insertProduct" parameterType="com.study.springboot.dto.ProductDto">
+		INSERT INTO DCF_PRODUCT 
+		VALUES( product_idx_seq.nextval, 
+		#{ product_name }, 
+		#{ product_price },  
+		#{ product_image },  
+		#{ product_content },  
+		#{ product_age },  
+		#{ product_feed_type }, 
+		#{ product_size }, 
+		#{ product_animal }, 
+		#{ product_new },  
+		#{ product_best }, 
+		0, 
+		#{ product_type }, 
+		sysdate, 
+		#{ product_sample }) 
+	</insert>
+	<update id="update" parameterType="com.study.springboot.dto.ProductDto">
+	  UPDATE dcf_product SET 
+	  product_name=#{ product_name },
+	  product_price=#{ product_price },
+	  product_image=#{ product_image },
+	  product_content=#{ product_content },
+	  product_age=#{ product_age },
+	  product_feed_type=#{ product_feed_type },
+	  product_size=#{ product_size },
+	  product_animal=#{ product_animal },
+	  product_new=#{ product_new },
+	  product_best=#{ product_best },
+	  product_sample=#{ product_sample }
+	  WHERE product_idx=#{ product_idx }
+	</update>
+	<select id="update_view" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_idx=#{ param1 }
+	</select>
 </mapper>

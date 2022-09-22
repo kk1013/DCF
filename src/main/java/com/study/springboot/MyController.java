@@ -1,13 +1,35 @@
 package com.study.springboot;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.study.springboot.dao.IOrderDao;
+import com.study.springboot.dao.IProductDao;
+import com.study.springboot.dao.IUsersDao;
+import com.study.springboot.dto.OrderDto;
+import com.study.springboot.dto.ProductDto;
+import com.study.springboot.dto.UsersDto;
 
 @Controller
 public class MyController {
+	@Autowired IUsersDao iUsersdao;
+
+	@Autowired IProductDao iProductdao;
+	
+	@Autowired IOrderDao iOrderdao;
 	/*
-	 * @Autowired IUsersDao iUsersdao;
 	 * 
 	 * @Autowired IUsersDao iSampledao;
 	 * 
@@ -27,73 +49,359 @@ public class MyController {
 	 * 
 	 * @Autowired IUsersDao iBasketdao;
 	 */
-	
-	
-	
+
 	@RequestMapping("/")
 	public String root() {
 		return "redirect:index";
 	}
-	
+
 	@RequestMapping("/index")
-	public String main( Model model ) {
+	public String main(Model model) {
 		model.addAttribute("mainPage", "main.jsp");
-		return "index"; //"index.jsp" 디스패치함.
+		return "index"; // "index.jsp" 디스패치함.
 	}
-	
+
 	@RequestMapping("/login")
-	public String login( Model model ) {
+	public String login(Model model) {
 		model.addAttribute("mainPage", "Member/login.jsp");
 		return "index";
 	}
-	
+
 	@RequestMapping("/join")
-	public String join( Model model ) {
+	public String join(Model model) {
 		model.addAttribute("mainPage", "Member/join.jsp");
 		return "index";
 	}
-	
+
 	@RequestMapping("/idfind")
-	public String idfind( Model model ) {
+	public String idfind(Model model) {
 		model.addAttribute("mainPage", "Member/idfind.jsp");
 		return "index";
 	}
-	
+
 	@RequestMapping("/pwfind")
-	public String pwfind( Model model ) {
+	public String pwfind(Model model) {
 		model.addAttribute("mainPage", "Member/pwfind.jsp");
 		return "index";
 	}
-	
+
 	@RequestMapping("/product")
-	public String product( Model model ) {
+	public String product(Model model) {
 		model.addAttribute("mainPage", "Product/product.jsp");
 		return "index";
 	}
-	
-	@RequestMapping("/productAction")
-	public String productAction( Model model ) {
-		model.addAttribute("mainPage", "Product/productAction.jsp");
+
+	@RequestMapping("/product_action")
+	public String product_action(Model model) {
+		model.addAttribute("mainPage", "Product/product_action.jsp");
 		return "index";
 	}
-	
+
 	@RequestMapping("/sample")
-	public String sample( Model model ) {
+	public String sample(Model model) {
 		model.addAttribute("mainPage", "Product/sample.jsp");
 		return "index";
 	}
-	
+
+	@RequestMapping("/faq")
+	public String faq(Model model) {
+		model.addAttribute("mainPage", "Customer/faq.jsp");
+		return "index";
+	}
+
+	@RequestMapping("/notice")
+	public String notice(Model model) {
+		model.addAttribute("mainPage", "Customer/notice.jsp");
+		return "index";
+	}
+
+	@RequestMapping("/one2one")
+	public String one2one(Model model) {
+		model.addAttribute("mainPage", "Customer/one2one.jsp");
+		return "index";
+	}
+
+	@RequestMapping("/join_action")
+	public String join_action(Model model) {
+		model.addAttribute("mainPage", "Member/join_action.jsp");
+		return "index";
+	}
+
+	@RequestMapping("/join_form")
+	public String join_form(Model model) {
+		model.addAttribute("mainPage", "Member/join_form.jsp");
+		return "index";
+	}
+
+	@RequestMapping("/cart")
+	public String cart(Model model) {
+		model.addAttribute("mainPage", "Mypage/cart.jsp");
+		return "index";
+	}
+
+	@RequestMapping("/order_payments")
+	public String order_payments(Model model) {
+		model.addAttribute("mainPage", "Order/order_payments.jsp");
+		return "index";
+	}
+
+	@RequestMapping("/order_action")
+	public String order_action(Model model) {
+		model.addAttribute("mainPage", "Order/order_action.jsp");
+		return "index";
+	}
+
+	@RequestMapping("/info_change")
+	public String info_change(Model model) {
+		model.addAttribute("mainPage", "Mypage/info_change.jsp");
+		return "index";
+	}
+
+	@RequestMapping("/mypage")
+	public String mypage(Model model) {
+		model.addAttribute("mainPage", "Mypage/mypage.jsp");
+		return "index";
+	}
+
+	@RequestMapping("/one2one_detail")
+	public String one2one_detail(Model model) {
+		model.addAttribute("mainPage", "Mypage/one2one_detail.jsp");
+		return "index";
+	}
+
+	@RequestMapping("/one2one_list")
+	public String one2one_list(Model model) {
+		model.addAttribute("mainPage", "Mypage/one2one_list.jsp");
+		return "index";
+	}
+
+	@RequestMapping("/order_list")
+	public String order_list(Model model) {
+		model.addAttribute("mainPage", "Mypage/order_list.jsp");
+		return "index";
+	}
+
+	@RequestMapping("/review")
+	public String review(Model model) {
+		model.addAttribute("mainPage", "Mypage/review.jsp");
+		return "index";
+	}
+
+	@RequestMapping("/order_detail")
+	public String order_detail(Model model) {
+		model.addAttribute("mainPage", "Order/order_detail.jsp");
+		return "index";
+	}
+
 	@RequestMapping("/loginAction")
-	public String adminPage(Model model) {
-		model.addAttribute("adminPage", "../Admin/admin_about_member.jsp");
+	public String admin_member(HttpServletRequest request, Model model) {
+		List<UsersDto> list = iUsersdao.list_member();
+		
+		for(int i = 0; i<list.size(); i++) {
+			if(list.get(i).getUser_gender().equals("0")) {
+				list.get(i).setUser_gender("여자");
+			}else if(list.get(i).getUser_gender().equals("1")) {
+				list.get(i).setUser_gender("남자");
+			}
+		}
+		
+		request.setAttribute("list", list);
+
+		model.addAttribute("adminPage", "../Admin/admin_member.jsp");
 		return "Admin/admin_index";
 	}
+
+	@RequestMapping("/admin_product_registration")
+	public String admin_product_registration(Model model) {
+		model.addAttribute("adminPage", "../Admin/admin_product_registration.jsp");
+		return "Admin/admin_index";
+	}
+
+	@RequestMapping("/admin_notice")
+	public String admin_notice(Model model) {
+		model.addAttribute("adminPage", "../Admin/admin_notice.jsp");
+		return "Admin/admin_index";
+	}
+
+	@RequestMapping("/admin_notice_write")
+	public String admin_notice_write(Model model) {
+		model.addAttribute("adminPage", "../Admin/admin_notice_write.jsp");
+		return "Admin/admin_index";
+	}
+
+	@RequestMapping("/admin_order_action")
+	public String admin_order_action(
+			@RequestParam(value = "order_idx", required = false, defaultValue = "") String order_idx,
+			HttpServletResponse resp,
+			Model model) throws IOException {
+		int total_quantity = 0;
+		int total_price = 0;
+		OrderDto result = iOrderdao.single_select(Integer.parseInt(order_idx));
+		model.addAttribute("dto", result);
+		result.setProduct_price( result.getOrder_quantity()*result.getProduct_price());
+		
+		List<OrderDto> product = iOrderdao.product(Integer.parseInt(order_idx));
+		for(int i = 0; i<product.size();i++) {
+			product.get(i).setProduct_price(product.get(i).getOrder_quantity()*product.get(i).getProduct_price());
+			total_quantity += product.get(i).getOrder_quantity();
+			total_price += product.get(i).getProduct_price();
+		}
+		model.addAttribute("list", product);
+		model.addAttribute("total_quantity", total_quantity);
+		model.addAttribute("total_price", total_price);
+		
+		if(product.size() < 1) {
+			resp.setContentType("text/html; charset=UTF-8");
+			PrintWriter out;
+			out = resp.getWriter();
+			out.println("<script>alert('정보가없습니다.');</script>");
+			out.flush(); 
+		}	
+		
+		model.addAttribute("adminPage", "../Admin/admin_order_action.jsp");
+		return "Admin/admin_index";
+	}
+
+	@RequestMapping("/admin_one2one")
+	public String admin_one2one(Model model) {
+		model.addAttribute("adminPage", "../Admin/admin_one2one.jsp");
+		return "Admin/admin_index";
+	}
+
+	@RequestMapping("/admin_one2one_detail")
+	public String admin_one2one_detail(Model model) {
+		model.addAttribute("adminPage", "../Admin/admin_one2one_detail.jsp");
+		return "Admin/admin_index";
+	}
+
+	@RequestMapping("/admin_order")
+	public String admin_order(Model model) {
+		model.addAttribute("adminPage", "../Admin/admin_order.jsp");
+		return "Admin/admin_index";
+	}
+
+	@RequestMapping("/admin_order_list")
+	public String admin_order_list(Model model) {
+		List<OrderDto> order_list = iOrderdao.order_list();
+		
+		
+		for(int i = 0; i<order_list.size(); i++) {
+			if(order_list.get(i).getOrder_status().equals("0")) {
+				order_list.get(i).setOrder_status("배송전");
+			}
+			else if(order_list.get(i).getOrder_status().equals("1")) {
+				order_list.get(i).setOrder_status("배송중");
+			}
+			else if(order_list.get(i).getOrder_status().equals("2")) {
+				order_list.get(i).setOrder_status("배송완료");
+			}
+			else if(order_list.get(i).getOrder_status().equals("3")) {
+				order_list.get(i).setOrder_status("배송전");
+			}
+		}
+		
+		model.addAttribute("list", order_list);
+		
+		model.addAttribute("adminPage", "../Admin/admin_order_list.jsp");
+		return "Admin/admin_index";
+	}
+
+	@RequestMapping("/admin_member_detail")
+	public String admin_member_detail(Model model) {
+		model.addAttribute("adminPage", "../Admin/admin_member_detail.jsp");
+		return "Admin/admin_index";
+	}
+
 	@RequestMapping("/admin_product")
 	public String admin_product(Model model) {
 		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
 		return "Admin/admin_index";
 	}
+
+	@Autowired
+	fileUploadService fileUploadService;
+	@RequestMapping(value="/admin_product_registration_form", method = RequestMethod.POST)
+	public String admin_product_registration_form(
+			@RequestParam(value = "animal", required = false, defaultValue = "") String animal,
+			@RequestParam(value = "age", required = false, defaultValue = "") String age,
+			@RequestParam(value = "feed-type", required = false, defaultValue = "") String feed_type,
+			@RequestParam(value = "type", required = false, defaultValue = "") String type,
+			@RequestParam(value = "sample", required = false, defaultValue = "0") String sample,
+			@RequestParam(value = "best", required = false, defaultValue = "0") String best,
+			@RequestParam(value = "new", required = false, defaultValue = "0") String new_,
+			@RequestParam(value = "size", required = false, defaultValue = "") String size,
+			@RequestParam(value = "name", required = false, defaultValue = "") String name,
+			@RequestParam(value = "chooseFile", required=false) MultipartFile file,
+			@RequestParam(value = "price", required = false, defaultValue = "") String price,
+			@RequestParam(value = "bo_content", required = false, defaultValue = "") String content, 
+			Model model) {
+		String upload_url = fileUploadService.restore(file);
+		ProductDto dto = new ProductDto();
+		dto.setProduct_animal(Integer.parseInt(animal));
+		dto.setProduct_age(Integer.parseInt(age));
+		dto.setProduct_feed_type(Integer.parseInt(feed_type));
+		dto.setProduct_type(Integer.parseInt(type));
+		if (Integer.parseInt(sample) == 2) {
+			dto.setProduct_sample(1);
+		} else {
+			dto.setProduct_sample(Integer.parseInt(sample));
+		}
+		dto.setProduct_best(Integer.parseInt(best));
+		dto.setProduct_new(Integer.parseInt(new_));
+		dto.setProduct_size(Integer.parseInt(size));
+		dto.setProduct_price(Integer.parseInt(price));
+		dto.setProduct_name(name);
+		dto.setProduct_image(upload_url);
+		dto.setProduct_content(content);
+		
+		int result = iProductdao.insertProduct( dto );
+		
+		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
+		return "Admin/admin_index";
+	}
+	
+	@RequestMapping("/admin_product_update")
+	public String admin_product_update(@RequestParam("product_idx") int product_idx, Model model) {
+		ProductDto update_view = iProductdao.update_view(product_idx);
+		model.addAttribute("dto", update_view);
+		model.addAttribute("adminPage", "../Admin/admin_product_update.jsp");
+		return "Admin/admin_index";
+	}
+
+	@RequestMapping(value="/admin_product_update_form", method = RequestMethod.POST)
+	public String admin_product_update_form(			
+			@RequestParam(value = "animal", required = false, defaultValue = "") String animal,
+			@RequestParam(value = "age", required = false, defaultValue = "") String age,
+			@RequestParam(value = "feed-type", required = false, defaultValue = "") String feed_type,
+			@RequestParam(value = "type", required = false, defaultValue = "") String type,
+			@RequestParam(value = "sample", required = false, defaultValue = "0") String sample,
+			@RequestParam(value = "best", required = false, defaultValue = "0") String best,
+			@RequestParam(value = "new", required = false, defaultValue = "0") String new_,
+			@RequestParam(value = "size", required = false, defaultValue = "") String size,
+			@RequestParam(value = "name", required = false, defaultValue = "") String name,
+			@RequestParam(value = "chooseFile", required=false) MultipartFile file,
+			@RequestParam(value = "price", required = false, defaultValue = "") String price,
+			@RequestParam(value = "bo_content", required = false, defaultValue = "") String content) {
+		String upload_url = fileUploadService.restore(file);
+		ProductDto dto = new ProductDto();
+		dto.setProduct_animal(Integer.parseInt(animal));
+		dto.setProduct_age(Integer.parseInt(age));
+		dto.setProduct_feed_type(Integer.parseInt(feed_type));
+		dto.setProduct_type(Integer.parseInt(type));
+		if (Integer.parseInt(sample) == 2) {
+			dto.setProduct_sample(1);
+		} else {
+			dto.setProduct_sample(Integer.parseInt(sample));
+		}
+		dto.setProduct_best(Integer.parseInt(best));
+		dto.setProduct_new(Integer.parseInt(new_));
+		dto.setProduct_size(Integer.parseInt(size));
+		dto.setProduct_price(Integer.parseInt(price));
+		dto.setProduct_name(name);
+		dto.setProduct_image(upload_url);
+		dto.setProduct_content(content);
+		
+		int update = iProductdao.update(dto);
+		return "redirect:/admin_product";
+	}
 }
-
-
-

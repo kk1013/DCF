@@ -6,15 +6,15 @@ import lombok.Data;
 
 @Data
 public class UsersDto {
-	private int User_idx;
-	private String User_id;
-	private String User_pw;
-	private String User_name;
-	private String User_email;
-	private int User_email_receive;
-	private String User_gender;
-	private String User_address;
-	private int User_phone;
-	private Date User_birth_date;
-	private Date User_join_date;
+	private int user_idx;
+	private String user_id;
+	private String user_pw;
+	private String user_name;
+	private String user_email;
+	private int user_email_receive;
+	private String user_gender;
+	private String user_address;
+	private int user_phone;
+	private Date user_birth_date;
+	private Date user_join_date;
 }

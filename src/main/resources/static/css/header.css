@@ -10,17 +10,18 @@
         width: 1080px;
         height: 35px;
         display: flex;
-        align-items: center;
         justify-content: flex-end;
-        position: relative;
-        left: 0px;
+        margin-top: 10px;
+        margin-bottom: 30px;
     }
     #top > ul{
         list-style: none;
         display: flex;
         flex-direction: row;
+        align-items: center;
     }
     #top > ul > li {
+    	cursor: pointer;
         margin-right: 10px;
     }
     #top > ul > li:last-child{
@@ -99,4 +100,29 @@
     .linkhover:hover::before{
         width: 100%;
         left: 0;
+    }
+    .ds-none{
+        display: none;
+    }
+    .mypage-submenu{
+        background-color: #ebebeb;
+        padding: 10px;
+        margin-left: -40px;
+        position: absolute;
+        z-index: 3;
+    }
+    .mypage-submenu li{
+        list-style: none;
+        font-size: 14px;
+    }
+    .mypage-submenu a{
+        color:#2b2b2b;
+    }
+    .triangle{
+        position: absolute;
+        margin-top: 35px;
+        margin-left: -25px;
+    }
+    .header-icon{
+        width: 38px;
     }

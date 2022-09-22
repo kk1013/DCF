@@ -7,4 +7,60 @@
 
 <mapper namespace="com.study.springboot.dao.IOrderDao">
 
+	<select id="order_list" resultType="com.study.springboot.dto.OrderDto">
+	SELECT 
+	a.*,
+	p.PRODUCT_NAME,
+	p.PRODUCT_PRICE,
+	u.USER_NAME
+	FROM DCF_ORDER a,
+	DCF_PRODUCT p,
+	DCF_USERS u
+	WHERE 
+	a.ORDER_PD_IDX = p.PRODUCT_IDX
+	AND a.ORDER_USER_IDX = u.USER_IDX
+	ORDER BY a.ORDER_IDX ASC
+	</select>
+	
+	<select id="single_select" resultType="com.study.springboot.dto.OrderDto">
+	SELECT 
+	a.*,
+	u.USER_NAME,
+	u.USER_ID,
+	u.USER_PHONE,
+	u.USER_ADDRESS,
+	u.USER_EMAIL,
+	p.PRODUCT_NAME,
+	p.PRODUCT_IMAGE,
+	p.PRODUCT_PRICE
+	FROM DCF_ORDER a,
+	DCF_PRODUCT p,
+	DCF_USERS u 
+	WHERE
+	a.ORDER_PD_IDX = p.PRODUCT_IDX 
+	AND a.ORDER_USER_IDX = u.USER_IDX 
+	AND a.ORDER_IDX = #{param1}
+	ORDER BY a.ORDER_IDX ASC
+	</select>
+
+	<select id="product" resultType="com.study.springboot.dto.OrderDto">
+	SELECT 
+	a.*,
+	u.USER_NAME,
+	u.USER_ID,
+	u.USER_PHONE,
+	u.USER_ADDRESS,
+	u.USER_EMAIL,
+	p.PRODUCT_NAME,
+	p.PRODUCT_IMAGE,
+	p.PRODUCT_PRICE
+	FROM DCF_ORDER a,
+	DCF_PRODUCT p,
+	DCF_USERS u 
+	WHERE
+	a.ORDER_PD_IDX = p.PRODUCT_IDX 
+	AND a.ORDER_USER_IDX = u.USER_IDX 
+	AND a.ORDER_USER_IDX = #{param1}
+	ORDER BY a.ORDER_IDX ASC
+	</select>
 </mapper>

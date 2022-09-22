@@ -1,5 +1,14 @@
 package com.study.springboot.dao;
 
-public interface IOrderDao {
+import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import com.study.springboot.dto.OrderDto;
+
+@Mapper
+public interface IOrderDao {
+	public List<OrderDto> order_list();
+	public OrderDto single_select(int order_idx);
+	public List<OrderDto> product(int order_idx);
 }

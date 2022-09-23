@@ -1,7 +1,6 @@
 package com.study.springboot;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.study.springboot.dao.IFaqDao;
 import com.study.springboot.dao.INoticeDao;
@@ -22,10 +23,8 @@ import com.study.springboot.dao.IUsersDao;
 import com.study.springboot.dto.FaqDto;
 import com.study.springboot.dto.NoticeDto;
 import com.study.springboot.dto.One2OneDto;
+import com.study.springboot.dto.OrderDto;
 import com.study.springboot.dto.ProductDto;
-import com.study.springboot.dto.UsersDto;
-
-import com.study.springboot.dao.IUsersDao;
 import com.study.springboot.dto.UsersDto;
 
 @Controller
@@ -287,14 +286,6 @@ public class MyController {
 		model.addAttribute("total_quantity", total_quantity);
 		model.addAttribute("total_price", total_price);
 		
-		if(product.size() < 1) {
-			resp.setContentType("text/html; charset=UTF-8");
-			PrintWriter out;
-			out = resp.getWriter();
-			out.println("<script>alert('정보가없습니다.');</script>");
-			out.flush(); 
-		}	
-		
 		model.addAttribute("adminPage", "../Admin/admin_order_action.jsp");
 		return "Admin/admin_index";
 	}
@@ -349,8 +340,6 @@ public class MyController {
 	@RequestMapping("/admin_order_list")
 	public String admin_order_list(Model model) {
 		List<OrderDto> order_list = iOrderdao.order_list();
-		
-		
 		for(int i = 0; i<order_list.size(); i++) {
 			if(order_list.get(i).getOrder_status().equals("0")) {
 				order_list.get(i).setOrder_status("배송전");
@@ -380,6 +369,8 @@ public class MyController {
 
 	@RequestMapping("/admin_product")
 	public String admin_product(Model model) {
+		List<ProductDto>list = iProductdao.list();
+		model.addAttribute("list", list);
 		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
 		return "Admin/admin_index";
 	}
@@ -406,7 +397,7 @@ public class MyController {
 		dto.setProduct_animal(Integer.parseInt(animal));
 		dto.setProduct_age(Integer.parseInt(age));
 		dto.setProduct_feed_type(Integer.parseInt(feed_type));
-		dto.setProduct_type(Integer.parseInt(type));
+		dto.setProduct_category_type(Integer.parseInt(type));
 		if (Integer.parseInt(sample) == 2) {
 			dto.setProduct_sample(1);
 		} else {
@@ -425,17 +416,10 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
 		return "Admin/admin_index";
 	}
-	
-	@RequestMapping("/admin_product_update")
-	public String admin_product_update(@RequestParam("product_idx") int product_idx, Model model) {
-		ProductDto update_view = iProductdao.update_view(product_idx);
-		model.addAttribute("dto", update_view);
-		model.addAttribute("adminPage", "../Admin/admin_product_update.jsp");
-		return "Admin/admin_index";
-	}
 
 	@RequestMapping(value="/admin_product_update_form", method = RequestMethod.POST)
 	public String admin_product_update_form(			
+			@RequestParam(value = "product_idx") String product_idx,
 			@RequestParam(value = "animal", required = false, defaultValue = "") String animal,
 			@RequestParam(value = "age", required = false, defaultValue = "") String age,
 			@RequestParam(value = "feed-type", required = false, defaultValue = "") String feed_type,
@@ -450,10 +434,11 @@ public class MyController {
 			@RequestParam(value = "bo_content", required = false, defaultValue = "") String content) {
 		String upload_url = fileUploadService.restore(file);
 		ProductDto dto = new ProductDto();
+		dto.setProduct_idx(Integer.parseInt(product_idx));
 		dto.setProduct_animal(Integer.parseInt(animal));
 		dto.setProduct_age(Integer.parseInt(age));
 		dto.setProduct_feed_type(Integer.parseInt(feed_type));
-		dto.setProduct_type(Integer.parseInt(type));
+		dto.setProduct_category_type(Integer.parseInt(type));
 		if (Integer.parseInt(sample) == 2) {
 			dto.setProduct_sample(1);
 		} else {
@@ -469,5 +454,15 @@ public class MyController {
 		
 		int update = iProductdao.update(dto);
 		return "redirect:/admin_product";
+	}
+	
+	@RequestMapping(value="/admin_order_status_update", method=RequestMethod.GET)
+	public String admin_order_status_update(
+			@RequestParam(value="delivery") String order_status,
+			@RequestParam(value="order_idx") String order_idx,
+			HttpServletRequest request,
+			Model model) {
+		int result = iOrderdao.order_status_update(Integer.parseInt(order_status),Integer.parseInt(order_idx));
+		return "redirect:/admin_order_action?order_idx="+Integer.parseInt(order_idx);
 	}
 }

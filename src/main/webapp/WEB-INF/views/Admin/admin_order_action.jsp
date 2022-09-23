@@ -62,26 +62,30 @@
             </div>
 
             <c:forEach var="list" items="${ list }">
+            <form action="/admin_order_status_update">
+            <input type="hidden" name="order_idx" value="${ list.order_idx }">
             <div class="orderActiondiv oa-div11">
                 <div class="oa-div11-1"><input type="checkbox"></div>
-                <div class="oa-div11-2">${ list.order_idx }</div>
+                <div class="oa-div11-2"><p>${ list.order_idx }</p></div>
                 <div class="oa-div11-3"><img src="/img/product-img/${ list.product_image }" alt="" width="80px" height="80px"></div>
                 <div class="oa-div11-4">${ list.product_name }</div>
                 <div class="oa-div11-5">
-                    <select class="oa-select" name="delivery" id="">
-                        <option value="before">배송준비중</option>
-                        <option value="middle">배송중</option>
-                        <option value="after">배송완료</option>
+                    <select class="oa-select" name="delivery" id="delivery">
+                        <option value="0">배송준비중</option>
+                        <option value="1">배송중</option>
+                        <option value="2">배송완료</option>
+                        <option value="3">배송취소</option>
                     </select>
-                    <input class="oa-select-button" type="button" value="변경">
+                    <input class="oa-select-button" type="submit" value="변경">
                 </div>
-                <div class="oa-div11-6">${ list.order_quantity }</div>
-                <div class="oa-div11-7">${ list.product_price }</div>
+                <div class="oa-div11-6">${ list.order_quantity }개</div>
+                <div class="oa-div11-7">${ list.product_price }원</div>
             </div>
+            </form>
             </c:forEach>
             
             <div class="orderActiondiv oa-div12">
-                <div class="oa-div12-1">${ total_quantity }</div>
+                <div class="oa-div12-1">합계: ${ total_quantity }개</div>
                 <div class="oa-div12-2">${ total_price }원</div>
             </div>
         </div>
@@ -89,5 +93,18 @@
             <input class="oa-div13-button oa-div13-1" type="button" value="목록">
             <input class="oa-div13-button oa-div13-2" type="button" value="정보수정">
         </div>
-        
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    window.onload = function(){
+    	var arr = new Array();
+    	var select = document.getElementsByClassName("oa-select");
+    	<c:forEach var="list" items="${ list }">
+    		arr.push("${list.order_status}");
+    	</c:forEach>
+    	for(var i = 0 ; i<select.length;i++){
+    		select[i][arr[i]].setAttribute("selected", true);
+    	}
+    	
+    }
+    </script>

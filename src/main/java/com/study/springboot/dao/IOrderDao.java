@@ -16,5 +16,6 @@ public interface IOrderDao {
 	public List<OrderDto> order_list();
 	public OrderDto single_select(int order_idx);
 	public List<OrderDto> product(int order_idx);
+	public int order_status_update(int order_status, int order_idx);
 
 }

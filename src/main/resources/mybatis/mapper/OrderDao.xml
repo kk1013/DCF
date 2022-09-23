@@ -81,7 +81,11 @@
 	WHERE
 	a.ORDER_PD_IDX = p.PRODUCT_IDX 
 	AND a.ORDER_USER_IDX = u.USER_IDX 
-	AND a.ORDER_USER_IDX = #{param1}
+	AND a.ORDER_IDX = #{param1}
 	ORDER BY a.ORDER_IDX ASC
 	</select>
+	
+	<update id="order_status_update">
+	UPDATE DCF_ORDER SET ORDER_STATUS=#{param1} WHERE ORDER_IDX=#{param2}
+	</update>
 </mapper>

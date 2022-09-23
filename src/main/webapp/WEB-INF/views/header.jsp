@@ -3,10 +3,16 @@
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/font.css">
 <div id="headerwrap">
+<% session.setAttribute("user_id", "admin"); %>
 <div id="top">
     <ul>
         <li>
-            <a href="login">로그인</a>
+        <% session = request.getSession(); %>
+        <% if( session.getAttribute("user_id") !=null){ %>
+            <p style="color: blue;"><%= session.getAttribute("user_id")  %>님</p>
+       	<% } else { %>
+       		<a href="login">로그인</a>
+       	<% } %>
         </li>
         <li>
             <a href="join">회원가입</a>

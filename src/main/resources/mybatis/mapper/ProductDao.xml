@@ -11,10 +11,6 @@
 	  SELECT * FROM dcf_product ORDER BY product_idx DESC
 	</select>
 	
-	<select id="update_view" resultType="com.study.springboot.dto.ProductDto">
-	  SELECT * FROM dcf_product WHERE product_idx=#{ param1 }
-	</select>
-	
 	<delete id="product_delete">
 	  DELETE FROM dcf_product WHERE product_idx=#{ param1 }
 	</delete>

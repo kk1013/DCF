@@ -5,6 +5,7 @@
     <p class="title">상품수정</p>
     <div>
     <form action="/admin_product_update_form" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="product_idx" value="${ dto.product_idx }">
         <table id="category-table">
             <tr class="line-top line-bottom">
                 <td class="item">
@@ -115,7 +116,7 @@ window.onload = function(){
 	$("#animal input[value=${ dto.product_animal }]").attr('checked' , true);
 	$("#age input[value=${ dto.product_age }]").attr('checked' , true);
 	$("#feed-type input[value=${ dto.product_feed_type }]").attr('checked' , true);
-	$("#category-type [value=${ dto.product_type }]").attr('checked' , true);
+	$("#category-type [value=${ dto.product_category_type }]").attr('checked' , true);
 	if('${ dto.product_sample }' == "1"){
 		$("#sample").attr('checked' , true);
 	}

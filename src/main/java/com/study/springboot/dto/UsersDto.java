@@ -2,19 +2,27 @@ package com.study.springboot.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
 public class UsersDto {
-	private int User_idx;
-	private String User_id;
-	private String User_pw;
-	private String User_name;
-	private String User_email;
-	private int User_email_receive;
-	private String User_gender;
-	private String User_address;
-	private int User_phone;
-	private Date User_birth_date;
-	private Date User_join_date;
+	private int user_idx;
+	private String user_id;
+	private String user_pw;
+	private String user_name;
+	private String user_address;
+	private String user_email;
+	private int user_email_receive;
+	private int user_gender;
+	private int user_phone;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date user_birth_date;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date user_join_date;
+	//private int order_user_idx;
+	//private int done2one_user;
+	
+
 }

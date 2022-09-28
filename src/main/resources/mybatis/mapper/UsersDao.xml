@@ -6,5 +6,20 @@
 <!-- SQL 끝에 ; 세미콜론을 넣지 마세요! -->
 
 <mapper namespace="com.study.springboot.dao.IUsersDao">
+	<select id="list_member" resultType="com.study.springboot.dto.UsersDto">
+		SELECT * FROM DCF_USERS
+	</select>
+	<select id="usersdto" resultType="com.study.springboot.dto.UsersDto">
+    	select * from dcf_users where user_idx=#{ param1 }
+    </select>
+    <update id="admin_member_update_form" parameterType="com.study.springboot.dto.UsersDto">
+		update dcf_users set user_id=#{user_id}, user_pw=#{user_pw},user_name=#{user_name},user_address=#{user_address},user_email=#{user_email},
+		user_gender=#{user_gender},user_phone=#{user_phone},user_birth_date=#{user_birth_date} where user_idx=#{user_idx}
+    </update>
+    <delete id="adminMemberDeleteAction">   		
+    	delete from dcf_users where user_idx=#{ param1 }
+    </delete>
 
 </mapper>
+
+

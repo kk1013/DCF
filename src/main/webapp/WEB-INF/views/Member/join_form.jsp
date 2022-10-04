@@ -25,7 +25,7 @@
             </div>
     
             <div>
-                <form action="join_action" method="get" onsubmit="validation()">
+                <form action="join_action" method="get">
                 <table class="joinform-table">
                     <tr class="joinform-tr">
                         <td class="joinform-subtitle">
@@ -35,12 +35,12 @@
                             <input class="joinform-input" type="text" name="name" id="name" placeholder="이름 입력" >
                         </td>
                     </tr>
-                    <tr class="joinform-tr">
+                    <tr class="joinform-tr btnalign">
                         <td class="joinform-subtitle">
                             아이디
                         </td>
                         <td class="btndiv">
-                            <input class="joinform-input2" type="text" placeholder="5~6자, 영문, 숫자 또는 영문+숫자 조합"> <button class="checkbutton">중복확인</button>
+                            <input class="joinform-input2" type="text" id="" pattern="^([a-z0-9_]){5,50}$" placeholder="5~6자, 영문, 숫자 또는 영문+숫자 조합"> <input type="button" class="checkbutton" value="중복확인" onClick="search()">
                         </td>
                     </tr>
                     <tr class="joinform-tr">
@@ -106,9 +106,9 @@
                             성별
                         </td>
                         <td class="joinform-check2">
-                            <input type="radio" name="checkBox2" id="yellowCheckbox2" class="checkinput" value="0">
+                            <input type="radio" name="gender" id="yellowCheckbox2" class="checkinput" value="0">
                             <label for="yellowCheckbox2" class="yellowCheckbox"></label> <span class="joinform-span">여자</span>
-                            <input type="radio" name="checkBox2" id="yellowCheckbox3" class="checkinput" value="1">
+                            <input type="radio" name="gender" id="yellowCheckbox3" class="checkinput" value="1">
                             <label for="yellowCheckbox3" class="yellowCheckbox"></label> <span class="joinform-span">남자</span>
                         </td>
                     </tr>
@@ -123,63 +123,24 @@
                 </table>
     
                 <div class="joinform-buttonwrap">
-                    <button class="joinform-button joinform-cancel">취소</button>
-                    <button class="joinform-button joinform-confirm">회원가입</button>
+                    <input type="button" class="joinform-button joinform-cancel" value="취소" onClick="history.back()">
+                    <input class="joinform-button joinform-confirm" type="submit" value="회원가입">
                 </div>
-                
                 </form>
+                
             </div>
         </div>
 
-        <script>
-            function validation(){
-                var name = document.getElementById("name").value;
-                if(name || name!=" "){namecheck(name)};
-
-                var id = document.getElementById("id").value;
-                if(id || id!=" "){idcheck(id)};
-
-                var pw = document.getElementById("pw").value;
-                var pwch = document.getElementById("pwch").value;
-                if(pw || pw!=" " && !pwch || pwch != " "){pwcheck(pw, pwch)};
-
-                var email = document.getElementById("email").value;
-                if(email || email!=" "){emailcheck(email)};
-
-                var phone = document.getElementById("phone").value;
-                if(phone || phone!=" "){phonecheck(phone)};
-
-                var birth = document.getElementById("birth").value;
-                if(birth || birth!=" "){birthcheck(birth)};
-
-                var gender = document.getElementById("gender").value;
-                if(gender || gender!=" "){gendercheck(gender)};
-
-                var address = document.getElementById("address").value;
-                if(address || address!=" "){addresscheck(address)};
-            }
-            function namecheck( name ){
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+<script>
+        
+	function search() {
+		window.name = "join_form"
+		window.open("/join_form_2", "join_form_2", "width=430, height=350, resizable=no, scrollbars=no");
+		form.submit();
+	};
+        
+        
                 
-            }
-            function idcheck( id ){
-
-            }
-            function pwcheck( pw, pwch ){
-
-            }
-            function emailcheck( email ){
-
-            }
-            function phonecheck( phone ){
-
-            }
-            function birthcheck( birth ){
-
-            }
-            function gendercheck( gender ){
-
-            }
-            function addresscheck( address ){
-
-            }
-        </script>
+</script>

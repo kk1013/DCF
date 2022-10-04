@@ -10,4 +10,5 @@ import com.study.springboot.dto.UsersDto;
 public interface IUsersDao {
 	public List<UsersDto> list_member();
 	public int login ( String user_id, String user_pw );
+	public List<UsersDto> user_list();
 }

@@ -42,22 +42,7 @@ public class MyController {
 	@Autowired
 	IFaqDao iFaqdao;
 	/*
-	 * 
-	 * @Autowired ISampleDao iSampledao;
-	 * 
 	 * @Autowired IReviewDao iReviewdao;
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 *
-	 * 
-	 * 
 	 * 
 	 * @Autowired IBasketDao iBasketdao;
 	 */
@@ -100,6 +85,30 @@ public class MyController {
 	@RequestMapping("/product")
 	public String product(Model model) {
 		model.addAttribute("mainPage", "Product/product.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/product_new")
+	public String product_new(Model model) {
+		List<ProductDto> newlist = iProductdao.newlist_dog();
+		model.addAttribute("newlist", newlist);
+		model.addAttribute("mainPage", "Product/product_new_dog.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/product_new_dog_form")
+	public String product_new_dog_form(Model model) {
+		List<ProductDto> newlist_dog = iProductdao.newlist_dog();
+		model.addAttribute("newlist", newlist_dog);
+		model.addAttribute("mainPage", "Product/product_new_dog.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/product_new_cat_form")
+	public String product_new_cat_form(Model model) {
+		List<ProductDto> newlist_cat = iProductdao.newlist_cat();
+		model.addAttribute("newlist", newlist_cat);
+		model.addAttribute("mainPage", "Product/product_new_cat.jsp");
 		return "index";
 	}
 
@@ -147,6 +156,13 @@ public class MyController {
 	public String join_form(Model model) {
 		model.addAttribute("mainPage", "Member/join_form.jsp");
 		return "index";
+	}
+	
+	@RequestMapping("/join_form_2")
+	public String join_form_2(Model model) {
+		List<UsersDto> list = iUsersdao.user_list();
+		model.addAttribute("list", list);
+		return "Member/join_form_2";
 	}
 
 	@RequestMapping("/cart")
@@ -211,11 +227,13 @@ public class MyController {
 
 	@RequestMapping("/loginAction")
 	public String admin_member(@RequestParam("user_id") String user_id,
-							   @RequestParam("user_pw") String user_pw, HttpServletRequest request, Model model) {
+							   @RequestParam("user_pw") String user_pw,
+							   HttpServletRequest request, Model model) {
 		List<UsersDto> list = iUsersdao.list_member();
 		request.setAttribute("list", list);
 		int result = iUsersdao.login(user_id, user_pw);
 		request.getSession().setAttribute("user_id", user_id);
+		request.getSession().setAttribute("user_pw", user_pw);
 		if(result >= 1) {
 			if(user_id.equals("admin")) {
 				for(int i = 0; i<list.size(); i++) {
@@ -237,6 +255,16 @@ public class MyController {
 		}
 		model.addAttribute("mainPage", "main.jsp");
 		return "index";
+	}
+	
+	
+	
+	@RequestMapping("admin_user")
+	public String adminlogin(HttpServletRequest request,Model model) {
+		List<UsersDto> list = iUsersdao.list_member();
+		request.setAttribute("list", list);
+		model.addAttribute("adminPage", "../Admin/admin_member.jsp");
+		return "Admin/admin_index";
 	}
 
 	@RequestMapping("/admin_product_registration")
@@ -314,11 +342,18 @@ public class MyController {
 		return "Admin/admin_index";
 	}
 	
+	@RequestMapping("/admin_one2one_detail_image_form")
+	public String admin_one2one_detail_image_form(@RequestParam("one2one_idx") int one2one_idx, HttpServletRequest request) {
+		One2OneDto content_detail = iOne2onedao.content_detail(one2one_idx);
+		request.setAttribute("list", content_detail);
+		return "/Admin/admin_one2one_detail_image";
+	}
+	
 	@RequestMapping("/admin_one2one_detail_form")
 	public String admin_one2one_detail_form(@RequestParam("one2one_idx") int one2one_idx,
 											@RequestParam("one2one_reply") String one2one_reply) {
 		int reply = iOne2onedao.reply(one2one_reply, one2one_idx);
-		return "redirect:/admin_one2one";
+		return "redirect:/admin_one2one_detail?one2one_idx="+one2one_idx;
 	}
 
 	@RequestMapping("/admin_order")

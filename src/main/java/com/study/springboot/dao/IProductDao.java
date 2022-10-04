@@ -14,4 +14,6 @@ public interface IProductDao {
 	public int product_delete( int product_idx );
 	public int update( ProductDto dto );
 	public int insertProduct( ProductDto dto );
+	public List<ProductDto> newlist_dog();
+	public List<ProductDto> newlist_cat();
 }

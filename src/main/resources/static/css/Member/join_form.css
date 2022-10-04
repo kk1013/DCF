@@ -66,12 +66,14 @@
     border-top: 1px solid #292929;
     border-bottom: 1px solid #292929;
     padding: 12px 0 12px 27px;
+    box-sizing: border-box;
 }
 .joinform-table {
     padding: 12px 0 20px 27px;
 }
 .btndiv {
 	display: flex;
+	margin-top: 8px;
 }
 .checkbutton {
 	display: flex;

@@ -5,9 +5,15 @@
 <div id="headerwrap">
 <div id="top">
     <ul>
-        <li>
-            <a href="login">로그인</a>
-        </li>
+        
+        <% session = request.getSession(); %>
+        <% if( session.getAttribute("user_id") != null){ %>
+           <li> <p><%= session.getAttribute("user_id") %>님</p></li> 
+           <li> <a href="logout">로그아웃</a></li>
+        <% } else { %>
+        <li>	<a href="login">로그인</a> </li>
+        <% } %>
+        
         <li>
             <a href="join">회원가입</a>
         </li>
@@ -41,7 +47,7 @@
             <h1><a href="product" class="linkhover">반려묘</a></h1>
         </li>
         <li>
-            <h1><a href="product" class="linkhover">신상품</a></h1>
+            <h1><a href="product_new" class="linkhover">신상품</a></h1>
         </li>
         <li>
             <h1><a href="product" class="linkhover">베스트</a></h1>

@@ -25,15 +25,12 @@
         border-collapse:collapse;
         box-sizing: border-box;
         display:flex; flex:row wrap;
-       
     }
     #one2one-answer-wrap table tr{
         width: 100%;
         border:1px solid #292929; box-sizing:border-box;
         border-left:none;
         border-right:none;
-  
-
     }
     #one2one-answer-wrap table tr td{
         padding:10px;
@@ -41,6 +38,9 @@
     #one2one-answer-wrap table tr>td:first-child{
         width: 100px; color:#505050; background-color:#ebebeb;
         text-align: center;
+    }
+    .taps_td {
+    	width: 500px;
     }
     .one2one-answer-img{
         width: 70px; height: 70px;

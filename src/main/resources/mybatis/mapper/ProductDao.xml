@@ -23,10 +23,13 @@
 	  SELECT * FROM dcf_product WHERE product_name LIKE '%'||#{ param1 }||'%' OR product_price LIKE '%'||#{ param1 }||'%' ORDER BY product_idx DESC
 	</select>
 	
-	<update id="update" parameterType="com.study.springboot.dto.ProductDto">
-	  UPDATE dcf_product SET product_name=#{ param1 }, product_price=#{ param2 }, product_image=#{ param3 }, product_content=#{ param4 },
-	  product_age=#{ param5 }, product_feed_type=#{ param6 }, product_size=#{ param7 }, product_animal=#{ param8 }, product_new=#{ param9 },
-	  product_best=#{ param10 }, product_category_type=#{ param11 }, product_sample=#{ param12 } WHERE product_idx=#{ param13 };
-	</update>
+	<select id="newlist_dog" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_new=1 AND product_animal=0
+	</select>
+	
+	<select id="newlist_cat" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_new=1 AND product_animal=1
+	</select>
+
 
 </mapper>

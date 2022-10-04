@@ -62,8 +62,8 @@
 
         </div>
         <div id="join-bottom">
-          <button id="join-cancel" class="join-button">취소</button>
-          <button id="join-confirm" class="join-button">확인</button>
+          <input type="button" id="join-cancel" class="join-button" value="취소" onClick="history.back()">
+          <input type="button" id="join-confirm" class="join-button" value="확인" onClick="is_checked()">
         </div>
 
         </form>
@@ -71,6 +71,13 @@
 </body>
 
 <script type="text/javascript">
+	function is_checked() {
+		if($("input:checkbox[name=yellowCheckbox1]").is(":checked") != true) {
+			alert("이용약관을 모두 동의해주세요.")
+		} else {
+			document.getElementById("form_wrap").submit();
+		}
+	}
 	
 	$(document).ready(function() {
 		$("#yellowCheckbox1").click(function() {

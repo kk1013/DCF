@@ -68,11 +68,13 @@
     color: #292929;
     font-weight: bold;
     margin-left: 35px;
+    width: 145px;
 }
 .countdiv {
     display: flex;
     flex-direction: row;
     margin-left: 84px;
+    width: 105px;
 }
 .minusbutton {
     width: 25px;
@@ -105,6 +107,7 @@
 }
 .productprice {
     margin-left: 110px;
+    width: 55px;
 }
 .buttondiv {
     display: flex;
@@ -150,6 +153,12 @@
     font-size: 14px;
     background-color: white;
     margin: 8px 0 0 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.delete-button:hover {
+	background-color: #fee469;
+	border: none;
 }
 .cartlist-order {
     height: 85px;

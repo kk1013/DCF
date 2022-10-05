@@ -67,3 +67,7 @@
 .product-name{
     text-align: end;
 }
+
+.ds-none{
+	display: none;
+}

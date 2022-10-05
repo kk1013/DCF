@@ -40,7 +40,7 @@
             <div id="answerform-wrap">
                 <form action="admin_one2one_detail_form">
                     <div>
-                        <p>내용</p>
+                        <p>답변내용</p>
                         <p>
                         	<input type="hidden" name="one2one_idx" value="${ dto.one2one_idx }">
                             <textarea name="one2one_reply" id="">${ dto.one2one_reply }</textarea>

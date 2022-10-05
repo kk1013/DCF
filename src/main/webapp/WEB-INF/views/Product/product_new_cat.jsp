@@ -19,9 +19,9 @@
     </form>
         </div>
         <div id="samplepage-sample">
-            <table id="product_new-table">
-                <tr>
+            <table id="product_new-table" style="width:1080px;">
             	<c:forEach var="list" items="${newlist}">
+                <tr style="width:25%; float:left;">
                     <td>
                         <div class="sample-product">
                             <img src="/img/product-img/${ list.product_image }" alt="사료1">
@@ -29,8 +29,8 @@
                         <p class="product-name">${ list.product_name }</p>
                         <p class="price">${ list.product_price }원</p>
                     </td>                   
-                 </c:forEach>
                 </tr>
+                 </c:forEach>
             </table>
         </div>
     </div>

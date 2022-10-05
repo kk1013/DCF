@@ -30,23 +30,24 @@
                 <span class="product-order">주문</span>
             </div>
 
+			<c:forEach var="list" items="${list}">
             <div class="cartlist-content">
 
                 <input class="checkboxdiv" type="checkbox" name="chk">
 
                 <div class="imgdiv">
-                    <img src="/img/dogfeedmainimg.jpg" alt="상품이미지" width="120px" height="120px">
+                    <img src="../img/product-img/${list.product_image}" alt="상품이미지" width="120px" height="120px">
                 </div>
 
-                <div class="productname">로얄캐닌 인도어 4kg</div>
+                <div class="productname">${list.product_name}</div>
 
                 <div class="countdiv">
                     <input class="minusbutton" type='button' onclick='count("minus")' value='-'/>
-                    <div id='result'>1</div>
+                    <div id='result'>${list.basket_count}</div>
                     <input class="plusbutton" type='button' onclick='count("plus")' value='+'/>
                 </div>
 
-                <div class="productprice"><span class="price price-num">45,300</span><span class="price">원</span></div>
+                <div class="productprice"><span class="price price-num">${list.product_price}</span><span class="price">원</span></div>
 
                 <div class="buttondiv">
                     <input class="cartlist-button cartlist-button1" type="button" value="바로주문">
@@ -54,29 +55,8 @@
                 </div>
 
             </div>
+            </c:forEach>
 
-            <div class="cartlist-content">
-                <input class="checkboxdiv" type="checkbox" name="chk">
-
-                <div class="imgdiv">
-                    <img src="/img/dogfeedmainimg.jpg" alt="상품이미지" width="120px" height="120px">
-                </div>
-
-                <div class="productname">로얄캐닌 인도어 4kg</div>
-
-                <div class="countdiv">
-                    <input class="minusbutton" type='button' onclick='count("minus")' value='-'/>
-                    <div id='result'>1</div>
-                    <input class="plusbutton" type='button' onclick='count("plus")' value='+'/>
-                </div>
-
-                <div class="productprice"><span class="price price-num">45,300</span><span class="price">원</span></div>
-
-                <div class="buttondiv">
-                    <input class="cartlist-button cartlist-button1" type="button" value="바로주문">
-                    <input class="cartlist-button" type="button" value="삭제">
-                </div>
-            </div>
 
             <div class="cartlist-delete">
                 <input class="delete-button" type="button" value="선택삭제">
@@ -84,7 +64,7 @@
 
             <div class="cartlist-order">
                 <span class="priceall">총 결제금액</span>
-                <span class="price-all-num">85,000</span><span class="price-all">원</span>
+                <span class="price-all-num">${sum}</span><span class="price-all">원</span>
             </div>
 
         </div>

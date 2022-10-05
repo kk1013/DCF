@@ -10,7 +10,7 @@
 		SELECT * FROM DCF_USERS
 	</select>
 	
-	<select id="login" resultType="_int">
+	<select id="login" resultType="com.study.springboot.dto.UsersDto">
 		SELECT * FROM dcf_users WHERE user_id=#{param1} and user_pw=#{param2}
 	</select>
 	

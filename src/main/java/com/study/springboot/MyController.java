@@ -10,12 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.study.springboot.dao.IBasketDao;
 import com.study.springboot.dao.IFaqDao;
 import com.study.springboot.dao.INoticeDao;
 import com.study.springboot.dao.IOne2OneDao;
 import com.study.springboot.dao.IOrderDao;
 import com.study.springboot.dao.IProductDao;
 import com.study.springboot.dao.IUsersDao;
+import com.study.springboot.dto.BasketDto;
 import com.study.springboot.dto.FaqDto;
 import com.study.springboot.dto.NoticeDto;
 import com.study.springboot.dto.One2OneDto;
@@ -36,10 +38,12 @@ public class MyController {
 	INoticeDao iNoticedao;
 	@Autowired
 	IFaqDao iFaqdao;
+	@Autowired
+	IBasketDao iBasketdao;
 	/*
 	 * @Autowired IReviewDao iReviewdao;
 	 * 
-	 * @Autowired IBasketDao iBasketdao;
+	 * 
 	 */
 
 	@RequestMapping("/")
@@ -140,6 +144,7 @@ public class MyController {
 		model.addAttribute("mainPage", "Customer/one2one.jsp");
 		return "index";
 	}
+	
 
 	@RequestMapping("/join_action")
 	public String join_action(Model model) {
@@ -161,7 +166,12 @@ public class MyController {
 	}
 
 	@RequestMapping("/cart")
-	public String cart(Model model) {
+	public String cart(HttpServletRequest request, Model model) {
+		int idx = (int) request.getSession().getAttribute("user_idx");
+		List<BasketDto> list = iBasketdao.list(idx);
+		int sum = iBasketdao.sum(idx);
+		model.addAttribute("list", list);
+		model.addAttribute("sum", sum);
 		model.addAttribute("mainPage", "Mypage/cart.jsp");
 		return "index";
 	}
@@ -191,13 +201,18 @@ public class MyController {
 	}
 
 	@RequestMapping("/one2one_detail")
-	public String one2one_detail(Model model) {
+	public String one2one_detail(@RequestParam("one2one_idx") int one2one_idx, Model model) {
+		One2OneDto content_detail = iOne2onedao.content_detail(one2one_idx);
+		model.addAttribute("dto", content_detail);
 		model.addAttribute("mainPage", "Mypage/one2one_detail.jsp");
 		return "index";
 	}
 
 	@RequestMapping("/one2one_list")
-	public String one2one_list(Model model) {
+	public String one2one_list(HttpServletRequest request, Model model) {
+		int idx = (int) request.getSession().getAttribute("user_idx");
+		List<One2OneDto> mylist = iOne2onedao.mylist(idx);
+		model.addAttribute("mylist", mylist);
 		model.addAttribute("mainPage", "Mypage/one2one_list.jsp");
 		return "index";
 	}
@@ -226,10 +241,11 @@ public class MyController {
 							   HttpServletRequest request, Model model) {
 		List<UsersDto> list = iUsersdao.list_member();
 		request.setAttribute("list", list);
-		int result = iUsersdao.login(user_id, user_pw);
+		UsersDto result = iUsersdao.login(user_id, user_pw);
 		request.getSession().setAttribute("user_id", user_id);
-		request.getSession().setAttribute("user_pw", user_pw);
-		if(result >= 1) {
+		request.getSession().setAttribute("user_idx", result.getUser_idx());
+		request.getSession().setAttribute("user_name", result.getUser_name());
+		if(result != null) {
 			if(user_id.equals("admin")) {
 				model.addAttribute("adminPage", "../Admin/admin_member.jsp");
 				return "Admin/admin_index";
@@ -243,6 +259,14 @@ public class MyController {
 		return "index";
 	}
 	
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest request, Model model) {
+		request.getSession().setAttribute("user_id", null);
+		request.getSession().setAttribute("user_idx", null);
+		request.getSession().setAttribute("user_name", null);
+		model.addAttribute("mainPage", "main.jsp");
+		return "index";
+	}
 	
 	
 	@RequestMapping("admin_user")

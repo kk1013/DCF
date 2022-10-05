@@ -26,6 +26,12 @@
 	  ORDER BY one2one_idx DESC
 	</select>
 	
+	<select id="mylist" resultType="com.study.springboot.dto.One2OneDto">
+	  SELECT * FROM dcf_one2one where one2one_user_idx = #{ param1 }
+	</select>
 	
+	<insert id="insert" parameterType="com.study.springboot.dto.One2OneDto">
+	  INSERT INTO dcf_one2one VALUES (ONE2ONE_IDX_SEQ.NEXTVAL, #{ dto.one2one_title }, #{ dto.one2one_content }, #{ dto.one2one_image }, null, sysdate , 2)
+	</insert>
 	
 </mapper>

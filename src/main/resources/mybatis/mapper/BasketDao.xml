@@ -7,4 +7,12 @@
 
 <mapper namespace="com.study.springboot.dao.IBasketDao">
 
+	<select id="list" resultType="com.study.springboot.dto.BasketDto">
+	  SELECT * FROM dcf_basket, dcf_product WHERE dcf_basket.basket_pd_idx = dcf_product.product_idx and basket_user_idx = #{ param1 }
+	</select>
+	
+	<select id="sum" resultType="_int">
+	  SELECT SUM(product_price) FROM dcf_product, dcf_basket WHERE dcf_basket.basket_pd_idx = dcf_product.product_idx and basket_user_idx = #{ param1 }
+	</select>
+	
 </mapper>

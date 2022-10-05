@@ -9,15 +9,17 @@
     <div class="square ds-none">
         <div class="user-type">
         <% session = request.getSession(); %>
+        <% if( session.getAttribute("user_name") != null){ %>
+            <p><%= session.getAttribute("user_name") %>님</p>
+        <% } %>     	
+        </div>
+        <p class="user-name">
+        <% session = request.getSession(); %>
         <% if( session.getAttribute("user_id") != null){ %>
             <p><%= session.getAttribute("user_id") %>님</p>
-        <% } else { %>
-        	<p>대표운영자님</p>
         <% } %>
-        </div>
-        <p class="user-name">님</p>
         <a href="#">쇼핑몰정보</a><br>
-        <a href="#">로그아웃</a>
+        <a href="logout">로그아웃</a>
     </div>
 <div id="aside-wrap">
     <div id="aside-main">

@@ -18,6 +18,15 @@
 	<select id="search" resultType="com.study.springboot.dto.ProductDto">
 	  SELECT * FROM dcf_product WHERE product_name LIKE '%'||#{ param1 }||'%' OR product_price LIKE '%'||#{ param1 }||'%' ORDER BY product_idx DESC
 	</select>
+	
+	<select id="newlist_dog" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_new=1 AND product_animal=0
+	</select>
+	
+	<select id="newlist_cat" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_new=1 AND product_animal=1
+	</select>
+
 
 	<insert id="insertProduct" parameterType="com.study.springboot.dto.ProductDto">
 		INSERT INTO DCF_PRODUCT 

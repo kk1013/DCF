@@ -50,7 +50,7 @@
             <h1><a href="product" class="linkhover">반려묘</a></h1>
         </li>
         <li>
-            <h1><a href="product" class="linkhover">신상품</a></h1>
+            <h1><a href="product_new" class="linkhover">신상품</a></h1>
         </li>
         <li>
             <h1><a href="product" class="linkhover">베스트</a></h1>

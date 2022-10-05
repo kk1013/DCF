@@ -26,4 +26,6 @@
 	  ORDER BY one2one_idx DESC
 	</select>
 	
+	
+	
 </mapper>

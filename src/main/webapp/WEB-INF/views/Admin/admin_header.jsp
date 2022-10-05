@@ -8,9 +8,14 @@
     </div>
     <div class="square ds-none">
         <div class="user-type">
-            <p>대표운영자님</p>
+        <% session = request.getSession(); %>
+        <% if( session.getAttribute("user_id") != null){ %>
+            <p><%= session.getAttribute("user_id") %>님</p>
+        <% } else { %>
+        	<p>대표운영자님</p>
+        <% } %>
         </div>
-        <p class="user-name">admin님</p>
+        <p class="user-name">님</p>
         <a href="#">쇼핑몰정보</a><br>
         <a href="#">로그아웃</a>
     </div>
@@ -19,7 +24,7 @@
         <img src="/img/logo.png" id="aside-logo">
         <ul class="aside-menu">
             <li class="aside-menu-item">
-                <a href="loginAction" class="bold">회원관리</a>
+                <a href="admin_user" class="bold">회원관리</a>
             </li>
             <li class="aside-menu-item">
                 <a href="admin_product" class="bold">상품관리</a>
@@ -57,4 +62,5 @@
             }
 		});
     });
+    
 </script>

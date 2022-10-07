@@ -17,11 +17,13 @@
         <div class="onetoone-top">
             <span>1:1문의</span>
         </div>
-
+		<form action="one2one_delete_form" method="post">
         <div>
             <table class="onetoone-table">
                 <tr>
-                    <td class="onetoone-td1">이름</td>
+                    <td class="onetoone-td1">이름
+                    <input type="hidden" name="one2one_idx" value="${ dto.one2one_idx }">
+                    </td>
                     <td class="onetoone-td2 onetoone-tdname">${ dto.user_name }</td>
                     <td class="onetoone-td1">작성일</td>
                     <td class="onetoone-td2"><fmt:formatDate value="${ dto.one2one_date }" pattern = "yyyy-MM-dd"/></td>
@@ -46,10 +48,10 @@
             <table class="onetoone-table">
                 <tr>
                     <td class="onetoone-td1 onetoone-td-content2">
-                    <input type="hidden" name="one2one_idx" value="${ dto.one2one_idx }">
+                    
                     답변내용
                     </td>
-                    <td colspan='4' class="onetoone-td2">${ dto.one2one_reply }</td>
+                    <td colspan='4' class="onetoone-td2"><p id="reply">${ dto.one2one_reply }</p></td>
                 </tr>
             </table>
 
@@ -57,14 +59,14 @@
 
         <div class="onetoone-button">
             <input onClick="location.href='one2one_list'" type="button" class="onetoone-button1" value="목록">
-            <input type="button" class="onetoone-button2" value="삭제">
+            <input type="submit" class="onetoone-button2" value="삭제">
         </div>
-
+	</form>
     </div>
     
     <script type="text/javascript">
-    	
-    	if( ${dto.one2one_reply} == null ){
+    	var a = document.getElementById("reply").innerHTML
+    	if( a == "" ){
     		document.getElementById("one2one_reply").style.display = "none";
     	}
     

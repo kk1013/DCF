@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <form action="#">
+    <form action="cart_form">
     <div class="cartwrap">
         <div>
             <span class="cartlist">장바구니</span>
@@ -33,7 +33,7 @@
 			<c:forEach var="list" items="${list}">
             <div class="cartlist-content">
 
-                <input class="checkboxdiv" type="checkbox" name="chk">
+                <input class="checkboxdiv" type="checkbox" name="chk" value="${list.basket_idx}">
 
                 <div class="imgdiv">
                     <img src="../img/product-img/${list.product_image}" alt="상품이미지" width="120px" height="120px">
@@ -42,16 +42,16 @@
                 <div class="productname">${list.product_name}</div>
 
                 <div class="countdiv">
-                    <input class="minusbutton" type='button' onclick='count("minus")' value='-'/>
-                    <div id='result'>${list.basket_count}</div>
-                    <input class="plusbutton" type='button' onclick='count("plus")' value='+'/>
+                    <input class="minusbutton" name="minus${list.basket_idx}" type='button' onclick='count("minus")' value='-'/>
+                    <div id='result' class="result${list.basket_idx}">${list.basket_count}</div>
+                    <input class="plusbutton" name="plus${list.basket_idx}" type='button' onclick='count("plus")' value='+'/>
                 </div>
 
-                <div class="productprice"><span class="price price-num">${list.product_price}</span><span class="price">원</span></div>
+                <div class="productprice"><span class="price price-num">${list.basket_count*list.product_price}</span><span class="price">원</span></div>
 
                 <div class="buttondiv">
                     <input class="cartlist-button cartlist-button1" type="button" value="바로주문">
-                    <input class="cartlist-button" type="button" value="삭제">
+                    <input class="cartlist-button" type="submit" value="삭제">
                 </div>
 
             </div>
@@ -59,7 +59,7 @@
 
 
             <div class="cartlist-delete">
-                <input class="delete-button" type="button" value="선택삭제">
+                <input class="delete-button" type="submit" value="선택삭제">
             </div>
 
             <div class="cartlist-order">
@@ -111,4 +111,9 @@
 	
       resultElement.innerText = number;
     }
+    
+    <% if(request.getAttribute("msg") != null) { %>
+		alert("${msg}");
+	<% }else { %>
+	<% } %>
 </script>

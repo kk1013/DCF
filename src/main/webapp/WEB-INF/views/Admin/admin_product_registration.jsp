@@ -4,7 +4,7 @@
 <div id="admin-product-wrap">
     <p class="title">상품등록</p>
     <div>
-    <form action="/admin_product_registration_form">
+    <form action="/admin_product_registration_form" method="post" enctype="multipart/form-data">
         <table id="category-table">
             <tr class="line-top line-bottom">
                 <td class="item">

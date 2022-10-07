@@ -80,10 +80,14 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         $(".type-button").click(function(){
-
+			for(var  i = 0 ; i<$(".type-button").length;i++){
+				$(".type-button")[i].classList.remove("bgcolor-yello");
+			}
+			$(this)[0].classList.add("bgcolor-yello");
         })
     });
 </script>

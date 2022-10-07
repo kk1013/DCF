@@ -39,3 +39,11 @@
         </div>
 
     </div>
+    
+<script>
+    <% if(request.getAttribute("msg") != null) { %>
+		alert("${msg}");
+	<% }else { %>
+	<% } %>
+
+</script>

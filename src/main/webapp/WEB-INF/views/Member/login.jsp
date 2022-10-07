@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <link rel="stylesheet" href="/css/Member/login.css">
 <link rel="stylesheet" href="/css/checkbox.css">
 <form action="loginAction" method="get">
@@ -13,7 +12,7 @@
     <h1 id="login-title"><img src="/img/icons/login_logo.png" alt="로그인로고"></h1>
     <div id="login-session-1">
         <input name="user_id" type="text" class="input-radius" placeholder="아이디를 입력하세요.">
-        <input name="user_pw" type="text" class="input-radius" placeholder="비밀번호를 입력하세요.">
+        <input name="user_pw" type="password" class="input-radius" placeholder="비밀번호를 입력하세요.">
         <input type="checkbox" name="checkbox" id="yellowCheckbox">
         <label for="yellowCheckbox" class="yellowCheckbox"></label><span class="bold">아이디 저장</span>
         <input type="submit" value="확인" id="bt1">

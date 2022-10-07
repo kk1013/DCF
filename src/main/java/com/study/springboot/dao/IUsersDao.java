@@ -11,4 +11,6 @@ public interface IUsersDao {
 	public List<UsersDto> list_member();
 	public UsersDto login ( String user_id, String user_pw );
 	public List<UsersDto> user_list();
+	public UsersDto list( int user_idx );
+	public int update( int user_idx );
 }

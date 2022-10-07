@@ -31,7 +31,11 @@
 	</select>
 	
 	<insert id="insert" parameterType="com.study.springboot.dto.One2OneDto">
-	  INSERT INTO dcf_one2one VALUES (ONE2ONE_IDX_SEQ.NEXTVAL, #{ dto.one2one_title }, #{ dto.one2one_content }, #{ dto.one2one_image }, null, sysdate , 2)
+	  INSERT INTO dcf_one2one VALUES (ONE2ONE_IDX_SEQ.NEXTVAL, #{ one2one_title }, #{ one2one_content }, #{ one2one_image }, null, sysdate , #{ one2one_User_idx })
 	</insert>
+	
+	<delete id="delete">
+	  DELETE FROM dcf_one2one WHERE one2one_idx = #{ param1 }
+	</delete>
 	
 </mapper>

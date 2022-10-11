@@ -6,9 +6,6 @@
 <div id="top">
     <ul>
         
-        
-        <% session = request.getSession(); %>
-        <% if( session.getAttribute("user_id") != null){ %>
         <li>
         
         <% session = request.getSession(); %>

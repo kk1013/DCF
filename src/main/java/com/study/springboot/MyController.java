@@ -1,12 +1,15 @@
 package com.study.springboot;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,13 +74,6 @@ public class MyController {
 		model.addAttribute("mainPage", "Member/login.jsp");
 		return "index";
 	}
-	
-	@RequestMapping("/logout")
-	public String logout (HttpServletRequest request , Model model) {
-		request.getSession().invalidate();
-		model.addAttribute("mainPage", "main.jsp");
-		return "index";
-	}
 
 	@RequestMapping("/join")
 	public String join(Model model) {
@@ -85,11 +81,6 @@ public class MyController {
 		return "index";
 	}
 	
-	@RequestMapping("/join_action")
-	public String join_action(Model model) {
-		model.addAttribute("mainPage", "Member/join_action.jsp");
-		return "index";
-	}
 	@RequestMapping("/idfind")
 	public String idfind(Model model) {
 		model.addAttribute("mainPage", "Member/idfind.jsp");
@@ -354,6 +345,7 @@ public class MyController {
 							   @RequestParam("user_pw") String user_pw,
 							   HttpServletRequest request, Model model) {
 		List<UsersDto> list = iUsersdao.list_member();
+		System.out.println("hello");
 		request.setAttribute("list", list);
 		UsersDto result = iUsersdao.login(user_id, user_pw);
 		request.getSession().setAttribute("user_id", user_id);
@@ -453,7 +445,7 @@ public class MyController {
 		dto.setUser_address(user_address);
 		dto.setUser_email(user_email);
 		dto.setUser_phone(Integer.parseInt(user_phone));
-		dto.setUser_gender(Integer.parseInt(user_gender));
+		dto.setUser_gender(user_gender);
 		dto.setUser_birth_date( user_birth_date );
 
 		int result = iUsersdao.admin_member_update_form(dto);
@@ -616,7 +608,7 @@ public class MyController {
 		dto.setUser_email_receive(Integer.parseInt(user_email_receive));
 		dto.setUser_phone(Integer.parseInt(user_phone));
 		dto.setUser_birth_date(user_birth_date);
-		dto.setUser_gender(Integer.parseInt(user_gender));
+		dto.setUser_gender(user_gender);
 		dto.setUser_address(user_address);
 		model.addAttribute("mainPage", "Member/join_action.jsp");
 		int result = iUsersdao.signUp(dto);
@@ -735,12 +727,6 @@ public class MyController {
 		model.addAttribute("list", order_list);
 		
 		model.addAttribute("adminPage", "../Admin/admin_order_list.jsp");
-		return "Admin/admin_index";
-	}
-
-	@RequestMapping("/admin_member_detail")
-	public String admin_member_detail(Model model) {
-		model.addAttribute("adminPage", "../Admin/admin_member_detail.jsp");
 		return "Admin/admin_index";
 	}
 	@RequestMapping("/admin_product")

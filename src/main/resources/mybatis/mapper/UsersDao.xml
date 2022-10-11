@@ -33,9 +33,6 @@
 	  	user_address=#{ user_address }
 	  	WHERE user_idx=#{ user_idx }
 	</update>
-	
-	
-</mapper>
 	<select id="usersdto" resultType="com.study.springboot.dto.UsersDto">
     	select * from dcf_users where user_idx=#{ param1 }
     </select>

@@ -15,7 +15,7 @@ public class UsersDto {
 	private String user_address;
 	private String user_email;
 	private int user_email_receive;
-	private int user_gender;
+	private String user_gender;
 	private int user_phone;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date user_birth_date;

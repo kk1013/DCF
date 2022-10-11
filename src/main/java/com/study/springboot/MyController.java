@@ -84,7 +84,12 @@ public class MyController {
 		model.addAttribute("mainPage", "Member/join.jsp");
 		return "index";
 	}
-
+	
+	@RequestMapping("/join_action")
+	public String join_action(Model model) {
+		model.addAttribute("mainPage", "Member/join_action.jsp");
+		return "index";
+	}
 	@RequestMapping("/idfind")
 	public String idfind(Model model) {
 		model.addAttribute("mainPage", "Member/idfind.jsp");
@@ -279,7 +284,6 @@ public class MyController {
 		model.addAttribute("mainPage", "Order/order_payments.jsp");
 		return "index";
 	}
-
 	@RequestMapping("/order_action")
 	public String order_action(Model model) {
 		model.addAttribute("mainPage", "Order/order_action.jsp");
@@ -393,7 +397,7 @@ public class MyController {
 		request.setAttribute("list", list);
 		model.addAttribute("adminPage", "../Admin/admin_member.jsp");
 		return "Admin/admin_index";
-	
+	}
 	@RequestMapping("/notice_detail")
 	public String notice_detail(
 								@RequestParam("notice_idx") String notice_idx,
@@ -403,41 +407,113 @@ public class MyController {
 		model.addAttribute("mainPage", "Customer/notice_detail.jsp");
 		return "index";
 	}
-
-	@RequestMapping("/loginAction")
-	public String admin_member(@RequestParam("user_id") String user_id,
-							   @RequestParam("user_pw") String user_pw, 
-							   HttpServletRequest request, 
-							   Model model) throws Exception {
-		Integer result = iUsersdao.login(user_id, user_pw);		
-		
-		if(result != null) {
-			request.getSession().setAttribute("user_id", user_id);
-			if(user_id.equals("admin")) {
-				List<UsersDto> list = iUsersdao.list_member();
-				request.setAttribute("list", list);
-				for(int i = 0; i<list.size(); i++) {
-					if(list.get(i).getUser_gender().equals("0")) {
-						list.get(i).setUser_gender("여자");
-					}else if(list.get(i).getUser_gender().equals("1")) {
-						list.get(i).setUser_gender("남자");
-					}
-				}
-				request.setAttribute("list", list);
-				model.addAttribute("msg","로그인 성공");
-				model.addAttribute("adminPage", "../Admin/admin_member.jsp");
-				return "Admin/admin_index";
-			}else {
-				model.addAttribute("msg","로그인 성공");
-				model.addAttribute("mainPage", "main.jsp");
-				return "index";
-			}
-		}
-		model.addAttribute("msg","로그인 실패...");
-		model.addAttribute("mainPage", "main.jsp");
-		return "index";
-	}
 	
+	//회원정보연결
+	@RequestMapping("/admin_member")
+	public String admin_memberl(
+			@RequestParam("user_idx") String user_idx,
+			Model model,
+			HttpServletRequest request) {		
+		UsersDto usersdto = iUsersdao.usersdto( Integer.parseInt(user_idx));
+		model.addAttribute("usersdto", usersdto);	
+		model.addAttribute("adminPage", "../Admin/admin_member_detail.jsp");
+		return "Admin/admin_index";
+	}
+	//회원정보연결
+		@RequestMapping("/admin_member_detail")
+		public String admin_member_detail(
+				@RequestParam("user_idx") String user_idx,
+				Model model,
+				HttpServletRequest request) {		
+			UsersDto usersdto = iUsersdao.usersdto( Integer.parseInt(user_idx));
+			model.addAttribute("usersdto", usersdto);	
+			model.addAttribute("adminPage", "../Admin/admin_member_detail.jsp");
+			return "Admin/admin_index";
+		}
+		
+	//회원정보변경
+	@RequestMapping("/admin_member_update_form")
+	public String admin_member_update_form(
+			@RequestParam("user_idx") String user_idx,    
+			@RequestParam("user_id") String user_id,            
+			@RequestParam("user_pw") String user_pw,
+			@RequestParam("user_name") String user_name,           
+			@RequestParam("user_address") String user_address,       
+			@RequestParam("user_email") String user_email,    
+			@RequestParam("user_gender") String user_gender,      
+			@RequestParam("user_phone") String user_phone,   
+			@RequestParam(value="user_birth_date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date user_birth_date,
+			UsersDto dto) {
+		
+		System.out.println(user_birth_date);
+		dto.setUser_idx(Integer.parseInt(user_idx));
+		dto.setUser_id(user_id);
+		dto.setUser_pw(user_pw);
+		dto.setUser_name(user_name);
+		dto.setUser_address(user_address);
+		dto.setUser_email(user_email);
+		dto.setUser_phone(Integer.parseInt(user_phone));
+		dto.setUser_gender(Integer.parseInt(user_gender));
+		dto.setUser_birth_date( user_birth_date );
+
+		int result = iUsersdao.admin_member_update_form(dto);
+	
+		return "redirect:/admin_member_detail?user_idx="+user_idx;
+	}
+	//회원정보삭제 adminMemberDeleteAction
+	@RequestMapping("/adminMemberDeleteAction")
+	public String adminMemberDeleteAction(
+			@RequestParam("user_idx") List<String> user_idx,
+			HttpServletRequest request) {
+		System.out.println(user_idx);
+		for(int i = 0; i<user_idx.size();i++) {
+			int result = iUsersdao.adminMemberDeleteAction(Integer.parseInt(user_idx.get(i)));
+		}
+		return "redirect:/loginAction";
+	}
+	//아이디찾기
+	
+	@RequestMapping("/idfindAction")
+	
+	public String idfindAction(
+			@NotBlank(message = "이름은 필수 입력 값입니다.")
+			@RequestParam ("user_name") String user_name,			
+			@RequestParam (value="user_email", required = false) String user_email,
+			@RequestParam (value="user_phone", required = false) String user_phone,
+			Model model) {		
+		System.out.println(user_email);
+		System.out.println(user_phone);		
+		UsersDto userId = iUsersdao.userId(user_name, user_email, (user_phone.equals("")) ? 1 : Integer.parseInt(user_phone) );
+		model.addAttribute("mainPage", "Member/idfind.jsp");
+		if(userId==null){
+			model.addAttribute("msg","아이디가 없습니다");
+			return "index";
+		}else {		
+			model.addAttribute("userId", userId.getUser_id());
+			return "index";
+		}			
+	}
+	//비밀번호찾기
+	@RequestMapping("/pwfindAction")
+	public String pwfindAction(
+			@NotBlank(message = "이름은 필수 입력 값입니다.")
+			@RequestParam ("user_id") String user_id,
+			@RequestParam ("user_name") String user_name,			
+			@RequestParam (value="user_email", required = false) String user_email,
+			@RequestParam (value="user_phone", required = false) String user_phone,
+			Model model) {		
+		System.out.println(user_email);
+		System.out.println(user_phone);		
+		UsersDto userPw = iUsersdao.userPw(user_id, user_name, user_email, (user_phone.equals("")) ? 1 : Integer.parseInt(user_phone) );
+		model.addAttribute("mainPage", "Member/pwfind.jsp");
+		if(userPw==null){
+			model.addAttribute("msg","아이디, 이름 확인 후 다시 작성해주세요.");
+			return "index";
+		}else {		
+			model.addAttribute("userPw", userPw.getUser_pw());
+			return "index";
+		}			
+	}
 	@RequestMapping("/admin_product_registration")
 	public String admin_product_registration(Model model) {
 		model.addAttribute("adminPage", "../Admin/admin_product_registration.jsp");
@@ -453,11 +529,25 @@ public class MyController {
 	}
 
 	@RequestMapping("/admin_notice")
-	public String admin_notice(Model model) {
+	public String admin_notice(
+			Model model,
+			HttpServletRequest request) {
+			List<NoticeDto> list = iNoticedao.list();
+			model.addAttribute("list", list);
 		model.addAttribute("adminPage", "../Admin/admin_notice.jsp");
 		return "Admin/admin_index";
 	}
+	@RequestMapping("/admin_notice_detail")
+	public String admin_notice_detail(
+			@RequestParam("notice_idx") String notice_idx,
+			Model model,
+			HttpServletRequest request) {		
 
+		NoticeDto noticedto = iNoticedao.noticedto( Integer.parseInt(notice_idx) );
+		model.addAttribute("noticedto", noticedto);	
+		model.addAttribute("adminPage", "../Admin/admin_notice_detail.jsp");
+		return "Admin/admin_index";
+	}
 	@RequestMapping("/admin_notice_write")
 	public String admin_notice_write(Model model) {
 		model.addAttribute("adminPage", "../Admin/admin_notice_write.jsp");
@@ -483,10 +573,92 @@ public class MyController {
 		model.addAttribute("list", product);
 		model.addAttribute("total_quantity", total_quantity);
 		model.addAttribute("total_price", total_price);
-		
 		model.addAttribute("adminPage", "../Admin/admin_order_action.jsp");
 		return "Admin/admin_index";
+	}	
+
+	//공지사항작성
+	@RequestMapping("/adminWriteNoticeformAction")
+	public String adminWriteNoticeformAction (
+									@RequestParam("notice_title") String notice_title,
+									@RequestParam("notice_content") String notice_content,
+									HttpServletRequest request, 
+									Model model) {
+		int result = iNoticedao.adminWriteNoticeformAction(notice_title, notice_content);
+
+		return "redirect:/admin_notice";
 	}
+	//회원가입
+	@RequestMapping("/signUp")
+	public String signUp(
+			@RequestParam("user_name") String user_name,
+			@RequestParam("user_id") String user_id,            
+			@RequestParam("user_pw") String user_pw,
+			@RequestParam("user_email") String user_email,    
+			@RequestParam(value="user_email_receive", required=false) String user_email_receive,
+			
+			@RequestParam("user_phone") String user_phone,
+			@RequestParam(value="user_birth_date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date user_birth_date,
+			@RequestParam("user_gender") String user_gender,      
+			@RequestParam("user_address") String user_address,
+			Model model,
+			UsersDto dto) {	
+	
+		if(user_email_receive == null) {
+			user_email_receive = "0";
+		}else {
+			user_email_receive = "1";
+		}
+		dto.setUser_name(user_name);
+		dto.setUser_id(user_id);
+		dto.setUser_pw(user_pw);
+		dto.setUser_email(user_email);
+		dto.setUser_email_receive(Integer.parseInt(user_email_receive));
+		dto.setUser_phone(Integer.parseInt(user_phone));
+		dto.setUser_birth_date(user_birth_date);
+		dto.setUser_gender(Integer.parseInt(user_gender));
+		dto.setUser_address(user_address);
+		model.addAttribute("mainPage", "Member/join_action.jsp");
+		int result = iUsersdao.signUp(dto);
+		
+		
+		return "index";
+	}
+ //아이디중복체크
+	//   @RequestMapping(value="idCheck", method = RequestMethod.POST)
+	 //  @ResponseBody
+	//   public String idCheck(String user_id) throws Exception{
+	 //     int result =iUsersdao.idCheck(user_id);
+	   //   if(result != 0) {
+	   //      return "fail";
+	  //    }else {   return""; }
+	  // }
+	
+	//공지사항수정
+	@RequestMapping("/adminUpdateAction")
+	public String adminUpdateAction(
+			@RequestParam("notice_idx") String notice_idx,
+			@RequestParam("notice_title") String notice_title,
+			@RequestParam("notice_content") String notice_content,
+			Model model,
+			HttpServletRequest request
+			) {
+		int result = iNoticedao.adminUpdateAction(Integer.parseInt(notice_idx), notice_title, notice_content);
+		
+		return "redirect:/admin_notice_detail?notice_idx="+notice_idx;
+	}
+	//공지삭제
+	@RequestMapping("/adminnoticeDeleteAction")
+	public String adminnoticeDeleteAction(
+			@RequestParam("notice_idx") List<String> notice_idx,		
+			HttpServletRequest request) {
+		System.out.println(notice_idx);
+		for(int i=0; i<notice_idx.size(); i++) {		
+			int result = iNoticedao.adminnoticeDeleteAction(Integer.parseInt(notice_idx.get(i)));
+		}
+		return "redirect:/admin_notice";
+	}
+
 
 	@RequestMapping("/admin_one2one")
 	public String admin_one2one(Model model) {

@@ -150,6 +150,37 @@ public class MyController {
 		return "index";
 	}
 	
+	@Autowired
+	fileUploadService fileUploadService1;
+	@RequestMapping(value="/one2one_form", method = RequestMethod.POST)
+	public String one2one_form(
+			@RequestParam(value = "chooseFile", required=false) MultipartFile file,
+			@RequestParam(value = "one2one_title", required = false, defaultValue = "") String one2one_title,
+			@RequestParam(value = "one2one_content", required = false, defaultValue = "") String one2one_content, 
+			HttpServletRequest request, Model model) {
+		int idx = (int) request.getSession().getAttribute("user_idx");
+		String upload_url = fileUploadService1.restore(file);
+		One2OneDto dto = new One2OneDto();
+		dto.setOne2one_title(one2one_title);
+		dto.setOne2one_content(one2one_content);
+		dto.setOne2one_image(upload_url);
+		dto.setOne2one_User_idx(idx);
+		int result = iOne2onedao.insert( dto );
+		
+		return "redirect:/one2one_list";
+	}
+	
+	@RequestMapping("/one2one_delete_form")
+	public String one2one_delete_form(@RequestParam("one2one_idx") int one2one_idx, HttpServletRequest request, Model model ) {
+		int result = iOne2onedao.delete(one2one_idx);
+		model.addAttribute("msg", "삭제성공");
+		int idx = (int) request.getSession().getAttribute("user_idx");
+		List<One2OneDto> mylist = iOne2onedao.mylist(idx);
+		model.addAttribute("mylist", mylist);
+		model.addAttribute("mainPage", "Mypage/one2one_list.jsp");
+		return "index";
+	}	
+	
 
 	@RequestMapping("/join_action")
 	public String join_action(Model model) {
@@ -180,6 +211,19 @@ public class MyController {
 		model.addAttribute("mainPage", "Mypage/cart.jsp");
 		return "index";
 	}
+	
+	@RequestMapping("/cart_form")
+	public String cart_form(@RequestParam("chk") int basket_idx, HttpServletRequest request, Model model ) {
+		int result = iBasketdao.delete(basket_idx);
+		model.addAttribute("msg", "삭제성공");
+		int idx = (int) request.getSession().getAttribute("user_idx");
+		List<BasketDto> list = iBasketdao.list(idx);
+		int sum = iBasketdao.sum(idx);
+		model.addAttribute("list", list);
+		model.addAttribute("sum", sum);
+		model.addAttribute("mainPage", "Mypage/cart.jsp");
+		return "index";
+	}	
 
 	@RequestMapping("/order_payments")
 	public String order_payments(Model model) {
@@ -194,7 +238,18 @@ public class MyController {
 	}
 
 	@RequestMapping("/info_change")
-	public String info_change(Model model) {
+	public String info_change(HttpServletRequest request, Model model) {
+		int idx = (int) request.getSession().getAttribute("user_idx");
+		UsersDto list = iUsersdao.list(idx);
+		model.addAttribute("dto", list);
+		model.addAttribute("mainPage", "Mypage/info_change.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/info_change_form")
+	public String info_change_form(HttpServletRequest request, Model model) {
+		int idx = (int) request.getSession().getAttribute("user_idx");
+		int update = iUsersdao.update(idx);
 		model.addAttribute("mainPage", "Mypage/info_change.jsp");
 		return "index";
 	}
@@ -208,6 +263,7 @@ public class MyController {
 	@RequestMapping("/one2one_detail")
 	public String one2one_detail(@RequestParam("one2one_idx") int one2one_idx, Model model) {
 		One2OneDto content_detail = iOne2onedao.content_detail(one2one_idx);
+		System.out.println( content_detail.getOne2one_reply() );
 		model.addAttribute("dto", content_detail);
 		model.addAttribute("mainPage", "Mypage/one2one_detail.jsp");
 		return "index";
@@ -259,7 +315,6 @@ public class MyController {
 						list.get(i).setUser_gender("남자");
 					}
 				}
-
 				request.setAttribute("list", list);
 				model.addAttribute("adminPage", "../Admin/admin_member.jsp");
 				return "Admin/admin_index";

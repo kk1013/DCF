@@ -14,4 +14,5 @@ public interface IOne2OneDao {
 	public List<One2OneDto> search( String keyword );
 	public List<One2OneDto> mylist( int user_idx );
 	public int insert( One2OneDto dto );
+	public int delete( int one2one_idx );
 }

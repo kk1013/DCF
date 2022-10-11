@@ -7,18 +7,21 @@
     <ul>
         <li>
         
-        
         <% session = request.getSession(); %>
         <% if( session.getAttribute("user_id") != null){ %>
             <p style="color: blue;"><%= session.getAttribute("user_id")  %>님</p>
        	<% } else { %>
        		<a href="login">로그인</a>
        	<% } %>
-       	<% session.setAttribute("user_id", null); %>
        	
         </li>
         <li>
-            <a href="join">회원가입</a>
+            <% session = request.getSession(); %>
+        	<% if( session.getAttribute("user_id") != null){ %>
+            	<a href="logout">로그아웃</a>
+       		<% } else { %>
+       			<a href="join">회원가입</a>
+       		<% } %>
         </li>
         <li id="ds_none">
             <img src="/img/icons/main-header-maypage.png" class="header-icon">

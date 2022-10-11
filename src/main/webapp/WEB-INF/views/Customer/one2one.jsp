@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <form action="one2one_form">
+    <form action="one2one_form" method="post" enctype="multipart/form-data">
     <div class="onetoonewrap">
 
         <div class="onetoone-top">
@@ -32,12 +32,12 @@
 
             <div class="onetoone-title">
                 <span class="onetoone-title-span">제목</span>
-                <input type="text" class="title" value="${ dto.one2one_title }">
+                <input type="text" name="one2one_title" class="title">
             </div>
 
             <div class="onetoone-content">
                 <span class="onetoone-content-span">문의내용</span>
-                <textarea name="" class="content">${ dto.one2one_content }</textarea>
+                <textarea name="one2one_content" class="content"></textarea>
             </div>
 
             <div class="onetoone-confirm">

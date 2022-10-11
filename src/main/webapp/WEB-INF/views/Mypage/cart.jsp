@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <form action="#">
+    <form action="cart_form">
     <div class="cartwrap">
         <div>
             <span class="cartlist">장바구니</span>
@@ -33,7 +33,7 @@
 			<c:forEach var="list" items="${list}">
             <div class="cartlist-content">
 
-                <input class="checkboxdiv" type="checkbox" name="chk">
+                <input class="checkboxdiv" type="checkbox" name="chk" value="${list.basket_idx}">
 
                 <div class="imgdiv">
                     <img src="../img/product-img/${list.product_image}" alt="상품이미지" width="120px" height="120px">
@@ -42,16 +42,19 @@
                 <div class="productname">${list.product_name}</div>
 
                 <div class="countdiv">
-                    <input class="minusbutton" type='button' onclick='count("minus")' value='-'/>
-                    <div id='result'>${list.basket_count}</div>
-                    <input class="plusbutton" type='button' onclick='count("plus")' value='+'/>
+                    <input class="minusbutton" type='button' id="minus" onclick="count(this)" value='-'/>
+                    <div id='result' class="result">${list.basket_count}</div>
+                    <input class="plusbutton" type='button' id="plus" onclick="count(this)" value='+'/>
                 </div>
 
-                <div class="productprice"><span class="price price-num">${list.product_price}</span><span class="price">원</span></div>
-
+                <div class="productprice">
+                <span class="price price-num">${list.basket_count*list.product_price}</span>
+                <input type="hidden" value="${list.product_price}">
+                <span class="price">원</span>
+                </div>
                 <div class="buttondiv">
                     <input class="cartlist-button cartlist-button1" type="button" value="바로주문">
-                    <input class="cartlist-button" type="button" value="삭제">
+                    <input class="cartlist-button" type="submit" value="삭제">
                 </div>
 
             </div>
@@ -59,12 +62,12 @@
 
 
             <div class="cartlist-delete">
-                <input class="delete-button" type="button" value="선택삭제">
+                <input class="delete-button" type="submit" value="선택삭제">
             </div>
 
             <div class="cartlist-order">
                 <span class="priceall">총 결제금액</span>
-                <span class="price-all-num">${sum}</span><span class="price-all">원</span>
+                <span id="price-all-num" class="price-all-num">${sum}</span><span class="price-all">원</span>
             </div>
 
         </div>
@@ -81,6 +84,10 @@
     <script type="text/javascript">
 
     $(document).ready(function() {
+    	var price = document.getElementById("price-all-num").innerHTML;
+    	var result = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    	console.log(result);
+    	
     	$("#cbx_chkAll").click(function() {
     		if($("#cbx_chkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
     		else $("input[name=chk]").prop("checked", false);
@@ -94,21 +101,36 @@
     		else $("#cbx_chkAll").prop("checked", true); 
     	});
     });
-
-    function count(type)  {
-      const resultElement = document.getElementById('result');
-        
-      let number = resultElement.innerText;
-        
-      if(type === 'plus') {
-        number = parseInt(number) + 1;
-      }else if(type === 'minus')  {
-    	  if(parseInt(number) == 1){
-    		  return;
-    	  }
-        number = parseInt(number) - 1;
-      }
 	
-      resultElement.innerText = number;
+    function count(btn) {
+        var parent = btn.parentNode;
+    	var product_price = parent.parentNode.childNodes[9].childNodes[3];
+    	product_price_value = product_price.value;
+        var price = parent.parentNode.childNodes[9].childNodes[1];
+    	price_text = price.innerText;
+        var result = parent.childNodes[3];
+    	result_text = result.innerText;
+        var total = document.getElementById("price-all-num");
+        total_text = total.innerText;
+        var id = btn.getAttribute('id');
+        if(id == 'plus'){
+            result.innerHTML = Number(result_text) + 1;
+            price.innerHTML = Number(price_text) + Number(product_price_value);
+            total.innerHTML = Number(total_text) + Number(product_price_value);
+        }else if(id == 'minus'){
+            if(result.innerHTML == '1'){
+                return;
+            }
+            result.innerHTML = Number(result_text) - 1;
+            price.innerHTML = Number(price_text) - Number(product_price_value);
+            total.innerHTML = Number(total_text) - Number(product_price_value);
+        }
     }
+    
+    
+    
+    <% if(request.getAttribute("msg") != null) { %>
+		alert("${msg}");
+	<% }else { %>
+	<% } %>
 </script>

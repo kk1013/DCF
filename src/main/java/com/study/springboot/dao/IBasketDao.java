@@ -10,4 +10,5 @@ import com.study.springboot.dto.BasketDto;
 public interface IBasketDao {
 	public List<BasketDto> list( int user_idx );
 	public int sum( int user_idx );
+	int delete( int basket_idx );
 }

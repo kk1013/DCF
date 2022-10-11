@@ -18,4 +18,21 @@
 		SELECT user_id FROM DCF_USERS
 	</select>
 	
+	<select id="list" resultType="com.study.springboot.dto.UsersDto">
+		SELECT * FROM DCF_USERS WHERE user_idx = #{ param1 }
+	</select>
+	
+	<update id="update" parameterType="com.study.springboot.dto.UsersDto">
+	  	UPDATE dcf_users SET
+	  	user_name=#{ user_name },
+	  	user_pw=#{ user_pw },
+	  	user_email=#{ user_email },
+	  	user_phone=#{ user_phone },
+	  	user_birth_date=#{ user_birth_date },
+	  	user_gender=#{ user_gender },
+	  	user_address=#{ user_address }
+	  	WHERE user_idx=#{ user_idx }
+	</update>
+	
+	
 </mapper>

@@ -20,6 +20,7 @@ import com.study.springboot.dao.INoticeDao;
 import com.study.springboot.dao.IOne2OneDao;
 import com.study.springboot.dao.IOrderDao;
 import com.study.springboot.dao.IProductDao;
+import com.study.springboot.dao.IReviewDao;
 import com.study.springboot.dao.IUsersDao;
 import com.study.springboot.dto.BasketDto;
 import com.study.springboot.dto.FaqDto;
@@ -27,6 +28,7 @@ import com.study.springboot.dto.NoticeDto;
 import com.study.springboot.dto.One2OneDto;
 import com.study.springboot.dto.OrderDto;
 import com.study.springboot.dto.ProductDto;
+import com.study.springboot.dto.ReviewDto;
 import com.study.springboot.dto.UsersDto;
 
 @Controller
@@ -45,6 +47,8 @@ public class MyController {
 	IFaqDao iFaqdao;
 	@Autowired
 	IBasketDao iBasketdao;
+	@Autowired 
+	IReviewDao iReviewdao;
 	/*
 	 * @Autowired IReviewDao iReviewdao;
 	 * 
@@ -65,6 +69,13 @@ public class MyController {
 	@RequestMapping("/login")
 	public String login(Model model) {
 		model.addAttribute("mainPage", "Member/login.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/logout")
+	public String logout (HttpServletRequest request , Model model) {
+		request.getSession().invalidate();
+		model.addAttribute("mainPage", "main.jsp");
 		return "index";
 	}
 
@@ -88,6 +99,13 @@ public class MyController {
 
 	@RequestMapping("/product")
 	public String product(Model model) {
+		List<ProductDto> all = iProductdao.list();
+		List<ProductDto> snack = iProductdao.product_list_snack();
+		List<ProductDto> food = iProductdao.product_list_food();
+
+		model.addAttribute("all", all);
+		model.addAttribute("snack", snack);
+		model.addAttribute("food", food);
 		model.addAttribute("mainPage", "Product/product.jsp");
 		return "index";
 	}
@@ -117,13 +135,37 @@ public class MyController {
 	}
 
 	@RequestMapping("/product_action")
-	public String product_action(Model model) {
+	public String product_action(
+			@RequestParam("product_idx") String product_idx,
+			Model model) {
+		ProductDto product = iProductdao.product_action(Integer.parseInt(product_idx));
+		List<ReviewDto> reviewData = iReviewdao.review(Integer.parseInt(product_idx));
+		for(int i = 0; i < reviewData.size();i++) {
+			if(reviewData.get(i).getReview_score() == 1) {
+				reviewData.get(i).setReview_score(20); 
+			}else if(reviewData.get(i).getReview_score() == 2) {
+				reviewData.get(i).setReview_score(40); 
+			}else if(reviewData.get(i).getReview_score() == 3) {
+				reviewData.get(i).setReview_score(60);
+			}else if(reviewData.get(i).getReview_score() == 4) {
+				reviewData.get(i).setReview_score(80); 
+			}else if(reviewData.get(i).getReview_score() == 5) {
+				reviewData.get(i).setReview_score(100); 
+			}
+		}
+		model.addAttribute("count",reviewData.size());
+		model.addAttribute("review_list", reviewData);
+		model.addAttribute("product",product);
 		model.addAttribute("mainPage", "Product/product_action.jsp");
 		return "index";
 	}
 
 	@RequestMapping("/sample")
 	public String sample(Model model) {
+		List<ProductDto> dog = iProductdao.sample_list_dog();
+		List<ProductDto> cat = iProductdao.sample_list_cat();
+		model.addAttribute("dog", dog);
+		model.addAttribute("cat", cat);
 		model.addAttribute("mainPage", "Product/sample.jsp");
 		return "index";
 	}
@@ -224,6 +266,13 @@ public class MyController {
 		model.addAttribute("mainPage", "Mypage/cart.jsp");
 		return "index";
 	}	
+	@RequestMapping("/basket_action")
+	public String basket_action(HttpServletRequest request,Model model) {
+		String count = request.getParameter("count");
+		System.out.println(count);
+		model.addAttribute("mainPage", "Mypage/cart.jsp");
+		return "index";
+	}
 
 	@RequestMapping("/order_payments")
 	public String order_payments(Model model) {
@@ -344,8 +393,51 @@ public class MyController {
 		request.setAttribute("list", list);
 		model.addAttribute("adminPage", "../Admin/admin_member.jsp");
 		return "Admin/admin_index";
+	
+	@RequestMapping("/notice_detail")
+	public String notice_detail(
+								@RequestParam("notice_idx") String notice_idx,
+								Model model) {
+		NoticeDto notice = iNoticedao.notice_detail( Integer.parseInt(notice_idx));
+		model.addAttribute("notice", notice);
+		model.addAttribute("mainPage", "Customer/notice_detail.jsp");
+		return "index";
 	}
 
+	@RequestMapping("/loginAction")
+	public String admin_member(@RequestParam("user_id") String user_id,
+							   @RequestParam("user_pw") String user_pw, 
+							   HttpServletRequest request, 
+							   Model model) throws Exception {
+		Integer result = iUsersdao.login(user_id, user_pw);		
+		
+		if(result != null) {
+			request.getSession().setAttribute("user_id", user_id);
+			if(user_id.equals("admin")) {
+				List<UsersDto> list = iUsersdao.list_member();
+				request.setAttribute("list", list);
+				for(int i = 0; i<list.size(); i++) {
+					if(list.get(i).getUser_gender().equals("0")) {
+						list.get(i).setUser_gender("여자");
+					}else if(list.get(i).getUser_gender().equals("1")) {
+						list.get(i).setUser_gender("남자");
+					}
+				}
+				request.setAttribute("list", list);
+				model.addAttribute("msg","로그인 성공");
+				model.addAttribute("adminPage", "../Admin/admin_member.jsp");
+				return "Admin/admin_index";
+			}else {
+				model.addAttribute("msg","로그인 성공");
+				model.addAttribute("mainPage", "main.jsp");
+				return "index";
+			}
+		}
+		model.addAttribute("msg","로그인 실패...");
+		model.addAttribute("mainPage", "main.jsp");
+		return "index";
+	}
+	
 	@RequestMapping("/admin_product_registration")
 	public String admin_product_registration(Model model) {
 		model.addAttribute("adminPage", "../Admin/admin_product_registration.jsp");
@@ -381,7 +473,6 @@ public class MyController {
 		int total_price = 0;
 		OrderDto result = iOrderdao.single_select(Integer.parseInt(order_idx));
 		model.addAttribute("dto", result);
-		result.setProduct_price( result.getOrder_quantity()*result.getProduct_price());
 		
 		List<OrderDto> product = iOrderdao.product(Integer.parseInt(order_idx));
 		for(int i = 0; i<product.size();i++) {
@@ -480,7 +571,6 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_member_detail.jsp");
 		return "Admin/admin_index";
 	}
-
 	@RequestMapping("/admin_product")
 	public String admin_product(Model model) {
 		List<ProductDto>list = iProductdao.list();

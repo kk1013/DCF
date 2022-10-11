@@ -10,5 +10,8 @@
 	<select id="list" resultType="com.study.springboot.dto.NoticeDto">
 	  SELECT * FROM dcf_notice
 	</select>
+	<select id="notice_detail" resultType="com.study.springboot.dto.NoticeDto">
+	  SELECT * FROM dcf_notice WHERE notice_idx = #{ param1 }
+	</select>
 	
 </mapper>

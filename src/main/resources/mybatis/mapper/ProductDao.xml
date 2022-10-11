@@ -7,9 +7,26 @@
 
 <mapper namespace="com.study.springboot.dao.IProductDao">
 
+	<select id="sample_list_dog" resultType="com.study.springboot.dto.ProductDto">
+	SELECT * FROM DCF_PRODUCT WHERE product_sample = 1 AND product_animal = 0
+	</select>
+	<select id="sample_list_cat" resultType="com.study.springboot.dto.ProductDto">
+	SELECT * FROM DCF_PRODUCT WHERE product_sample = 1 AND product_animal = 1
+	</select>
 	<select id="list" resultType="com.study.springboot.dto.ProductDto">
 	  SELECT * FROM dcf_product ORDER BY product_idx DESC
 	</select>
+	<select id="product_list_snack" resultType="com.study.springboot.dto.ProductDto">
+	SELECT * FROM DCF_PRODUCT WHERE product_category_type=1
+	</select>
+	<select id="product_list_food" resultType="com.study.springboot.dto.ProductDto">
+	SELECT * FROM DCF_PRODUCT WHERE product_category_type=0
+	</select>
+	<select id="product_action" resultType="com.study.springboot.dto.ProductDto">
+	SELECT * FROM DCF_PRODUCT WHERE product_idx=#{param1}
+	</select>
+	
+	
 	
 	<delete id="product_delete">
 	  DELETE FROM dcf_product WHERE product_idx=#{ param1 }
@@ -42,7 +59,7 @@
 		#{ product_new },  
 		#{ product_best }, 
 		0, 
-		#{ product_type }, 
+		#{ product_category_type }, 
 		sysdate, 
 		#{ product_sample }) 
 	</insert>

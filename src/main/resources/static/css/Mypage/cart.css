@@ -87,7 +87,7 @@
     font-size: 16px;
     cursor: pointer;
 }
-#result {
+.result {
     text-align: center;
     width: 45px;
     height: 23px;
@@ -106,6 +106,7 @@
     cursor: pointer;
 }
 .productprice {
+	display: flex;
     margin-left: 110px;
     width: 55px;
 }

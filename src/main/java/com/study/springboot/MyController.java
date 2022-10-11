@@ -315,7 +315,6 @@ public class MyController {
 						list.get(i).setUser_gender("남자");
 					}
 				}
-
 				request.setAttribute("list", list);
 				model.addAttribute("adminPage", "../Admin/admin_member.jsp");
 				return "Admin/admin_index";

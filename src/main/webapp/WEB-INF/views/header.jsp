@@ -5,9 +5,21 @@
 <div id="headerwrap">
 <div id="top">
     <ul>
+        
+        
+        <% session = request.getSession(); %>
+        <% if( session.getAttribute("user_id") != null){ %>
         <li>
-            <a href="login">로그인</a>
+            <p style="color: blue;"><%= session.getAttribute("user_id")  %>님</p>
         </li>
+        <li>
+        	<a href="logout">로그아웃</a>
+        </li>
+       	<% } else { %>
+       	<li>
+       		<a href="login">로그인</a>
+       	</li>
+       	<% } %>
         <li>
             <a href="join">회원가입</a>
         </li>

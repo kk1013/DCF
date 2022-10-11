@@ -1,7 +1,6 @@
 package com.study.springboot;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,39 +14,56 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.study.springboot.dao.IFaqDao;
+import com.study.springboot.dao.INoticeDao;
+import com.study.springboot.dao.IOne2OneDao;
 import com.study.springboot.dao.IOrderDao;
 import com.study.springboot.dao.IProductDao;
+import com.study.springboot.dao.IReviewDao;
 import com.study.springboot.dao.IUsersDao;
+import com.study.springboot.dto.FaqDto;
+import com.study.springboot.dto.NoticeDto;
+import com.study.springboot.dto.One2OneDto;
 import com.study.springboot.dto.OrderDto;
 import com.study.springboot.dto.ProductDto;
+import com.study.springboot.dto.ReviewDto;
 import com.study.springboot.dto.UsersDto;
 
 @Controller
 public class MyController {
-	@Autowired IUsersDao iUsersdao;
-
-	@Autowired IProductDao iProductdao;
-	
-	@Autowired IOrderDao iOrderdao;
+	@Autowired
+	IUsersDao iUsersdao;
+	@Autowired
+	IOne2OneDao iOne2onedao;
+	@Autowired
+	IProductDao iProductdao;
+	@Autowired
+	IOrderDao iOrderdao;
+	@Autowired
+	INoticeDao iNoticedao;
+	@Autowired
+	IFaqDao iFaqdao;
+	@Autowired 
+	IReviewDao iReviewdao;
 	/*
 	 * 
-	 * @Autowired IUsersDao iSampledao;
+	 * @Autowired ISampleDao iSampledao;
 	 * 
-	 * @Autowired IUsersDao iReviewdao;
+	 * @Autowired IReviewDao iReviewdao;
 	 * 
-	 * @Autowired IUsersDao iProductdao;
 	 * 
-	 * @Autowired IUsersDao iOrderdao;
 	 * 
-	 * @Autowired IUsersDao iOne2onedao;
 	 * 
-	 * @Autowired IUsersDao iNoticedao;
 	 * 
-	 * @Autowired IUsersDao iFaqdao;
 	 * 
-	 * @Autowired IUsersDao iDeliverydao;
 	 * 
-	 * @Autowired IUsersDao iBasketdao;
+	 * 
+	 * 
+	 *
+	 * 
+	 * 
+	 * 
+	 * @Autowired IBasketDao iBasketdao;
 	 */
 
 	@RequestMapping("/")
@@ -64,6 +80,13 @@ public class MyController {
 	@RequestMapping("/login")
 	public String login(Model model) {
 		model.addAttribute("mainPage", "Member/login.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/logout")
+	public String logout (HttpServletRequest request , Model model) {
+		request.getSession().invalidate();
+		model.addAttribute("mainPage", "main.jsp");
 		return "index";
 	}
 
@@ -87,30 +110,65 @@ public class MyController {
 
 	@RequestMapping("/product")
 	public String product(Model model) {
+		List<ProductDto> all = iProductdao.list();
+		List<ProductDto> snack = iProductdao.product_list_snack();
+		List<ProductDto> food = iProductdao.product_list_food();
+
+		model.addAttribute("all", all);
+		model.addAttribute("snack", snack);
+		model.addAttribute("food", food);
 		model.addAttribute("mainPage", "Product/product.jsp");
 		return "index";
 	}
 
 	@RequestMapping("/product_action")
-	public String product_action(Model model) {
+	public String product_action(
+			@RequestParam("product_idx") String product_idx,
+			Model model) {
+		ProductDto product = iProductdao.product_action(Integer.parseInt(product_idx));
+		List<ReviewDto> reviewData = iReviewdao.review(Integer.parseInt(product_idx));
+		for(int i = 0; i < reviewData.size();i++) {
+			if(reviewData.get(i).getReview_score() == 1) {
+				reviewData.get(i).setReview_score(20); 
+			}else if(reviewData.get(i).getReview_score() == 2) {
+				reviewData.get(i).setReview_score(40); 
+			}else if(reviewData.get(i).getReview_score() == 3) {
+				reviewData.get(i).setReview_score(60);
+			}else if(reviewData.get(i).getReview_score() == 4) {
+				reviewData.get(i).setReview_score(80); 
+			}else if(reviewData.get(i).getReview_score() == 5) {
+				reviewData.get(i).setReview_score(100); 
+			}
+		}
+		model.addAttribute("count",reviewData.size());
+		model.addAttribute("review_list", reviewData);
+		model.addAttribute("product",product);
 		model.addAttribute("mainPage", "Product/product_action.jsp");
 		return "index";
 	}
 
 	@RequestMapping("/sample")
 	public String sample(Model model) {
+		List<ProductDto> dog = iProductdao.sample_list_dog();
+		List<ProductDto> cat = iProductdao.sample_list_cat();
+		model.addAttribute("dog", dog);
+		model.addAttribute("cat", cat);
 		model.addAttribute("mainPage", "Product/sample.jsp");
 		return "index";
 	}
 
 	@RequestMapping("/faq")
 	public String faq(Model model) {
+		List<FaqDto> faqlist = iFaqdao.list();
+		model.addAttribute("list", faqlist);
 		model.addAttribute("mainPage", "Customer/faq.jsp");
 		return "index";
 	}
 
 	@RequestMapping("/notice")
 	public String notice(Model model) {
+		List<NoticeDto> noticelist = iNoticedao.list();
+		model.addAttribute("list", noticelist);
 		model.addAttribute("mainPage", "Customer/notice.jsp");
 		return "index";
 	}
@@ -135,6 +193,13 @@ public class MyController {
 
 	@RequestMapping("/cart")
 	public String cart(Model model) {
+		model.addAttribute("mainPage", "Mypage/cart.jsp");
+		return "index";
+	}
+	@RequestMapping("/basket_action")
+	public String basket_action(HttpServletRequest request,Model model) {
+		String count = request.getParameter("count");
+		System.out.println(count);
 		model.addAttribute("mainPage", "Mypage/cart.jsp");
 		return "index";
 	}
@@ -192,28 +257,62 @@ public class MyController {
 		model.addAttribute("mainPage", "Order/order_detail.jsp");
 		return "index";
 	}
-
-	@RequestMapping("/loginAction")
-	public String admin_member(HttpServletRequest request, Model model) {
-		List<UsersDto> list = iUsersdao.list_member();
-		
-		for(int i = 0; i<list.size(); i++) {
-			if(list.get(i).getUser_gender().equals("0")) {
-				list.get(i).setUser_gender("여자");
-			}else if(list.get(i).getUser_gender().equals("1")) {
-				list.get(i).setUser_gender("남자");
-			}
-		}
-		
-		request.setAttribute("list", list);
-
-		model.addAttribute("adminPage", "../Admin/admin_member.jsp");
-		return "Admin/admin_index";
+	
+	@RequestMapping("/notice_detail")
+	public String notice_detail(
+								@RequestParam("notice_idx") String notice_idx,
+								Model model) {
+		NoticeDto notice = iNoticedao.notice_detail( Integer.parseInt(notice_idx));
+		model.addAttribute("notice", notice);
+		model.addAttribute("mainPage", "Customer/notice_detail.jsp");
+		return "index";
 	}
 
+	@RequestMapping("/loginAction")
+	public String admin_member(@RequestParam("user_id") String user_id,
+							   @RequestParam("user_pw") String user_pw, 
+							   HttpServletRequest request, 
+							   Model model) throws Exception {
+		Integer result = iUsersdao.login(user_id, user_pw);		
+		
+		if(result != null) {
+			request.getSession().setAttribute("user_id", user_id);
+			if(user_id.equals("admin")) {
+				List<UsersDto> list = iUsersdao.list_member();
+				request.setAttribute("list", list);
+				for(int i = 0; i<list.size(); i++) {
+					if(list.get(i).getUser_gender().equals("0")) {
+						list.get(i).setUser_gender("여자");
+					}else if(list.get(i).getUser_gender().equals("1")) {
+						list.get(i).setUser_gender("남자");
+					}
+				}
+				request.setAttribute("list", list);
+				model.addAttribute("msg","로그인 성공");
+				model.addAttribute("adminPage", "../Admin/admin_member.jsp");
+				return "Admin/admin_index";
+			}else {
+				model.addAttribute("msg","로그인 성공");
+				model.addAttribute("mainPage", "main.jsp");
+				return "index";
+			}
+		}
+		model.addAttribute("msg","로그인 실패...");
+		model.addAttribute("mainPage", "main.jsp");
+		return "index";
+	}
+	
 	@RequestMapping("/admin_product_registration")
 	public String admin_product_registration(Model model) {
 		model.addAttribute("adminPage", "../Admin/admin_product_registration.jsp");
+		return "Admin/admin_index";
+	}
+	
+	@RequestMapping("/admin_product_update")
+	public String admin_product_update(@RequestParam("product_idx") int product_idx, Model model) {
+		ProductDto update_view = iProductdao.update_view(product_idx);
+		model.addAttribute("dto", update_view);
+		model.addAttribute("adminPage", "../Admin/admin_product_update.jsp");
 		return "Admin/admin_index";
 	}
 
@@ -238,7 +337,6 @@ public class MyController {
 		int total_price = 0;
 		OrderDto result = iOrderdao.single_select(Integer.parseInt(order_idx));
 		model.addAttribute("dto", result);
-		result.setProduct_price( result.getOrder_quantity()*result.getProduct_price());
 		
 		List<OrderDto> product = iOrderdao.product(Integer.parseInt(order_idx));
 		for(int i = 0; i<product.size();i++) {
@@ -250,32 +348,53 @@ public class MyController {
 		model.addAttribute("total_quantity", total_quantity);
 		model.addAttribute("total_price", total_price);
 		
-		if(product.size() < 1) {
-			resp.setContentType("text/html; charset=UTF-8");
-			PrintWriter out;
-			out = resp.getWriter();
-			out.println("<script>alert('정보가없습니다.');</script>");
-			out.flush(); 
-		}	
-		
 		model.addAttribute("adminPage", "../Admin/admin_order_action.jsp");
 		return "Admin/admin_index";
 	}
 
 	@RequestMapping("/admin_one2one")
 	public String admin_one2one(Model model) {
+		List<One2OneDto> list = iOne2onedao.list();
+		model.addAttribute("list", list);
+		model.addAttribute("adminPage", "../Admin/admin_one2one.jsp");
+		return "Admin/admin_index";
+	}
+	
+	@RequestMapping("/admin_one2one_search")
+	public String admin_one2one_search(@RequestParam("keyword") String keyword, Model model) {
+		List<One2OneDto> search = iOne2onedao.search(keyword);
+		model.addAttribute("list", search);
 		model.addAttribute("adminPage", "../Admin/admin_one2one.jsp");
 		return "Admin/admin_index";
 	}
 
 	@RequestMapping("/admin_one2one_detail")
-	public String admin_one2one_detail(Model model) {
+	public String admin_one2one_detail(@RequestParam("one2one_idx") int one2one_idx, Model model) {
+		One2OneDto content_detail = iOne2onedao.content_detail(one2one_idx);
+		model.addAttribute("dto", content_detail);
 		model.addAttribute("adminPage", "../Admin/admin_one2one_detail.jsp");
 		return "Admin/admin_index";
 	}
+	
+	@RequestMapping("/admin_one2one_detail_form")
+	public String admin_one2one_detail_form(@RequestParam("one2one_idx") int one2one_idx,
+											@RequestParam("one2one_reply") String one2one_reply) {
+		int reply = iOne2onedao.reply(one2one_reply, one2one_idx);
+		return "redirect:/admin_one2one";
+	}
 
 	@RequestMapping("/admin_order")
-	public String admin_order(Model model) {
+	public String admin_order( Model model) {
+		int order_status0 = iOrderdao.beforeDTO();
+		int order_status1 = iOrderdao.duringDTO();
+		int order_status2 = iOrderdao.afterDTO();
+		int order_status3 = iOrderdao.cancelDTO();
+		int order_status = iOrderdao.orderAllDTO();
+		model.addAttribute("before", order_status0 );
+		model.addAttribute("during", order_status1 );
+		model.addAttribute("after", order_status2 );
+		model.addAttribute("cancel", order_status3 );
+		model.addAttribute("orderAll", order_status );		
 		model.addAttribute("adminPage", "../Admin/admin_order.jsp");
 		return "Admin/admin_index";
 	}
@@ -283,8 +402,6 @@ public class MyController {
 	@RequestMapping("/admin_order_list")
 	public String admin_order_list(Model model) {
 		List<OrderDto> order_list = iOrderdao.order_list();
-		
-		
 		for(int i = 0; i<order_list.size(); i++) {
 			if(order_list.get(i).getOrder_status().equals("0")) {
 				order_list.get(i).setOrder_status("배송전");
@@ -311,9 +428,10 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_member_detail.jsp");
 		return "Admin/admin_index";
 	}
-
 	@RequestMapping("/admin_product")
 	public String admin_product(Model model) {
+		List<ProductDto>list = iProductdao.list();
+		model.addAttribute("list", list);
 		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
 		return "Admin/admin_index";
 	}
@@ -340,7 +458,7 @@ public class MyController {
 		dto.setProduct_animal(Integer.parseInt(animal));
 		dto.setProduct_age(Integer.parseInt(age));
 		dto.setProduct_feed_type(Integer.parseInt(feed_type));
-		dto.setProduct_type(Integer.parseInt(type));
+		dto.setProduct_category_type(Integer.parseInt(type));
 		if (Integer.parseInt(sample) == 2) {
 			dto.setProduct_sample(1);
 		} else {
@@ -359,17 +477,10 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
 		return "Admin/admin_index";
 	}
-	
-	@RequestMapping("/admin_product_update")
-	public String admin_product_update(@RequestParam("product_idx") int product_idx, Model model) {
-		ProductDto update_view = iProductdao.update_view(product_idx);
-		model.addAttribute("dto", update_view);
-		model.addAttribute("adminPage", "../Admin/admin_product_update.jsp");
-		return "Admin/admin_index";
-	}
 
 	@RequestMapping(value="/admin_product_update_form", method = RequestMethod.POST)
 	public String admin_product_update_form(			
+			@RequestParam(value = "product_idx") String product_idx,
 			@RequestParam(value = "animal", required = false, defaultValue = "") String animal,
 			@RequestParam(value = "age", required = false, defaultValue = "") String age,
 			@RequestParam(value = "feed-type", required = false, defaultValue = "") String feed_type,
@@ -384,10 +495,11 @@ public class MyController {
 			@RequestParam(value = "bo_content", required = false, defaultValue = "") String content) {
 		String upload_url = fileUploadService.restore(file);
 		ProductDto dto = new ProductDto();
+		dto.setProduct_idx(Integer.parseInt(product_idx));
 		dto.setProduct_animal(Integer.parseInt(animal));
 		dto.setProduct_age(Integer.parseInt(age));
 		dto.setProduct_feed_type(Integer.parseInt(feed_type));
-		dto.setProduct_type(Integer.parseInt(type));
+		dto.setProduct_category_type(Integer.parseInt(type));
 		if (Integer.parseInt(sample) == 2) {
 			dto.setProduct_sample(1);
 		} else {
@@ -403,5 +515,15 @@ public class MyController {
 		
 		int update = iProductdao.update(dto);
 		return "redirect:/admin_product";
+	}
+	
+	@RequestMapping(value="/admin_order_status_update", method=RequestMethod.GET)
+	public String admin_order_status_update(
+			@RequestParam(value="delivery") String order_status,
+			@RequestParam(value="order_idx") String order_idx,
+			HttpServletRequest request,
+			Model model) {
+		int result = iOrderdao.order_status_update(Integer.parseInt(order_status),Integer.parseInt(order_idx));
+		return "redirect:/admin_order_action?order_idx="+Integer.parseInt(order_idx);
 	}
 }

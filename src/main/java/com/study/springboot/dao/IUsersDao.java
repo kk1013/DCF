@@ -9,4 +9,5 @@ import com.study.springboot.dto.UsersDto;
 @Mapper
 public interface IUsersDao {
 	public List<UsersDto> list_member();
+	public Integer login ( String user_id, String user_pw );
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="/css/product/product.css">
 <div id="product-wrap">
     <div id="page-nav-wrap">
@@ -100,7 +102,7 @@
                 </div>
             </div>
         </div>
-        <div id="product-session">
+        <div id="product-session" >
             <div id="product-session-menu">
                 <input type="button" class="type-feed-btn bgcolor-yello" id="left-button" value="모든상품">
                 <input type="button" class="type-feed-btn" id="center-button" value="간식">
@@ -108,145 +110,44 @@
             </div>
             <div id="productpage-product">
                 <div id="product-product">
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood1.jpg" alt="사료1">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood2.jpg" class="product" alt="사료2">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood3.jpg" class="product" alt="사료3">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood5.jpg" class="product" alt="사료5">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood6.jpg" class="product" alt="사료6">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood7.jpg" class="product" alt="사료7">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood1.jpg" alt="사료1">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood2.jpg" class="product" alt="사료2">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood3.jpg" class="product" alt="사료3">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood5.jpg" class="product" alt="사료5">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood6.jpg" class="product" alt="사료6">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood7.jpg" class="product" alt="사료7">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood1.jpg" alt="사료1">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood2.jpg" class="product" alt="사료2">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood3.jpg" class="product" alt="사료3">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood5.jpg" class="product" alt="사료5">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood6.jpg" class="product" alt="사료6">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                            <td>
-                                <div class="product">
-                                    <img src="/img/product-img/dogfood7.jpg" class="product" alt="사료7">
-                                </div>
-                                <p class="product-name">맥시어덜트 사료 250g</p>
-                                <p class="price">2000원</p>
-                            </td>
-                        </tr>
+            <table class="table all" style="width: 710px;">
+                 <c:forEach var="all" items="${ all }">
+                <tr  style="width: 33.3%; float: left;">
+                	<td>
+                        <div class="sample-product">
+                            <img src="/img/product-img/${ all.product_image }" class="product" alt="사료8">
+                        </div>
+                        <p class="product-name">${ all.product_name }</p>
+                        <p class="price">${ all.product_price }</p>
+                     </td>
+                </tr>
+					</c:forEach>
+            </table>
+           <table class="table food ds-none" style="width: 710px;">
+                 <c:forEach var="food" items="${ food }">
+                <tr  style="width: 33%; float: left;">
+                	<td>
+                        <div class="sample-product">
+                            <img src="/img/product-img/${ food.product_image }" class="product" alt="사료8">
+                        </div>
+                        <p class="product-name">${ food.product_name }</p>
+                        <p class="price">${ food.product_price }</p>
+                     </td>
+                </tr>
+					</c:forEach>
+            </table>
+             <table class="table snack ds-none" style="width: 710px;">
+                	<c:forEach var="snack" items="${ snack }">
+                <tr  style="width: 33%; float: left;">
+                	<td>
+                        <div class="sample-product">
+                            <img src="/img/product-img/${ snack.product_image }" class="product" alt="사료8">
+                        </div>
+                        <p class="product-name">${ snack.product_name }</p>
+                        <p class="price">${ snack.product_price }</p>
+                     </td>
+                </tr>
+					</c:forEach>
                     </table>
                 </div>
             </div>
@@ -269,7 +170,34 @@
                 button.classList.remove("display_none");
             }
 		});
-
+        $(".type-feed-btn").click(function(){
+			for(var  i = 0 ; i<$(".type-feed-btn").length;i++){
+				$(".type-feed-btn")[i].classList.remove("bgcolor-yello");
+			}
+			if($(this).attr("id") == "left-button"){
+				$("#left-button").attr("disabled", true);
+				$("#center-button").attr("disabled", false);
+				$("#right-button").attr("disabled", false);
+				$(".table")[0].classList.remove("ds-none");
+				$(".table")[1].classList.add("ds-none");
+				$(".table")[2].classList.add("ds-none");
+			}else if($(this).attr("id") == "center-button"){
+				$("#center-button").attr("disabled", true);
+				$("#right-button").attr("disabled", false);
+				$("#left-button").attr("disabled", false);
+				$(".table")[1].classList.remove("ds-none");
+				$(".table")[0].classList.add("ds-none");
+				$(".table")[2].classList.add("ds-none");
+			}else if($(this).attr("id") == "right-button"){
+				$("#right-button").attr("disabled", true);
+				$("#center-button").attr("disabled", false);
+				$("#left-button").attr("disabled", false);
+				$(".table")[2].classList.remove("ds-none");
+				$(".table")[1].classList.add("ds-none");
+				$(".table")[0].classList.add("ds-none");
+			}
+			$(this)[0].classList.add("bgcolor-yello");
+        })
     }); 
     var before_value = 0;
     var week = 0;

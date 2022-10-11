@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
@@ -34,81 +35,13 @@
                     <td class="table-td2">제목</td>
                     <td class="table-td3">작성일</td>
                 </tr>
-                <tr class="table-tr">
-                    <td class="td1">51</td>
-                    <td class="td2">추석연휴 기간 배송안내</td>
-                    <td class="td3">2022.09.05</td>
+                <c:forEach var="list" items="${list}">
+                <tr class="table-tr" onclick="location.href='notice_detail?notice_idx=${ list.notice_idx }'">
+                    <td class="td1">${ list.notice_idx }</td>
+                    <td class="td2">${ list.notice_title }</td>
+                    <td class="td3"><fmt:formatDate value="${ list.notice_date }" pattern = "yyyy-MM-dd"/></td>
                 </tr>
-                <tr class="table-tr">
-                    <td class="td1">50</td>
-                    <td class="td2">멍냥남매 서버 점검으로 인한 서비스 일시 중단 안내</td>
-                    <td class="td3">2022.09.01</td>
-                </tr>
-                <tr class="table-tr">
-                    <td class="td1">49</td>
-                    <td class="td2">개인정보처리방침 개정 안내의 건</td>
-                    <td class="td3">2022.08.29</td>
-                </tr>
-                <tr class="table-tr">
-                    <td class="td1">51</td>
-                    <td class="td2">추석연휴 기간 배송안내</td>
-                    <td class="td3">2022.09.05</td>
-                </tr>
-                <tr class="table-tr">
-                    <td class="td1">50</td>
-                    <td class="td2">멍냥남매 서버 점검으로 인한 서비스 일시 중단 안내</td>
-                    <td class="td3">2022.09.01</td>
-                </tr>
-                <tr class="table-tr">
-                    <td class="td1">49</td>
-                    <td class="td2">개인정보처리방침 개정 안내의 건</td>
-                    <td class="td3">2022.08.29</td>
-                </tr>
-                <tr class="table-tr">
-                    <td class="td1">51</td>
-                    <td class="td2">추석연휴 기간 배송안내</td>
-                    <td class="td3">2022.09.05</td>
-                </tr>
-                <tr class="table-tr">
-                    <td class="td1">50</td>
-                    <td class="td2">멍냥남매 서버 점검으로 인한 서비스 일시 중단 안내</td>
-                    <td class="td3">2022.09.01</td>
-                </tr>
-                <tr class="table-tr">
-                    <td class="td1">49</td>
-                    <td class="td2">개인정보처리방침 개정 안내의 건</td>
-                    <td class="td3">2022.08.29</td>
-                </tr>
-                <tr class="table-tr">
-                    <td class="td1">51</td>
-                    <td class="td2">추석연휴 기간 배송안내</td>
-                    <td class="td3">2022.09.05</td>
-                </tr>
-                <tr class="table-tr">
-                    <td class="td1">50</td>
-                    <td class="td2">멍냥남매 서버 점검으로 인한 서비스 일시 중단 안내</td>
-                    <td class="td3">2022.09.01</td>
-                </tr>
-                <tr class="table-tr">
-                    <td class="td1">49</td>
-                    <td class="td2">개인정보처리방침 개정 안내의 건</td>
-                    <td class="td3">2022.08.29</td>
-                </tr>
-                <tr class="table-tr">
-                    <td class="td1">51</td>
-                    <td class="td2">추석연휴 기간 배송안내</td>
-                    <td class="td3">2022.09.05</td>
-                </tr>
-                <tr class="table-tr">
-                    <td class="td1">50</td>
-                    <td class="td2">멍냥남매 서버 점검으로 인한 서비스 일시 중단 안내</td>
-                    <td class="td3">2022.09.01</td>
-                </tr>
-                <tr class="table-tr">
-                    <td class="td1">49</td>
-                    <td class="td2">개인정보처리방침 개정 안내의 건</td>
-                    <td class="td3">2022.08.29</td>
-                </tr>
+                </c:forEach>
             </table>
 
             <div class="customer-search">

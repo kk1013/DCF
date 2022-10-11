@@ -6,6 +6,27 @@
 <!-- SQL 끝에 ; 세미콜론을 넣지 마세요! -->
 
 <mapper namespace="com.study.springboot.dao.IOrderDao">
+	
+	<select id="beforeDTO" resultType="_int">
+	  SELECT COUNT(order_status) FROM dcf_order WHERE order_status=0
+	</select>
+	
+	<select id="duringDTO" resultType="_int">
+	  SELECT COUNT(order_status) FROM dcf_order WHERE order_status=1
+	</select>
+	
+	<select id="afterDTO" resultType="_int">
+	  SELECT COUNT(order_status) FROM dcf_order WHERE order_status=2
+	</select>
+	
+	<select id="cancelDTO" resultType="_int">
+	  SELECT COUNT(order_status) FROM dcf_order WHERE order_status=3
+	</select>
+	
+	<select id="orderAllDTO" resultType="_int">
+	  SELECT COUNT(order_status) FROM dcf_order
+	</select>
+	
 
 	<select id="order_list" resultType="com.study.springboot.dto.OrderDto">
 	SELECT 
@@ -60,7 +81,11 @@
 	WHERE
 	a.ORDER_PD_IDX = p.PRODUCT_IDX 
 	AND a.ORDER_USER_IDX = u.USER_IDX 
-	AND a.ORDER_USER_IDX = #{param1}
+	AND a.ORDER_IDX = #{param1}
 	ORDER BY a.ORDER_IDX ASC
 	</select>
+	
+	<update id="order_status_update">
+	UPDATE DCF_ORDER SET ORDER_STATUS=#{param1} WHERE ORDER_IDX=#{param2}
+	</update>
 </mapper>

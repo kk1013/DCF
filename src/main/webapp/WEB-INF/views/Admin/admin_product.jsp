@@ -1,16 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="/css/Admin/admin_product.css">
     <div class="content-wrap">
+    
         <p class="admin-title">상품관리</p>
         <div class="btn-wrap">
-            <label><input type="button" id="product_delete" value="상품삭제"></label> 
+            <label><input onClick="document.getElementById('product_delete_form').submit()" type="button" id="product_delete" value="상품수정"></label> 
             <div class="customer-search">
-                <input type="text" class="searchbar">
-                <input type="button" class="searchbutton" value="검색">
+        <form action="/admin_product_search" method="get">
+                <input name="keyword" type="text" class="searchbar">
+                <input type="submit" class="searchbutton" value="검색">
+        </form>
             </div>
         </div>
-
+		
+            <form action="/admin_product_delete" method="get" id="product_delete_form">
         <table>
             <thead>
                 <tr>
@@ -22,58 +28,25 @@
                 </tr>
             </thead>
             <tbody>
+            	<c:forEach var="list" items="${list}">
                 <tr>
-                    <td><input type="checkbox"></td>
-                    <td>134546</td>
-                    <td>
+                    <td><input type="checkbox" name="product_idx" value="${ list.product_idx }"></td>
+                    <td onclick="location.href='/admin_product_update?product_idx=${ list.product_idx }';">${ list.product_idx }</td>
+                    <td onclick="location.href='/admin_product_update?product_idx=${ list.product_idx }';">
                         <div class="admin-product-img">
-                            <span><img src="/img/ono2onoanswerimg.jpg" alt=""></span>
-                            <span>상품명임상품명임</span>
+                            <span><img src="../img/product-img/${ list.product_image }" alt=""></span>
+                            <span>${ list.product_name }</span>
                         </div>
                     </td>
-                    <td>123,456</td>
-                    <td>2022-01-01</td>
+                    <td onclick="location.href='/admin_product_update?product_idx=${ list.product_idx }';">${ list.product_price }</td>
+                    <td onclick="location.href='/admin_product_update?product_idx=${ list.product_idx }';"><fmt:formatDate value="${ list.product_date }" pattern = "yyyy-MM-dd"/></td>
                 </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>134546</td>
-                    <td>
-                        <div class="admin-product-img">
-                            <img src="/img/ono2onoanswerimg.jpg" alt="">
-                            <span>상품명임</span>
-                        </div>
-                    </td>
-                    <td>123,456</td>
-                    <td>2022-01-01</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>134546</td>
-                    <td>
-                        <div class="admin-product-img">
-                            <img src="/img/ono2onoanswerimg.jpg" alt="">
-                            <span>상품명임 5kg상품명임 5kg상품명임 </span>
-                        </div>
-                    </td>
-                    <td>123,456</td>
-                    <td>2022-01-01</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>134546</td>
-                    <td>
-                        <div class="admin-product-img">
-                            <img src="/img/ono2onoanswerimg.jpg" alt="">
-                            <span>상품명임 3kg</span>
-                        </div>
-                    </td>
-                    <td>123,456</td>
-                    <td>2022-01-01</td>
-                </tr>
-               
+                </c:forEach>
             </tbody>
-
+		
         </table>
-
+			</form>
     </div><!--content-wrap-->
+    
+
     

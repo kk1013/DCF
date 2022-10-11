@@ -67,3 +67,9 @@
 .product-name{
     text-align: end;
 }
+.ds-none{
+	display: none;
+}
+input:disabled{
+	color: #292929;
+}

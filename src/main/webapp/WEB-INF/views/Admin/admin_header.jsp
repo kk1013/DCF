@@ -12,7 +12,7 @@
         </div>
         <p class="user-name">admin님</p>
         <a href="#">쇼핑몰정보</a><br>
-        <a href="#">로그아웃</a>
+        <a href="logout">로그아웃</a>
     </div>
 <div id="aside-wrap">
     <div id="aside-main">

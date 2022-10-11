@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,14 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.study.springboot.dao.INoticeDao;
+import com.study.springboot.dao.IOrderDao;
 import com.study.springboot.dao.IUsersDao;
 import com.study.springboot.dto.NoticeDto;
 import com.study.springboot.dto.UsersDto;
+
 
 @Controller
 public class MyController {
 	@Autowired IUsersDao iUsersdao;
 	@Autowired INoticeDao iNoticedao;
+	@Autowired IOrderDao iOrderdao;
 	
 	/*
 	 * 
@@ -30,7 +34,6 @@ public class MyController {
 	 * 
 	 * @Autowired IUsersDao iProductdao;
 	 * 
-	 * @Autowired IUsersDao iOrderdao;
 	 * 
 	 * @Autowired IUsersDao iOne2onedao;
 	 * 
@@ -64,7 +67,12 @@ public class MyController {
 		model.addAttribute("mainPage", "Member/join.jsp");
 		return "index";
 	}
-
+	
+	@RequestMapping("/join_action")
+	public String join_action(Model model) {
+		model.addAttribute("mainPage", "Member/join_action.jsp");
+		return "index";
+	}
 	@RequestMapping("/idfind")
 	public String idfind(Model model) {
 		model.addAttribute("mainPage", "Member/idfind.jsp");
@@ -106,37 +114,32 @@ public class MyController {
 		model.addAttribute("mainPage", "Customer/notice.jsp");
 		return "index";
 	}
+	@RequestMapping("/notice_detail")
+	public String notice_detail(Model model) {
+		model.addAttribute("mainPage", "Customer/notice_detail.jsp");
+		return "index";
+	}
 
 	@RequestMapping("/one2one")
 	public String one2one(Model model) {
 		model.addAttribute("mainPage", "Customer/one2one.jsp");
 		return "index";
 	}
-
-	@RequestMapping("/join_action")
-	public String join_action(Model model) {
-		model.addAttribute("mainPage", "Member/join_action.jsp");
-		return "index";
-	}
-
 	@RequestMapping("/join_form")
 	public String join_form(Model model) {
 		model.addAttribute("mainPage", "Member/join_form.jsp");
 		return "index";
 	}
-
 	@RequestMapping("/cart")
 	public String cart(Model model) {
 		model.addAttribute("mainPage", "Mypage/cart.jsp");
 		return "index";
 	}
-
 	@RequestMapping("/order_payments")
 	public String order_payments(Model model) {
 		model.addAttribute("mainPage", "Order/order_payments.jsp");
 		return "index";
 	}
-
 	@RequestMapping("/order_action")
 	public String order_action(Model model) {
 		model.addAttribute("mainPage", "Order/order_action.jsp");
@@ -170,7 +173,7 @@ public class MyController {
 	@RequestMapping("/order_list")
 	public String order_list(Model model) {
 		model.addAttribute("mainPage", "Mypage/order_list.jsp");
-		return "index";
+		return "index";		
 	}
 
 	@RequestMapping("/review")
@@ -184,19 +187,17 @@ public class MyController {
 		model.addAttribute("mainPage", "Order/order_detail.jsp");
 		return "index";
 	}
-
+	
 	@RequestMapping("/loginAction")
 	public String admin_member(HttpServletRequest request, Model model) {
 		List<UsersDto> list = iUsersdao.list_member();
 		request.setAttribute("list", list);
-
 		model.addAttribute("adminPage", "../Admin/admin_member.jsp");
 		return "Admin/admin_index";
 	}
-	
 	//회원정보연결
-	@RequestMapping("/admin_member_detail")
-	public String admin_member_detail(
+	@RequestMapping("/admin_member")
+	public String admin_memberl(
 			@RequestParam("user_idx") String user_idx,
 			Model model,
 			HttpServletRequest request) {		
@@ -205,6 +206,18 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_member_detail.jsp");
 		return "Admin/admin_index";
 	}
+	//회원정보연결
+		@RequestMapping("/admin_member_detail")
+		public String admin_member_detail(
+				@RequestParam("user_idx") String user_idx,
+				Model model,
+				HttpServletRequest request) {		
+			UsersDto usersdto = iUsersdao.usersdto( Integer.parseInt(user_idx));
+			model.addAttribute("usersdto", usersdto);	
+			model.addAttribute("adminPage", "../Admin/admin_member_detail.jsp");
+			return "Admin/admin_index";
+		}
+		
 	//회원정보변경
 	@RequestMapping("/admin_member_update_form")
 	public String admin_member_update_form(
@@ -235,17 +248,59 @@ public class MyController {
 		return "redirect:/admin_member_detail?user_idx="+user_idx;
 	}
 	//회원정보삭제 adminMemberDeleteAction
-		@RequestMapping("/adminMemberDeleteAction")
-		public String adminMemberDeleteAction(
-				@RequestParam("user_idx") List<String> user_idx,
-				HttpServletRequest request) {
-			System.out.println(user_idx);
-			for(int i = 0; i<user_idx.size();i++) {
-				int result = iUsersdao.adminMemberDeleteAction(Integer.parseInt(user_idx.get(i)));
-			}
-			return "redirect:/loginAction";
+	@RequestMapping("/adminMemberDeleteAction")
+	public String adminMemberDeleteAction(
+			@RequestParam("user_idx") List<String> user_idx,
+			HttpServletRequest request) {
+		System.out.println(user_idx);
+		for(int i = 0; i<user_idx.size();i++) {
+			int result = iUsersdao.adminMemberDeleteAction(Integer.parseInt(user_idx.get(i)));
 		}
-		
+		return "redirect:/loginAction";
+	}
+	//아이디찾기
+	
+	@RequestMapping("/idfindAction")
+	
+	public String idfindAction(
+			@NotBlank(message = "이름은 필수 입력 값입니다.")
+			@RequestParam ("user_name") String user_name,			
+			@RequestParam (value="user_email", required = false) String user_email,
+			@RequestParam (value="user_phone", required = false) String user_phone,
+			Model model) {		
+		System.out.println(user_email);
+		System.out.println(user_phone);		
+		UsersDto userId = iUsersdao.userId(user_name, user_email, (user_phone.equals("")) ? 1 : Integer.parseInt(user_phone) );
+		model.addAttribute("mainPage", "Member/idfind.jsp");
+		if(userId==null){
+			model.addAttribute("msg","아이디가 없습니다");
+			return "index";
+		}else {		
+			model.addAttribute("userId", userId.getUser_id());
+			return "index";
+		}			
+	}
+	//비밀번호찾기
+	@RequestMapping("/pwfindAction")
+	public String pwfindAction(
+			@NotBlank(message = "이름은 필수 입력 값입니다.")
+			@RequestParam ("user_id") String user_id,
+			@RequestParam ("user_name") String user_name,			
+			@RequestParam (value="user_email", required = false) String user_email,
+			@RequestParam (value="user_phone", required = false) String user_phone,
+			Model model) {		
+		System.out.println(user_email);
+		System.out.println(user_phone);		
+		UsersDto userPw = iUsersdao.userPw(user_id, user_name, user_email, (user_phone.equals("")) ? 1 : Integer.parseInt(user_phone) );
+		model.addAttribute("mainPage", "Member/pwfind.jsp");
+		if(userPw==null){
+			model.addAttribute("msg","아이디, 이름 확인 후 다시 작성해주세요.");
+			return "index";
+		}else {		
+			model.addAttribute("userPw", userPw.getUser_pw());
+			return "index";
+		}			
+	}
 	@RequestMapping("/admin_product_registration")
 	public String admin_product_registration(Model model) {
 		model.addAttribute("adminPage", "../Admin/admin_product_registration.jsp");
@@ -277,7 +332,6 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_notice_write.jsp");
 		return "Admin/admin_index";
 	}
-		
 	//공지사항작성
 	@RequestMapping("/adminWriteNoticeformAction")
 	public String adminWriteNoticeformAction (
@@ -289,6 +343,52 @@ public class MyController {
 
 		return "redirect:/admin_notice";
 	}
+	//회원가입
+	@RequestMapping("/signUp")
+	public String signUp(
+			@RequestParam("user_name") String user_name,
+			@RequestParam("user_id") String user_id,            
+			@RequestParam("user_pw") String user_pw,
+			@RequestParam("user_email") String user_email,    
+			@RequestParam(value="user_email_receive", required=false) String user_email_receive,
+			
+			@RequestParam("user_phone") String user_phone,
+			@RequestParam(value="user_birth_date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date user_birth_date,
+			@RequestParam("user_gender") String user_gender,      
+			@RequestParam("user_address") String user_address,
+			Model model,
+			UsersDto dto) {	
+	
+		if(user_email_receive == null) {
+			user_email_receive = "0";
+		}else {
+			user_email_receive = "1";
+		}
+		dto.setUser_name(user_name);
+		dto.setUser_id(user_id);
+		dto.setUser_pw(user_pw);
+		dto.setUser_email(user_email);
+		dto.setUser_email_receive(Integer.parseInt(user_email_receive));
+		dto.setUser_phone(Integer.parseInt(user_phone));
+		dto.setUser_birth_date(user_birth_date);
+		dto.setUser_gender(Integer.parseInt(user_gender));
+		dto.setUser_address(user_address);
+		model.addAttribute("mainPage", "Member/join_action.jsp");
+		int result = iUsersdao.signUp(dto);
+		
+		
+		return "index";
+	}
+ //아이디중복체크
+	//   @RequestMapping(value="idCheck", method = RequestMethod.POST)
+	 //  @ResponseBody
+	//   public String idCheck(String user_id) throws Exception{
+	 //     int result =iUsersdao.idCheck(user_id);
+	   //   if(result != 0) {
+	   //      return "fail";
+	  //    }else {   return""; }
+	  // }
+	
 	//공지사항수정
 	@RequestMapping("/adminUpdateAction")
 	public String adminUpdateAction(

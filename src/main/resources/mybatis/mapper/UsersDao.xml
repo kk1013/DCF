@@ -19,7 +19,44 @@
     <delete id="adminMemberDeleteAction">   		
     	delete from dcf_users where user_idx=#{ param1 }
     </delete>
-
+	<select id="userId" resultType="com.study.springboot.dto.UsersDto">
+    	select * from dcf_users
+    	where (user_name=#{param1}) and (user_email=#{param2} or user_phone=#{param3})
+    </select>
+    <select id="userPw" resultType="com.study.springboot.dto.UsersDto">
+    	select * from dcf_users
+    	where ((user_id=#{param1}) and (user_name=#{param2})) and (user_email=#{param3} or user_phone=#{param4})
+    </select>
+    <insert id="signUp" parameterType="com.study.springboot.dto.UsersDto">
+    
+           insert into dcf_users  (
+	       user_idx,
+	       user_id,
+	       user_pw,
+	       user_name,
+	       user_address,
+	       user_email,
+	       user_email_receive,
+	       user_gender,
+	       user_phone,
+	       user_birth_date,
+	       user_join_date)
+	       values (
+	       user_idx_seq.NEXTVAL,
+	       #{user_id},
+	       #{user_pw},
+	       #{user_name},
+	       #{user_address},
+	       #{user_email},
+	       #{user_email_receive},
+	       #{user_gender},
+	       #{user_phone},
+	       #{user_birth_date},
+	       sysdate)   
+    </insert>
+    <select id="idCheck" parameterType="com.study.springboot.dao.IUsersDao" resultType="int">
+    	select count(*) from dcf_users where user_id=#{user_id}
+    </select>
 </mapper>
 
 

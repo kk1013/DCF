@@ -88,4 +88,13 @@
 	<update id="order_status_update">
 	UPDATE DCF_ORDER SET ORDER_STATUS=#{param1} WHERE ORDER_IDX=#{param2}
 	</update>
+	
+	<select id="payments_list" resultType="com.study.springboot.dto.OrderDto">
+	SELECT user_name, user_id, user_phone FROM dcf_users WHERE user_idx=#{param1}
+	</select>
+	
+	<select id="payments_product" resultType="com.study.springboot.dto.OrderDto">
+	SELECT * FROM dcf_basket, dcf_product WHERE dcf_basket.basket_pd_idx = dcf_product.product_idx and basket_idx =#{ param1 }
+	</select>
+	
 </mapper>

@@ -36,7 +36,7 @@
                     <td class="table-td3">작성일</td>
                 </tr>
                 <c:forEach var="list" items="${list}">
-                <tr class="table-tr">
+                <tr class="table-tr" onclick="location.href='notice_detail?notice_idx=${ list.notice_idx }'">
                     <td class="td1">${ list.notice_idx }</td>
                     <td class="td2">${ list.notice_title }</td>
                     <td class="td3"><fmt:formatDate value="${ list.notice_date }" pattern = "yyyy-MM-dd"/></td>

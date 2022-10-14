@@ -189,11 +189,13 @@ input[name="type"]{
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }
+input:disabled{
+	color: #292929;
+}
 
 /* productpage product */
 #product-product{
-    width: 620px;
-    margin-left: 100px;
+    margin-left: 50px;
 }
 .product{
     width: 33.3%;

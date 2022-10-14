@@ -19,6 +19,7 @@
         text-align: center;
         border-left: 0;
         border-right: 0;
+        margin-top:20px;
     }
     #first-tr{
         font-size: 16px;
@@ -39,7 +40,7 @@
     td{
         border: 1px solid #ebebeb;
         width: 13.2%;
-        height: 30px;
+        height: 35px;
     }
     .btn{
         width: 100px;
@@ -72,15 +73,16 @@
     height: 30px;
     font-size: 16px;
     color: #292929;
-}
-.searchbutton {
-    width: 60px;
-    height: 30px;
-    background-color: #292929;
-    color: white;
-    border: 0;
-    border-radius: 5px;
-    margin-left: 5px;
-    margin-top: 3px;
-    cursor: pointer;
-}
+	}
+	.searchbutton {
+	    width: 60px;
+	    height: 30px;
+	    background-color: #292929;
+	    color: white;
+	    border: 0;
+	    border-radius: 5px;
+	    margin-left: 5px;
+	    margin-top: 3px;
+	    cursor: pointer;
+	}
+	

@@ -75,3 +75,19 @@
     #user-infowrap  div input:hover {
         background-color:#fee469; border:none;
     }
+    
+    input[type=date]{
+	border:0; background-color:#ffff;
+	margin-left:10px; color:#505050;
+	}
+	button#delete{
+	 	border:1px solid #292929;
+        border-radius: 5px;
+        width: 100px; height: 35px; line-height: 35px; text-align: center;
+        background-color:#ffffff;
+        cursor: pointer;
+        transition: 0.2s;
+	}
+	button#delete:hover {
+        background-color:#fee469; border:none;
+    }

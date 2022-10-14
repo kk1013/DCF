@@ -6,5 +6,7 @@
 <!-- SQL 끝에 ; 세미콜론을 넣지 마세요! -->
 
 <mapper namespace="com.study.springboot.dao.IReviewDao">
-
+	<select id="review" resultType="com.study.springboot.dto.ReviewDto">
+	SELECT r.*, u.USER_NAME FROM DCF_REVIEW r, DCF_USERS u WHERE r.REVIEW_USER_IDX = u.USER_IDX AND REVIEW_PD_IDX=#{param1}
+	</select>
 </mapper>

@@ -19,4 +19,5 @@ public interface IOrderDao {
 	public int order_status_update(int order_status, int order_idx);
 	public List<OrderDto> payments_list(int user_idx);
 	public List<OrderDto> payments_product( int basket_idx );
+	public List<OrderDto> payments_product_check( String str );
 }

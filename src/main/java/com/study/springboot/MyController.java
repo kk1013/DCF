@@ -1,7 +1,7 @@
 package com.study.springboot;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.study.springboot.dao.IBasketDao;
@@ -52,11 +53,6 @@ public class MyController {
 	IBasketDao iBasketdao;
 	@Autowired 
 	IReviewDao iReviewdao;
-	/*
-	 * @Autowired IReviewDao iReviewdao;
-	 * 
-	 * 
-	 */
 
 	@RequestMapping("/")
 	public String root() {
@@ -250,20 +246,90 @@ public class MyController {
 		return "index";
 	}
 	
-	@RequestMapping("/cart_form")
-	public String cart_form(@RequestParam("chk") int basket_idx, HttpServletRequest request, Model model ) {
-		int result = iBasketdao.delete(basket_idx);
-		model.addAttribute("msg", "삭제성공");
+	@RequestMapping("/cart_update_plus")
+	public String cart_update_plus(@RequestParam("status_idx") int status_idx, HttpServletRequest request, Model model) {
 		int idx = (int) request.getSession().getAttribute("user_idx");
+		int update_plus = iBasketdao.update_plus( idx, status_idx );
 		List<BasketDto> list = iBasketdao.list(idx);
 		int sum = iBasketdao.sum(idx);
 		model.addAttribute("list", list);
 		model.addAttribute("sum", sum);
 		model.addAttribute("mainPage", "Mypage/cart.jsp");
 		return "index";
-	}	
+	}
+	
+	@RequestMapping("/cart_update_minus")
+	public String cart_update_minus(@RequestParam("status_idx") int status_idx, HttpServletRequest request, Model model) {
+		int idx = (int) request.getSession().getAttribute("user_idx");
+		int update_minus = iBasketdao.update_minus( idx, status_idx );
+		List<BasketDto> list = iBasketdao.list(idx);
+		int sum = iBasketdao.sum(idx);
+		model.addAttribute("list", list);
+		model.addAttribute("sum", sum);
+		model.addAttribute("mainPage", "Mypage/cart.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/cart_delete")
+	@ResponseBody
+	public String cart_delete(@RequestParam("status_idx") int status_idx, HttpServletRequest request, Model model) {
+		int idx = (int) request.getSession().getAttribute("user_idx");
+		int delete = iBasketdao.delete_rowNum( idx, status_idx );
+		return "<script>alert('해당 상품이 장바구니에서 제외되었습니다.');location.href='/cart'</script>";
+	}
+	
+	@RequestMapping("/cart_order_all")
+	public String cart_order_all(HttpServletRequest request, Model model) {
+		int idx = (int) request.getSession().getAttribute("user_idx");
+		List<BasketDto> product_list = iBasketdao.list(idx);
+		model.addAttribute("product", product_list);
+		model.addAttribute("mainPage", "Order/order_payments.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/cart_check_order")
+	public String cart_check_order(@RequestParam("chk") List<String> basket_idx, HttpServletRequest request, Model model) {
+		String str = "";
+		for(int i=0; i<basket_idx.size(); i++) {
+			str += "dcf_basket.basket_pd_idx = dcf_product.product_idx and basket_idx =" + basket_idx.get(i);
+			if( i != basket_idx.size()-1 ) {
+				str += " or ";
+			}
+		}
+		List<OrderDto> payments_product_check = iOrderdao.payments_product_check( str );
+		System.out.println(str);
+		model.addAttribute("product", payments_product_check);
+		model.addAttribute("mainPage", "Order/order_payments.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/cart_check_delete")
+	public String cart_check_delete(@RequestParam("chk") List<String> basket_idx, HttpServletRequest request, Model model) {
+		for(int i=0; i<basket_idx.size(); i++) {
+			int result = iBasketdao.delete(Integer.parseInt(basket_idx.get(i)));
+			if(result == 0) {
+				int idx = (int) request.getSession().getAttribute("user_idx");
+				List<BasketDto> list = iBasketdao.list(idx);
+				int sum = iBasketdao.sum(idx);
+				model.addAttribute("list", list);
+				model.addAttribute("sum", sum);
+				model.addAttribute("msg", "선택된 상품이 없습니다.");
+				model.addAttribute("mainPage", "Mypage/cart.jsp");
+				return "index";
+			}
+		}
+		int idx = (int) request.getSession().getAttribute("user_idx");
+		List<BasketDto> list = iBasketdao.list(idx);
+		int sum = iBasketdao.sum(idx);
+		model.addAttribute("list", list);
+		model.addAttribute("sum", sum);
+		model.addAttribute("msg", "해당 상품이 장바구니에서 제외되었습니다.");
+		model.addAttribute("mainPage", "Mypage/cart.jsp");
+		return "index";
+	}
+	
 	@RequestMapping("/basket_action")
-	public String basket_action(HttpServletRequest request,Model model) {
+	public String basket_action(HttpServletRequest request, Model model) {
 		String count = request.getParameter("count");
 		System.out.println(count);
 		model.addAttribute("mainPage", "Mypage/cart.jsp");
@@ -271,7 +337,9 @@ public class MyController {
 	}
 
 	@RequestMapping("/order_payments")
-	public String order_payments(Model model) {
+	public String order_payments(@RequestParam("basket_idx") int basket_idx, HttpServletRequest request, Model model) {
+		List<OrderDto> product_list = iOrderdao.payments_product(basket_idx);
+		model.addAttribute("product", product_list);
 		model.addAttribute("mainPage", "Order/order_payments.jsp");
 		return "index";
 	}
@@ -291,11 +359,27 @@ public class MyController {
 	}
 	
 	@RequestMapping("/info_change_form")
-	public String info_change_form(HttpServletRequest request, Model model) {
-		int idx = (int) request.getSession().getAttribute("user_idx");
-		int update = iUsersdao.update(idx);
-		model.addAttribute("mainPage", "Mypage/info_change.jsp");
-		return "index";
+	public String info_change_form(@RequestParam("user_idx") String user_idx,
+			@RequestParam("user_pw") String user_pw,
+			@RequestParam("user_name") String user_name,
+			@RequestParam("user_address") String user_address,
+			@RequestParam("user_email") String user_email,
+			@RequestParam("user_gender") String user_gender,
+			@RequestParam("user_phone") String user_phone,
+			@RequestParam(value="user_birth_date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date user_birth_date,
+			HttpServletRequest request, UsersDto dto) {
+		dto.setUser_idx(Integer.parseInt(user_idx));
+		dto.setUser_pw(user_pw);
+		dto.setUser_name(user_name);
+		dto.setUser_address(user_address);
+		dto.setUser_email(user_email);
+		dto.setUser_phone(Integer.parseInt(user_phone));
+		dto.setUser_gender(user_gender);
+		dto.setUser_birth_date( user_birth_date );
+
+		int result = iUsersdao.update(dto);
+	
+		return "redirect:/mypage";
 	}
 
 	@RequestMapping("/mypage")
@@ -345,7 +429,6 @@ public class MyController {
 							   @RequestParam("user_pw") String user_pw,
 							   HttpServletRequest request, Model model) {
 		List<UsersDto> list = iUsersdao.list_member();
-		System.out.println("hello");
 		request.setAttribute("list", list);
 		UsersDto result = iUsersdao.login(user_id, user_pw);
 		request.getSession().setAttribute("user_id", user_id);

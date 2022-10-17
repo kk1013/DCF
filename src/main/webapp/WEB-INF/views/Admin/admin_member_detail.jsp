@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <td>폰</td>
-                    <td><input type="text" name="user_phone" value="${ usersdto.user_phone}"></td>
+                    <td><input type="text" name="user_phone" value="0${ usersdto.user_phone}"></td>
                 </tr>
                 <tr>
                     <td>주소</td>

@@ -12,7 +12,7 @@ public interface IUsersDao {
 	public UsersDto login ( String user_id, String user_pw );
 	public List<UsersDto> user_list();
 	public UsersDto list( int user_idx );
-	public int update( int user_idx );
+	public int update(UsersDto dto);
 	public UsersDto usersdto (int user_idx);
 	public int admin_member_update_form(UsersDto dto);
 	public int adminMemberDeleteAction (int user_idx);

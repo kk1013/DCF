@@ -17,7 +17,6 @@
        	
         </li>
         <li>
-            <% session = request.getSession(); %>
         	<% if( session.getAttribute("user_id") != null){ %>
             	<a href="logout">로그아웃</a>
        		<% } else { %>
@@ -25,8 +24,18 @@
        		<% } %>
         </li>
         <li id="ds_none">
+        <% if( session.getAttribute("user_id") != null){ %>
             <img src="/img/icons/main-header-maypage.png" class="header-icon">
             <img src="/img/icons/mypagearrow.png" class="triangle ds-none" alt="">
+        <% } else { %>
+        <a href="login"><img src="/img/icons/main-header-maypage.png" class="header-icon" onclick="login()"></a>
+        <a href="login"><img src="/img/icons/mypagearrow.png" class="triangle ds-none" alt="" onclick="login()"></a>
+        <script>
+        function login() {
+        alert("로그인후 이용해주세요");
+        }
+        </script>
+        <% } %>
             <div class="mypage-submenu ds-none">
                 <ul>
                     <li><a href="order_list">주문목록</a></li>
@@ -37,7 +46,16 @@
             </div>
         </li>
         <li>
+        <% if( session.getAttribute("user_id") != null){ %>
             <a href="cart"><img src="/img/icons/main-header-basket.png" class="header-icon"></a>
+        <% } else { %>
+        <a href="login"><img src="/img/icons/main-header-basket.png" class="header-icon" onclick="login()"></a>
+        <script>
+        function login() {
+        alert("로그인후 이용해주세요");
+        }
+        </script>
+        <% } %>
         </li>
     </ul>
 </div>

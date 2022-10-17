@@ -545,7 +545,10 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_notice_write.jsp");
 		return "Admin/admin_index";
 	}
-
+	
+	
+	
+	
 	@RequestMapping("/admin_order_action")
 	public String admin_order_action(
 			@RequestParam(value = "order_idx", required = false, defaultValue = "") String order_idx,

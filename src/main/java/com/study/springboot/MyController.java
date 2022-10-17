@@ -53,11 +53,6 @@ public class MyController {
 	IBasketDao iBasketdao;
 	@Autowired 
 	IReviewDao iReviewdao;
-	/*
-	 * @Autowired IReviewDao iReviewdao;
-	 * 
-	 * 
-	 */
 
 	@RequestMapping("/")
 	public String root() {
@@ -262,6 +257,7 @@ public class MyController {
 		model.addAttribute("mainPage", "Mypage/cart.jsp");
 		return "index";
 	}
+	
 	@RequestMapping("/cart_update_minus")
 	public String cart_update_minus(@RequestParam("status_idx") int status_idx, HttpServletRequest request, Model model) {
 		int idx = (int) request.getSession().getAttribute("user_idx");
@@ -291,6 +287,21 @@ public class MyController {
 		return "index";
 	}
 	
+	@RequestMapping("/cart_check_order")
+	public String cart_check_order(@RequestParam("chk") List<String> basket_idx, HttpServletRequest request, Model model) {
+		String str = "";
+		for(int i=0; i<basket_idx.size(); i++) {
+			str += "dcf_basket.basket_pd_idx = dcf_product.product_idx and basket_idx =" + basket_idx.get(i);
+			if( i != basket_idx.size()-1 ) {
+				str += " or ";
+			}
+		}
+		List<OrderDto> payments_product_check = iOrderdao.payments_product_check( str );
+		System.out.println(str);
+		model.addAttribute("product", payments_product_check);
+		model.addAttribute("mainPage", "Order/order_payments.jsp");
+		return "index";
+	}
 	
 	@RequestMapping("/cart_check_delete")
 	public String cart_check_delete(@RequestParam("chk") List<String> basket_idx, HttpServletRequest request, Model model) {
@@ -418,7 +429,6 @@ public class MyController {
 							   @RequestParam("user_pw") String user_pw,
 							   HttpServletRequest request, Model model) {
 		List<UsersDto> list = iUsersdao.list_member();
-		System.out.println("hello");
 		request.setAttribute("list", list);
 		UsersDto result = iUsersdao.login(user_id, user_pw);
 		request.getSession().setAttribute("user_id", user_id);

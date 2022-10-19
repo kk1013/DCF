@@ -43,6 +43,7 @@
     </div>
     <div id="content-wrap">
         <div id="product-content">
+        <img src="/img/product-img/unknown.jpg">
        	${ product.product_content }
         </div>
         <table id="review">

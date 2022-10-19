@@ -16,7 +16,7 @@
 
 /* product Layout */
 .display_none{
-    opacity: 0;
+    visibility:hidden
 }
 
 #product-wrap{
@@ -157,6 +157,8 @@ input[name="type"]{
     background-color: #ffff;
     color: #3d5bf2;
     border: 1px solid #3d5bf2;
+    cursor: pointer;
+    margin-bottom: 50px;
 }
 
 /* session */

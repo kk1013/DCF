@@ -45,9 +45,9 @@
                 <div class="productname">${list.product_name}</div>
 
                 <div class="countdiv">
-                    <input class="minusbutton" type='button' id="minus" onclick="location.href='/cart_update_minus?status_idx=${status.count}';" value='-'>
+                    <input class="minusbutton" type='button' id="minus" onclick="count(this)" value='-'>
                     <div id='result' class="result">${list.basket_count}</div>
-                    <input class="plusbutton" type='button' id="plus" onclick="location.href='/cart_update_plus?status_idx=${status.count}';" value='+'>
+                    <input class="plusbutton" type='button' id="plus" onclick="count(this)" value='+'>
                 </div>
 
                 <div class="productprice">
@@ -57,7 +57,7 @@
                 </div>
                 <div class="buttondiv">
                     <input class="cartlist-button cartlist-button1" type="button" value="바로주문" onclick="location.href='/order_payments?basket_idx=${list.basket_idx}'">
-                	<input type="hidden" name="status_idx" value="${status.count}">
+                	<input type=hidden name="status_idx" value="${status.count}">
                 	<input type="hidden" name="basket_idx" value="${list.basket_idx}">
                     <input class="cartlist-button" name="delete" type="button" value="삭제" onclick="location.href='/cart_delete?status_idx=${status.count}'">
                 </div>
@@ -86,14 +86,10 @@
     </form>
 
     
-    <script type="text/javascript">
+<script type="text/javascript">
     
 
     $(document).ready(function() {
-    	var price = document.getElementById("price-all-num").innerHTML;
-    	var result = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    	console.log(result);
-   
     	
     	$("#cbx_chkAll").click(function() {
     		var chkAll = $('input:checkbox[id="cbx_chkAll"]').is(":checked");
@@ -116,20 +112,43 @@
     });
     
     function count(btn) {
+    	var parent = btn.parentNode;
+    	var product_price = parent.parentNode.childNodes[11].childNodes[3];
+    	product_price_value = product_price.value;
+        var price = parent.parentNode.childNodes[11].childNodes[1];
+    	price_text = price.innerText.replace(/,/g, "");
+        var result = parent.childNodes[3];
+    	result_text = result.innerText;
+        var total = document.getElementById("price-all-num");
+        total_text = total.innerText.replace(/,/g, "");;
+        var id = btn.getAttribute('id');
+        var status = parent.parentNode.childNodes[13].childNodes[3];
+        status_value = status.value;
         if(id == 'plus'){
-			$.ajax({
-				type: "GET",
-				url: "/cart",
-				data: {},
-				success: function (response) {
-					console.log(response);
-				}
-			})
-        }else if(id == 'minus'){
-            if(result.innerHTML == '1'){
-                return;
-            }
+        	 result.innerHTML = Number(result_text) + 1;
+             price.innerHTML = Number(price_text) + Number(product_price_value);
+             total.innerHTML = Number(total_text) + Number(product_price_value);
+             price.innerHTML = price.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+             total.innerHTML = total.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+             $.ajax({
+					type: "POST",
+					url: "/cart_update_plus?status_value="+status_value+"&result_text="+result_text,
+					success: function( str ){
+						console.log("hello");
+					}
+			 })
+        } else if(id == 'minus'){
+        	 result.innerHTML = Number(result_text) - 1;
+             price.innerHTML = Number(price_text) - Number(product_price_value);
+             total.innerHTML = Number(total_text) - Number(product_price_value);
+             price.innerHTML = price.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+             total.innerHTML = total.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+             $.ajax({
+					type: "POST",
+					url: "/cart_update_minus?status_value="+status_value+"&result_text="+result_text
+			 })
         }
+        	
     }
     
     

@@ -31,7 +31,17 @@
                 </div>
             </div>
             <div>
-                <input type="submit" id="basket" value="장바구니 담기">
+            	<% session = request.getSession(); %>
+            	<% if( session.getAttribute("user_id") != null){ %>
+		            <input type="submit" id="basket" value="장바구니 담기">
+		        <% } else { %>
+		        	<input type="button" id="basket" value="장바구니 담기" onclick="login(); location.href='login';">
+		        <script>
+		        function login() {
+		        alert("로그인후 이용해주세요");
+		        }
+		        </script>
+		        <% } %>
             </div>
         </div>
     </div>

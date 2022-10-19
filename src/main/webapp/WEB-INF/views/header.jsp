@@ -61,15 +61,17 @@
 </div>
 <div id="header">
     <h1><img src="/img/logo.png" style="cursor: pointer;" alt="멍냥남매" onclick="location.href='index';"></h1>
-    <p><input type="text"><img src="/img/icons/searchicon.png" alt="검색하기"></p>
+    <form action="product_search" id="product_search">
+    <p><input type="text" name="keyword"><img src="/img/icons/searchicon.png" alt="검색하기" onclick="document.getElementById('product_search').submit()"></p>
+    </form>
 </div>
 <div id="menu">
     <ul>
         <li>
-            <h1><a href="product" class="linkhover">반려견</a></h1>
+            <h1><a href="product_dog" class="linkhover">반려견</a></h1>
         </li>
         <li>
-            <h1><a href="product" class="linkhover">반려묘</a></h1>
+            <h1><a href="product_cat" class="linkhover">반려묘</a></h1>
         </li>
         <li>
             <h1><a href="product_new" class="linkhover">신상품</a></h1>

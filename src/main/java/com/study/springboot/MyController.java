@@ -94,10 +94,63 @@ public class MyController {
 		List<ProductDto> all = iProductdao.list();
 		List<ProductDto> snack = iProductdao.product_list_snack();
 		List<ProductDto> food = iProductdao.product_list_food();
-
 		model.addAttribute("all", all);
 		model.addAttribute("snack", snack);
 		model.addAttribute("food", food);
+		model.addAttribute("mainPage", "Product/product.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/product_search")
+	public String product_search(@RequestParam("keyword") String keyword, Model model) {
+		List<ProductDto> search = iProductdao.search(keyword);
+		model.addAttribute("all", search);
+		model.addAttribute("mainPage", "Product/product.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/product_condition")
+	public String product_condition(@RequestParam("product_animal") List<String> animal,
+									@RequestParam("product_age") int age,
+									@RequestParam("product_type") List<String> type,
+									@RequestParam("product_size") List<String> size, HttpServletRequest request, Model model) {
+		if(age >= 1 & age <=19){age = 1;} else if(age >= 20 & age <= 31){age = 2;} else if(age == 32){age = 3;}	else if(age == 33){age = 4;} else if(age == 34){age = 5;} else if(age == 35){age = 6;} else if(age == 36){age = 7;}	else if(age == 37){age = 8;} else if(age == 38){age = 9;} else if(age == 39){age = 10;} else if(age == 40){age = 11;}
+		String str = "";
+		for(int i=0; i<animal.size(); i++) {if(Integer.parseInt(animal.get(i)) == 0 || Integer.parseInt(animal.get(i)) == 1) {str += "product_animal = " + animal.get(i); if(i != animal.size()-1) {str += " OR ";}	}	} str += ") ";
+		if(age == 0) {str += "AND (";	for(int j=0; j<type.size(); j++) {if(Integer.parseInt(type.get(j)) == 0 || Integer.parseInt(type.get(j)) == 1) {str += "product_feed_type = " + type.get(j);	if(j != type.size()-1) {str += " OR ";}	}	} str += ") AND (";
+		for(int k=0; k<size.size(); k++) {if(Integer.parseInt(size.get(k)) == 0 || Integer.parseInt(size.get(k)) == 1 || Integer.parseInt(size.get(k)) == 2 || Integer.parseInt(size.get(k)) == 3 || Integer.parseInt(size.get(k)) == 4) {str += "product_size = " + size.get(k);	if(k != size.size()-1) {str += " OR ";}	}	}str += ")";}
+		else {str += "AND product_age = " + age + " AND (";	for(int j=0; j<type.size(); j++) {if(Integer.parseInt(type.get(j)) == 0 || Integer.parseInt(type.get(j)) == 1) {str += "product_feed_type = " + type.get(j);	if(j != type.size()-1) {str += " OR ";}	}	} str += ") AND (";
+		for(int k=0; k<size.size(); k++) {if(Integer.parseInt(size.get(k)) == 0 || Integer.parseInt(size.get(k)) == 1 || Integer.parseInt(size.get(k)) == 2 || Integer.parseInt(size.get(k)) == 3 || Integer.parseInt(size.get(k)) == 4) {str += "product_size = " + size.get(k);	if(k != size.size()-1) {str += " OR ";}	}	}str += ")";}
+		List<ProductDto> product_condition = iProductdao.product_condition(str);		
+		List<ProductDto> product_condition_food = iProductdao.product_condition_food(str);		
+		List<ProductDto> product_condition_snack = iProductdao.product_condition_snack(str);		
+		model.addAttribute("all", product_condition);
+		model.addAttribute("food", product_condition_food);
+		model.addAttribute("snack", product_condition_snack);
+		model.addAttribute("mainPage", "Product/product.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/product_dog")
+	public String product_dog(HttpServletRequest request, Model model) {
+		List<ProductDto> dog = iProductdao.product_list_dog();
+		List<ProductDto> dog_food = iProductdao.product_list_dog_food();
+		List<ProductDto> dog_snack = iProductdao.product_list_dog_snack();
+		model.addAttribute("all", dog);
+		model.addAttribute("food", dog_food);
+		model.addAttribute("snack", dog_snack);		
+		model.addAttribute("mainPage", "Product/product.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/product_cat")
+	public String product_cat(HttpServletRequest request, Model model) {
+		List<ProductDto> cat = iProductdao.product_list_cat();
+		List<ProductDto> cat_food = iProductdao.product_list_cat_food();
+		List<ProductDto> cat_snack = iProductdao.product_list_cat_snack();
+		model.addAttribute("all", cat);
+		model.addAttribute("food", cat_food);
+		model.addAttribute("snack", cat_snack);		
 		model.addAttribute("mainPage", "Product/product.jsp");
 		return "index";
 	}
@@ -247,9 +300,10 @@ public class MyController {
 	}
 	
 	@RequestMapping("/cart_update_plus")
-	public String cart_update_plus(@RequestParam("status_idx") int status_idx, HttpServletRequest request, Model model) {
+	public String cart_update_plus(@RequestParam("status_value") int status_value,
+								   @RequestParam("result_text") int result_text, HttpServletRequest request, Model model) {
 		int idx = (int) request.getSession().getAttribute("user_idx");
-		int update_plus = iBasketdao.update_plus( idx, status_idx );
+		int update_plus = iBasketdao.update_plus( idx, status_value );
 		List<BasketDto> list = iBasketdao.list(idx);
 		int sum = iBasketdao.sum(idx);
 		model.addAttribute("list", list);
@@ -259,9 +313,10 @@ public class MyController {
 	}
 	
 	@RequestMapping("/cart_update_minus")
-	public String cart_update_minus(@RequestParam("status_idx") int status_idx, HttpServletRequest request, Model model) {
+	public String cart_update_minus(@RequestParam("status_value") int status_value,
+								   @RequestParam("result_text") int result_text, HttpServletRequest request, Model model) {
 		int idx = (int) request.getSession().getAttribute("user_idx");
-		int update_minus = iBasketdao.update_minus( idx, status_idx );
+		int update_plus = iBasketdao.update_minus( idx, status_value );
 		List<BasketDto> list = iBasketdao.list(idx);
 		int sum = iBasketdao.sum(idx);
 		model.addAttribute("list", list);
@@ -469,6 +524,13 @@ public class MyController {
 	@RequestMapping("admin_user")
 	public String adminlogin(HttpServletRequest request,Model model) {
 		List<UsersDto> list = iUsersdao.list_member();
+		for(int i = 0; i<list.size(); i++) {
+			if(list.get(i).getUser_gender().equals("0")) {
+				list.get(i).setUser_gender("여자");
+			}else if(list.get(i).getUser_gender().equals("1")) {
+				list.get(i).setUser_gender("남자");
+			}
+		}
 		request.setAttribute("list", list);
 		model.addAttribute("adminPage", "../Admin/admin_member.jsp");
 		return "Admin/admin_index";
@@ -750,6 +812,7 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_one2one.jsp");
 		return "Admin/admin_index";
 	}
+
 
 	@RequestMapping("/admin_one2one_detail")
 	public String admin_one2one_detail(@RequestParam("one2one_idx") int one2one_idx, Model model) {

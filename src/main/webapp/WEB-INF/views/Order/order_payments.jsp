@@ -8,6 +8,7 @@
     </div> 
 </div>
 <div class="orderpay-wrap">
+	<form action="order_action" method="get">
     <div class="order-box">
         <p class="title">주문자 정보</p>
         <div class="line-box">
@@ -19,9 +20,9 @@
                 </tr>
                 <tr>
 
-                    <td class="tr-2td-1">아아아</td>
-                    <td class="tr-2td-2">tmdgusdl1212</td>
-                    <td class="tr-2td-3">010-3241-0156</td>
+                    <td class="tr-2td-1">${ item.user_name }</td>
+                    <td class="tr-2td-2">${ item.user_id }</td>
+                    <td class="tr-2td-3">0${ item.user_phone }</td>
 
                 </tr>
             </table>
@@ -33,15 +34,15 @@
             <table class="infotable">
                 <tr>
                     <td class="td-title"><p class="bold">이름</p></td>
-                    <td class="td-input"><input type="text" class="inputs margin-top-15px" style="width: 60%;" placeholder="이름을 입력해주세요"></td>
+                    <td class="td-input"><input type="text" class="inputs margin-top-15px" name="name" style="width: 60%;" value="${ item.user_name }" placeholder="이름을 입력해주세요"></td>
                 </tr>
                 <tr>
                     <td class="td-title"><p class="bold">휴대폰 번호</p></td>
-                    <td class="td-input"><input type="text" class="inputs" style="width: 60%;" placeholder="숫자만 입력(11자리)"></td>
+                    <td class="td-input"><input type="text" class="inputs" style="width: 60%;" name="phone" value="${ item.user_phone }" placeholder="숫자만 입력(11자리)"></td>
                 </tr>
                 <tr>
                     <td class="td-title"><p class="bold">주소</p></td>
-                    <td class="td-input"><input type="text" class="inputs margin-bottom-15px" placeholder="주소를 입력해주세요"></td>
+                    <td class="td-input"><input type="text" class="inputs margin-bottom-15px" name="address" value="${ item.user_address }" placeholder="주소를 입력해주세요"></td>
                 </tr>
             </table>
         </div>
@@ -62,6 +63,10 @@
                             <div class="product-image">
                                 <img src="../img/product-img/${product.product_image}" id="product-img">
                             </div>
+                            <input type="hidden" name="product_idx" value="${ product.basket_pd_idx }"/>
+                            <input type="hidden" name="product_name" value="${ product.product_name }"/>
+                            <input type="hidden" name="product_count" value="${ product.basket_count }"/>
+                            <input type="hidden" name="product_price" value="${ product.product_price}"/>
                             <p class="product-name">${product.product_name}</p>
                         </div>
                     </td>
@@ -72,8 +77,9 @@
             </table>
         </div>
         <div class="bottom-button">
-            <input type="button" onclick="location.href='paymentsAction'" class="btn" value="주문결제">
+            <input type="submit" class="btn" value="주문결제">
             <input type="button" class="btn" value="취소" onclick="location.href='/cart'">
         </div>
     </div>
+    </form>
 </div>

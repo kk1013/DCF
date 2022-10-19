@@ -1,6 +1,7 @@
 package com.study.springboot;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -289,6 +290,7 @@ public class MyController {
 	
 	@RequestMapping("/cart_check_order")
 	public String cart_check_order(@RequestParam("chk") List<String> basket_idx, HttpServletRequest request, Model model) {
+		int idx = (int) request.getSession().getAttribute("user_idx");
 		String str = "";
 		for(int i=0; i<basket_idx.size(); i++) {
 			str += "dcf_basket.basket_pd_idx = dcf_product.product_idx and basket_idx =" + basket_idx.get(i);
@@ -296,8 +298,9 @@ public class MyController {
 				str += " or ";
 			}
 		}
+		UsersDto user = iUsersdao.usersdto(idx);
 		List<OrderDto> payments_product_check = iOrderdao.payments_product_check( str );
-		System.out.println(str);
+		model.addAttribute("item",user);
 		model.addAttribute("product", payments_product_check);
 		model.addAttribute("mainPage", "Order/order_payments.jsp");
 		return "index";
@@ -329,11 +332,18 @@ public class MyController {
 	}
 	
 	@RequestMapping("/basket_action")
-	public String basket_action(HttpServletRequest request, Model model) {
-		String count = request.getParameter("count");
-		System.out.println(count);
-		model.addAttribute("mainPage", "Mypage/cart.jsp");
-		return "index";
+	public String basket_action(
+			@RequestParam("product_idx") String product_idx,
+			@RequestParam("count") String count,
+			HttpServletRequest request,
+			Model model) {
+		String idx = String.valueOf(request.getSession().getAttribute("user_idx"));
+		if(idx == null) {
+			model.addAttribute("mainPage", "Member/login.jsp");
+			return "index";
+		}
+		iBasketdao.insert( Integer.parseInt(count), Integer.parseInt(product_idx), Integer.parseInt(idx));
+		return "redirect:/cart";
 	}
 
 	@RequestMapping("/order_payments")
@@ -344,7 +354,37 @@ public class MyController {
 		return "index";
 	}
 	@RequestMapping("/order_action")
-	public String order_action(Model model) {
+	public String order_action(
+			@RequestParam(value="name", required = false, defaultValue = "") String name,
+			@RequestParam(value="phone", required = false, defaultValue = "") String phone,
+			@RequestParam(value="address", required = false, defaultValue = "") String address,			
+			@RequestParam(value="product_idx", required = false) List<String> idx,
+			@RequestParam(value="product_name", required = false) List<String> pdname,
+			@RequestParam(value="product_count", required = false) List<String> pdcout,
+			@RequestParam(value="product_price", required = false) List<String> pdprice,
+			HttpServletRequest request,
+			Model model) {
+		
+		String idx_name = "";
+		Calendar calendar = Calendar.getInstance();
+		idx_name += calendar.get(Calendar.MILLISECOND);
+		System.out.println(idx_name);
+		int user_idx = (int) request.getSession().getAttribute("user_idx");
+		OrderDto dto = new OrderDto();
+		dto.setOrder_idx(Integer.parseInt(idx_name));
+		dto.setOrder_user_idx(user_idx);
+		dto.setUser_name(name);
+		dto.setUser_phone(Integer.parseInt(phone));
+		dto.setUser_address(address);
+		
+		int order = iOrderdao.order_insert(dto);
+		for(int i = 0 ; i < idx.size();i++) {
+			dto.setOrder_pd_idx(Integer.parseInt(idx.get(i)));
+			dto.setProduct_name(pdname.get(i));
+			dto.setOrder_quantity(Integer.parseInt(pdcout.get(i)));
+			dto.setProduct_price(Integer.parseInt(pdprice.get(i)));
+			int order_detail = iOrderdao.order_detail_insert(dto);
+		}
 		model.addAttribute("mainPage", "Order/order_action.jsp");
 		return "index";
 	}

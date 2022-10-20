@@ -132,6 +132,18 @@ public class MyController {
 		return "index";
 	}
 	
+	@RequestMapping("/product_best")
+	public String product_best(HttpServletRequest request, Model model) {
+		List<ProductDto> best = iProductdao.product_list_best();
+		List<ProductDto> best_food = iProductdao.product_list_best_food();
+		List<ProductDto> best_snack = iProductdao.product_list_best_snack();
+		model.addAttribute("all", best);
+		model.addAttribute("food", best_food);
+		model.addAttribute("snack", best_snack);		
+		model.addAttribute("mainPage", "Product/product.jsp");
+		return "index";
+	}
+	
 	@RequestMapping("/product_dog")
 	public String product_dog(HttpServletRequest request, Model model) {
 		List<ProductDto> dog = iProductdao.product_list_dog();
@@ -245,16 +257,20 @@ public class MyController {
 			@RequestParam(value = "chooseFile", required=false) MultipartFile file,
 			@RequestParam(value = "one2one_title", required = false, defaultValue = "") String one2one_title,
 			@RequestParam(value = "one2one_content", required = false, defaultValue = "") String one2one_content, 
-			HttpServletRequest request, Model model) {
+			HttpServletRequest request, Model model) throws Exception {
 		int idx = (int) request.getSession().getAttribute("user_idx");
-		String upload_url = fileUploadService1.restore(file);
 		One2OneDto dto = new One2OneDto();
 		dto.setOne2one_title(one2one_title);
 		dto.setOne2one_content(one2one_content);
-		dto.setOne2one_image(upload_url);
 		dto.setOne2one_User_idx(idx);
+		if(file.isEmpty()) {
+			String upload_url = "null";			
+			dto.setOne2one_image(upload_url);
+		}else {
+			String upload_url = fileUploadService1.restore(file);
+			dto.setOne2one_image(upload_url);		
+		}
 		int result = iOne2onedao.insert( dto );
-		
 		return "redirect:/one2one_list";
 	}
 	
@@ -486,7 +502,6 @@ public class MyController {
 	@RequestMapping("/one2one_detail")
 	public String one2one_detail(@RequestParam("one2one_idx") int one2one_idx, Model model) {
 		One2OneDto content_detail = iOne2onedao.content_detail(one2one_idx);
-		System.out.println( content_detail.getOne2one_reply() );
 		model.addAttribute("dto", content_detail);
 		model.addAttribute("mainPage", "Mypage/one2one_detail.jsp");
 		return "index";

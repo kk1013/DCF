@@ -20,7 +20,7 @@
                 <div id="countbar-in">
                     <div id="count-button">
                         <input type="button" id="minus" value="-">
-                        <input type="hidden" name="count" value="0">
+                        <input type="hidden" name="count" value="1">
                         <p id="count">1</p>
                         <input type="button" id="plus" value="+">
                     </div>

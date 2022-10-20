@@ -57,7 +57,7 @@
                 </div>
                 <div class="buttondiv">
                     <input class="cartlist-button cartlist-button1" type="button" value="바로주문" onclick="location.href='/order_payments?basket_idx=${list.basket_idx}'">
-                	<input type=hidden name="status_idx" value="${status.count}">
+                	<input type="hidden" name="status_idx" value="${status.count}">
                 	<input type="hidden" name="basket_idx" value="${list.basket_idx}">
                     <input class="cartlist-button" name="delete" type="button" value="삭제" onclick="location.href='/cart_delete?status_idx=${status.count}'">
                 </div>
@@ -134,10 +134,14 @@
 					type: "POST",
 					url: "/cart_update_plus?status_value="+status_value+"&result_text="+result_text,
 					success: function( str ){
-						console.log("hello");
+						console.log(status_value);
+						console.log(result_text);
 					}
 			 })
         } else if(id == 'minus'){
+             if(result.innerHTML == 1){
+            	 return;
+             }
         	 result.innerHTML = Number(result_text) - 1;
              price.innerHTML = Number(price_text) - Number(product_price_value);
              total.innerHTML = Number(total_text) - Number(product_price_value);

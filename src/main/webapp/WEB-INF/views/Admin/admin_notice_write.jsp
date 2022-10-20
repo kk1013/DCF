@@ -14,21 +14,22 @@
     <div class="board-admin">게시판관리</div>
     <div class="board-wrap">
         <span>-공지사항</span>
+        <form action="adminWriteNoticeformAction">
         <table class="board-table">
             <tr>
                 <td class="board-td1 board-name board-title">제목</td>
-                <td class="board-td2 board-title"><textarea class="board-text1"></textarea></td>
+                <td class="board-td2 board-title"><textarea class="board-text1" name="notice_title"></textarea></td>
             </tr>
             <tr>
                 <td class="board-td1 board-name board-content">내용</td>
-                <td class="board-td2 board-content"><textarea class="board-text2"></textarea></td>
+                <td class="board-td2 board-content"><textarea class="board-text2" name="notice_content"></textarea></td>
             </tr>
         </table>
 
         <div class="buttondiv">
             <input type="button" class="board-button btn1" value="취소">
-            <input type="button" class="board-button btn2" value="등록">
+            <input type="submit" class="board-button btn2" value="등록">
         </div>
-
+		</form>
     </div>
 </div>

@@ -15,22 +15,21 @@
         </div>
     </div>
 
-    <form action="#">
+    <form action="reviewWriteAction" method="post" enctype="multipart/form-data">
     <div class="reviewwrap">
-
         <div class="review-title">
-            <span>리뷰작성</span>
+            <span>리뷰작성</span>${viewproductinfo[0].product_idx }테스트
         </div>
         <div class="review-star">
             <div class="imgdiv">
-                <img src="/img/dogfeedmainimg.jpg" width="300px" height="300px">
-            </div>
+                <img src="../img/product-img/${viewproductinfo[0].product_image}" width="300px" height="300px">
+            </div><input type="hidden" name="review_pd_idx" value="${viewproductinfo[0].product_idx }">
             <div class="stardiv">
-                <span class="product-name">로얄캐닌 인도어 4kg</span><br>
+                <span class="product-name">${viewproductinfo[0].product_name}</span><br>
                 <div class="star-rating space-x-4 mx-auto">
-                    <input type="radio" id="5-stars" name="rating" value="5" onclick="score(this.form);" v-model="ratings"/>
+                    <input type="radio" id="5-stars" name="rating" value="5" onclick="score(this.form);" v-model="ratings" />
                     <label for="5-stars" class="star pr-4">★</label>
-                    <input type="radio" id="4-stars" name="rating" value="4" onclick="score(this.form);" v-model="ratings"/>
+                    <input type="radio" id="4-stars" name="rating" value="4" onclick="score(this.form);" v-model="ratings" required/>
                     <label for="4-stars" class="star">★</label>
                     <input type="radio" id="3-stars" name="rating" value="3" onclick="score(this.form);" v-model="ratings"/>
                     <label for="3-stars" class="star">★</label>
@@ -54,7 +53,7 @@
 
         <div class="review-confirm">
             <span class="review-confirm-title">상세리뷰</span>
-            <textarea name="" class="review-content" placeholder="10자이상 작성해주세요."></textarea>
+            <textarea name="review_content" class="review-content" placeholder="10자이상 작성해주세요."></textarea>
         </div>
         
         <div class="review-button">
@@ -62,6 +61,7 @@
             <input type="submit" class="review-submit" value="등록하기">
         </div>
         
+    </div>
     </div>
     </form>
     

@@ -18,7 +18,7 @@
         <% if( session.getAttribute("user_id") != null){ %>
             <p><%= session.getAttribute("user_id") %>님</p>
         <% } %>
-        <a href="#">쇼핑몰정보</a><br>
+        <a href="index">쇼핑몰정보</a><br>
         <a href="logout">로그아웃</a>
     </div>
 <div id="aside-wrap">

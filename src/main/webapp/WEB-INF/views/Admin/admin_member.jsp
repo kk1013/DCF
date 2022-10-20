@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="/css/Admin/admin_member.css">
 <div id="user-search-wrap">
     <h2 id="user-search-title">회원정보 조회</h2>
-    <input type="button" class="btn" onclick="location.href='admin_member_detail_inmember'" value="정보수정">
     <a><button id="" class="btn" type="button" onclick="document.getElementById('frm').submit();" value="회원삭제">회원삭제</button></a>
 	    <div class="customer-search">
 	    	<select name="search" id="search">

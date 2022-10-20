@@ -24,4 +24,8 @@ public class OrderDto {
 	private int basket_idx;
 	private int basket_count;
 	private int basket_pd_idx;
+	private String order_user_name;
+	private int order_user_phone;
+	private String order_user_address;
+	
 }

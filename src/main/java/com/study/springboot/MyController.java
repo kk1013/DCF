@@ -1,6 +1,7 @@
 package com.study.springboot;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -131,6 +132,18 @@ public class MyController {
 		return "index";
 	}
 	
+	@RequestMapping("/product_best")
+	public String product_best(HttpServletRequest request, Model model) {
+		List<ProductDto> best = iProductdao.product_list_best();
+		List<ProductDto> best_food = iProductdao.product_list_best_food();
+		List<ProductDto> best_snack = iProductdao.product_list_best_snack();
+		model.addAttribute("all", best);
+		model.addAttribute("food", best_food);
+		model.addAttribute("snack", best_snack);		
+		model.addAttribute("mainPage", "Product/product.jsp");
+		return "index";
+	}
+	
 	@RequestMapping("/product_dog")
 	public String product_dog(HttpServletRequest request, Model model) {
 		List<ProductDto> dog = iProductdao.product_list_dog();
@@ -244,16 +257,20 @@ public class MyController {
 			@RequestParam(value = "chooseFile", required=false) MultipartFile file,
 			@RequestParam(value = "one2one_title", required = false, defaultValue = "") String one2one_title,
 			@RequestParam(value = "one2one_content", required = false, defaultValue = "") String one2one_content, 
-			HttpServletRequest request, Model model) {
+			HttpServletRequest request, Model model) throws Exception {
 		int idx = (int) request.getSession().getAttribute("user_idx");
-		String upload_url = fileUploadService1.restore(file);
 		One2OneDto dto = new One2OneDto();
 		dto.setOne2one_title(one2one_title);
 		dto.setOne2one_content(one2one_content);
-		dto.setOne2one_image(upload_url);
 		dto.setOne2one_User_idx(idx);
+		if(file.isEmpty()) {
+			String upload_url = "null";			
+			dto.setOne2one_image(upload_url);
+		}else {
+			String upload_url = fileUploadService1.restore(file);
+			dto.setOne2one_image(upload_url);		
+		}
 		int result = iOne2onedao.insert( dto );
-		
 		return "redirect:/one2one_list";
 	}
 	
@@ -344,6 +361,7 @@ public class MyController {
 	
 	@RequestMapping("/cart_check_order")
 	public String cart_check_order(@RequestParam("chk") List<String> basket_idx, HttpServletRequest request, Model model) {
+		int idx = (int) request.getSession().getAttribute("user_idx");
 		String str = "";
 		for(int i=0; i<basket_idx.size(); i++) {
 			str += "dcf_basket.basket_pd_idx = dcf_product.product_idx and basket_idx =" + basket_idx.get(i);
@@ -351,8 +369,9 @@ public class MyController {
 				str += " or ";
 			}
 		}
+		UsersDto user = iUsersdao.usersdto(idx);
 		List<OrderDto> payments_product_check = iOrderdao.payments_product_check( str );
-		System.out.println(str);
+		model.addAttribute("item",user);
 		model.addAttribute("product", payments_product_check);
 		model.addAttribute("mainPage", "Order/order_payments.jsp");
 		return "index";
@@ -384,11 +403,18 @@ public class MyController {
 	}
 	
 	@RequestMapping("/basket_action")
-	public String basket_action(HttpServletRequest request, Model model) {
-		String count = request.getParameter("count");
-		System.out.println(count);
-		model.addAttribute("mainPage", "Mypage/cart.jsp");
-		return "index";
+	public String basket_action(
+			@RequestParam("product_idx") String product_idx,
+			@RequestParam("count") String count,
+			HttpServletRequest request,
+			Model model) {
+		String idx = String.valueOf(request.getSession().getAttribute("user_idx"));
+		if(idx == null) {
+			model.addAttribute("mainPage", "Member/login.jsp");
+			return "index";
+		}
+		iBasketdao.insert( Integer.parseInt(count), Integer.parseInt(product_idx), Integer.parseInt(idx));
+		return "redirect:/cart";
 	}
 
 	@RequestMapping("/order_payments")
@@ -399,7 +425,37 @@ public class MyController {
 		return "index";
 	}
 	@RequestMapping("/order_action")
-	public String order_action(Model model) {
+	public String order_action(
+			@RequestParam(value="name", required = false, defaultValue = "") String name,
+			@RequestParam(value="phone", required = false, defaultValue = "") String phone,
+			@RequestParam(value="address", required = false, defaultValue = "") String address,			
+			@RequestParam(value="product_idx", required = false) List<String> idx,
+			@RequestParam(value="product_name", required = false) List<String> pdname,
+			@RequestParam(value="product_count", required = false) List<String> pdcout,
+			@RequestParam(value="product_price", required = false) List<String> pdprice,
+			HttpServletRequest request,
+			Model model) {
+		
+		String idx_name = "";
+		Calendar calendar = Calendar.getInstance();
+		idx_name += calendar.get(Calendar.MILLISECOND);
+		System.out.println(idx_name);
+		int user_idx = (int) request.getSession().getAttribute("user_idx");
+		OrderDto dto = new OrderDto();
+		dto.setOrder_idx(Integer.parseInt(idx_name));
+		dto.setOrder_user_idx(user_idx);
+		dto.setUser_name(name);
+		dto.setUser_phone(Integer.parseInt(phone));
+		dto.setUser_address(address);
+		
+		int order = iOrderdao.order_insert(dto);
+		for(int i = 0 ; i < idx.size();i++) {
+			dto.setOrder_pd_idx(Integer.parseInt(idx.get(i)));
+			dto.setProduct_name(pdname.get(i));
+			dto.setOrder_quantity(Integer.parseInt(pdcout.get(i)));
+			dto.setProduct_price(Integer.parseInt(pdprice.get(i)));
+			int order_detail = iOrderdao.order_detail_insert(dto);
+		}
 		model.addAttribute("mainPage", "Order/order_action.jsp");
 		return "index";
 	}
@@ -446,7 +502,6 @@ public class MyController {
 	@RequestMapping("/one2one_detail")
 	public String one2one_detail(@RequestParam("one2one_idx") int one2one_idx, Model model) {
 		One2OneDto content_detail = iOne2onedao.content_detail(one2one_idx);
-		System.out.println( content_detail.getOne2one_reply() );
 		model.addAttribute("dto", content_detail);
 		model.addAttribute("mainPage", "Mypage/one2one_detail.jsp");
 		return "index";
@@ -690,7 +745,10 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_notice_write.jsp");
 		return "Admin/admin_index";
 	}
-
+	
+	
+	
+	
 	@RequestMapping("/admin_order_action")
 	public String admin_order_action(
 			@RequestParam(value = "order_idx", required = false, defaultValue = "") String order_idx,

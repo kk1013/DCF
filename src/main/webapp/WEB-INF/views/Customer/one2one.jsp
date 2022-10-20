@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <form action="one2one_form" method="post" enctype="multipart/form-data">
+    <form action="one2one_form" method="POST" enctype="multipart/form-data">
     <div class="onetoonewrap">
 
         <div class="onetoone-top">

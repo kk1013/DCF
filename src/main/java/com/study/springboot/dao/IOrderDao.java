@@ -20,4 +20,6 @@ public interface IOrderDao {
 	public List<OrderDto> payments_list(int user_idx);
 	public List<OrderDto> payments_product( int basket_idx );
 	public List<OrderDto> payments_product_check( String str );
+	public int order_insert(OrderDto dto);
+	public int order_detail_insert(OrderDto dto);
 }

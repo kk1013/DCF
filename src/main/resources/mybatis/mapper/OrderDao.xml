@@ -6,7 +6,12 @@
 <!-- SQL 끝에 ; 세미콜론을 넣지 마세요! -->
 
 <mapper namespace="com.study.springboot.dao.IOrderDao">
-	
+	<insert id="order_insert" parameterType="com.study.springboot.dto.OrderDto">
+	INSERT INTO DCF_ORDER VALUES(#{ order_idx }, 0, SYSDATE, #{ order_user_idx }, #{ user_name }, #{ user_phone }, #{ user_address })
+	</insert>
+	<insert id="order_detail_insert" parameterType="com.study.springboot.dto.OrderDto">
+	INSERT INTO DCF_ORDER_DETAIL VALUES(ORDER_IDX_SEQ.NEXTVAL, #{ order_idx }, #{ order_pd_idx } , #{ order_quantity }, #{ product_price })
+	</insert>
 	<select id="beforeDTO" resultType="_int">
 	  SELECT COUNT(order_status) FROM dcf_order WHERE order_status=0
 	</select>

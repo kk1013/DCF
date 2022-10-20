@@ -54,6 +54,18 @@
 	  SELECT * FROM dcf_product WHERE product_animal = 0 AND product_category_type = 1
 	</select>
 	
+	<select id="product_list_best" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_best = 1
+	</select>
+	
+	<select id="product_list_best_food" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_best = 1 AND product_category_type = 0
+	</select>
+	
+	<select id="product_list_best_snack" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_best = 1 AND product_category_type = 1
+	</select>
+	
 	<select id="product_list_cat" resultType="com.study.springboot.dto.ProductDto">
 	  SELECT * FROM dcf_product WHERE product_animal = 1
 	</select>

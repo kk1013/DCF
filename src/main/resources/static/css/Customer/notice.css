@@ -79,6 +79,7 @@
 }
 .table-tr {
     height: 35px;
+    cursor: pointer;
 }
 .td1, .td3 {
     text-align: center;

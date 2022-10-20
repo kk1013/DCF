@@ -22,4 +22,5 @@ public class OrderDto {
 	private int product_price;
 	private int basket_idx;
 	private int basket_count;
+	private int basket_pd_idx;
 }

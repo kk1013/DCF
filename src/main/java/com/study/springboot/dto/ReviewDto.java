@@ -17,10 +17,4 @@ public class ReviewDto {
 	private int review_item_idx;
 	private int review_user_idx;
 	private String user_name;
-	private int product_idx;
-    private String product_name;
-    private int product_price;
-    private String product_image;
-    private int review_pd_idx;
-    
 }

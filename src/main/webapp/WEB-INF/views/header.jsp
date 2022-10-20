@@ -77,7 +77,7 @@
             <h1><a href="product_new" class="linkhover">신상품</a></h1>
         </li>
         <li>
-            <h1><a href="product_best" class="linkhover">베스트</a></h1>
+            <h1><a href="product" class="linkhover">베스트</a></h1>
         </li>
         <li>
             <h1><a href="sample" class="linkhover">샘플신청</a></h1>

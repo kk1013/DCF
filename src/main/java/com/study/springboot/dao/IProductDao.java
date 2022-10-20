@@ -27,9 +27,6 @@ public interface IProductDao {
 	public List<ProductDto> product_list_cat();
 	public List<ProductDto> product_list_cat_food();
 	public List<ProductDto> product_list_cat_snack();
-	public List<ProductDto> product_list_best();
-	public List<ProductDto> product_list_best_food();
-	public List<ProductDto> product_list_best_snack();
 	public List<ProductDto> product_condition( String str );
 	public List<ProductDto> product_condition_food( String str );
 	public List<ProductDto> product_condition_snack( String str );

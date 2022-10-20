@@ -24,6 +24,7 @@ import com.study.springboot.dao.IFaqDao;
 import com.study.springboot.dao.INoticeDao;
 import com.study.springboot.dao.IOne2OneDao;
 import com.study.springboot.dao.IOrderDao;
+import com.study.springboot.dao.IOrderDetailDao;
 import com.study.springboot.dao.IProductDao;
 import com.study.springboot.dao.IReviewDao;
 import com.study.springboot.dao.IUsersDao;
@@ -31,6 +32,7 @@ import com.study.springboot.dto.BasketDto;
 import com.study.springboot.dto.FaqDto;
 import com.study.springboot.dto.NoticeDto;
 import com.study.springboot.dto.One2OneDto;
+import com.study.springboot.dto.OrderDetailDto;
 import com.study.springboot.dto.OrderDto;
 import com.study.springboot.dto.ProductDto;
 import com.study.springboot.dto.ReviewDto;
@@ -54,6 +56,8 @@ public class MyController {
 	IBasketDao iBasketdao;
 	@Autowired 
 	IReviewDao iReviewdao;
+	@Autowired
+	IOrderDetailDao iOrderdetaildao;
 
 	@RequestMapping("/")
 	public String root() {
@@ -470,6 +474,14 @@ public class MyController {
 	}
 	
 	@RequestMapping("/info_change_form")
+	public String info_change_form(HttpServletRequest request, Model model) {
+		int idx = (int) request.getSession().getAttribute("user_idx");
+		int update = iUsersdao.update(idx);
+		model.addAttribute("mainPage", "Mypage/info_change.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/info_change_form")
 	public String info_change_form(@RequestParam("user_idx") String user_idx,
 			@RequestParam("user_pw") String user_pw,
 			@RequestParam("user_name") String user_name,
@@ -515,17 +527,77 @@ public class MyController {
 		model.addAttribute("mainPage", "Mypage/one2one_list.jsp");
 		return "index";
 	}
-
+//주문목록
 	@RequestMapping("/order_list")
-	public String order_list(Model model) {
-		model.addAttribute("mainPage", "Mypage/order_list.jsp");
+	public String order_list(			
+			HttpServletRequest request,
+			Model model) {		
+		int idx = (int) request.getSession().getAttribute("user_idx");	
+		List<OrderDto> list = iOrderdao.myOrderList(idx);		
+		List<OrderDetailDto>orderProductVeiw=iOrderdetaildao.orderProductVeiw(idx);
+		System.out.println(orderProductVeiw);
+		model.addAttribute("myOrderList", list);
+		model.addAttribute("orderProductVeiw", orderProductVeiw);
+		System.out.println(orderProductVeiw);
+		model.addAttribute("mainPage", "Mypage/order_list.jsp");		
+		return "index";		
+	}
+	//주문목록 단건조회
+	@RequestMapping("/order_list_detail")
+	public String order_list_detail(
+			@RequestParam("order_idx") int order_idx,
+			Model model,
+			HttpServletRequest request) {		
+		int idx = (int) request.getSession().getAttribute("user_idx");
+			List<OrderDto> list = iOrderdao.orderdetail(order_idx, idx);			
+			model.addAttribute("orderdetail", list);	
+		model.addAttribute("mainPage", "./Order/order_detail.jsp");
 		return "index";
 	}
-
 	@RequestMapping("/review")
-	public String review(Model model) {
+	public String review(@RequestParam("prodcut_idx") int prodcut_idx, HttpServletRequest request, Model model) {
+		List<ReviewDto> viewproductinfo = iReviewdao.viewproductinfo(prodcut_idx);
+		model.addAttribute("viewproductinfo", viewproductinfo);
 		model.addAttribute("mainPage", "Mypage/review.jsp");
 		return "index";
+	}
+	
+	
+	@RequestMapping(value="/reviewWriteAction", method=RequestMethod.POST)
+	public String reviewWriteAction(
+			@RequestParam(value="chooseFile", required=false) MultipartFile file,
+			@RequestParam(value="rating", required=false) String review_score,
+			@RequestParam(value="review_pd_idx", required=false) int review_pd_idx,
+			@RequestParam(value="review_content", required=false) String review_content,
+			HttpServletRequest request, Model model) {
+		int idx = (int) request.getSession().getAttribute("user_idx");
+		//int review_pd_idx = (int) request.getSession().getAttribute("prodcut_idx");
+		
+		ReviewDto dto = new ReviewDto();
+		System.out.println(file);
+		System.out.println(review_score);
+		System.out.println(review_content);
+		
+		
+		dto.setReview_score(Integer.parseInt(review_score));
+		
+		if(file.isEmpty()) {
+			String upload_url = "null";
+			dto.setReview_image(upload_url);
+		}else { 
+			String upload_url = fileUploadService.restore(file);
+			dto.setReview_image(upload_url);
+			}		
+		dto.setReview_content(review_content);
+		dto.setReview_user_idx(idx);
+		dto.setReview_pd_idx(review_pd_idx);
+		int result = iReviewdao.reviewInsert(dto);
+		System.out.println(dto);
+		
+		
+		model.addAttribute("mainPage", "Mypage/review.jsp");
+		return "redirect:/order_list";
+		
 	}
 
 	@RequestMapping("/order_detail")
@@ -538,6 +610,47 @@ public class MyController {
 	public String admin_member(@RequestParam("user_id") String user_id,
 							   @RequestParam("user_pw") String user_pw,
 							   HttpServletRequest request, Model model) {
+		List<UsersDto> list = iUsersdao.list_member();
+		System.out.println("hello");
+		request.setAttribute("list", list);
+		UsersDto result = iUsersdao.login(user_id, user_pw);
+		request.getSession().setAttribute("user_id", user_id);
+		request.getSession().setAttribute("user_idx", result.getUser_idx());
+		request.getSession().setAttribute("user_name", result.getUser_name());
+		if(result != null) {
+			if(user_id.equals("admin")) {
+				for(int i = 0; i<list.size(); i++) {
+					if(list.get(i).getUser_gender().equals("0")) {
+						list.get(i).setUser_gender("여자");
+					}else if(list.get(i).getUser_gender().equals("1")) {
+						list.get(i).setUser_gender("남자");
+					}
+				}
+				request.setAttribute("list", list);
+				model.addAttribute("adminPage", "../Admin/admin_member.jsp");
+				return "Admin/admin_index";
+			}else {
+				model.addAttribute("mainPage", "main.jsp");
+				return "index";
+			}
+			
+		}
+		model.addAttribute("mainPage", "main.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest request, Model model) {
+		request.getSession().setAttribute("user_id", null);
+		request.getSession().setAttribute("user_idx", null);
+		request.getSession().setAttribute("user_name", null);
+		model.addAttribute("mainPage", "main.jsp");
+		return "index";
+	}
+	
+	
+	@RequestMapping("admin_user")
+	public String adminlogin(HttpServletRequest request,Model model) {
 		List<UsersDto> list = iUsersdao.list_member();
 		request.setAttribute("list", list);
 		UsersDto result = iUsersdao.login(user_id, user_pw);
@@ -611,7 +724,7 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_member_detail.jsp");
 		return "Admin/admin_index";
 	}
-	//회원정보연결
+	//회원정보연결_상세보
 		@RequestMapping("/admin_member_detail")
 		public String admin_member_detail(
 				@RequestParam("user_idx") String user_idx,
@@ -636,8 +749,6 @@ public class MyController {
 			@RequestParam("user_phone") String user_phone,   
 			@RequestParam(value="user_birth_date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date user_birth_date,
 			UsersDto dto) {
-		
-		System.out.println(user_birth_date);
 		dto.setUser_idx(Integer.parseInt(user_idx));
 		dto.setUser_id(user_id);
 		dto.setUser_pw(user_pw);
@@ -660,7 +771,7 @@ public class MyController {
 		for(int i = 0; i<user_idx.size();i++) {
 			int result = iUsersdao.adminMemberDeleteAction(Integer.parseInt(user_idx.get(i)));
 		}
-		return "redirect:/loginAction";
+		return "redirect:/admin_user";
 	}
 	//아이디찾기
 	
@@ -740,10 +851,7 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_notice_write.jsp");
 		return "Admin/admin_index";
 	}
-	
-	
-	
-	
+
 	@RequestMapping("/admin_order_action")
 	public String admin_order_action(
 			@RequestParam(value = "order_detail_idx", required = false, defaultValue = "") String order_detail_idx,
@@ -752,7 +860,6 @@ public class MyController {
 			Model model) throws IOException {
 		int total_quantity = 0;
 		int total_price = 0;
-		System.out.println(order_detail_idx);
 		OrderDto result = iOrderdao.single_select(Integer.parseInt(order_detail_idx));
 		model.addAttribute("dto", result);
 		
@@ -788,14 +895,14 @@ public class MyController {
 			@RequestParam("user_pw") String user_pw,
 			@RequestParam("user_email") String user_email,    
 			@RequestParam(value="user_email_receive", required=false) String user_email_receive,
-			
 			@RequestParam("user_phone") String user_phone,
 			@RequestParam(value="user_birth_date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date user_birth_date,
 			@RequestParam("user_gender") String user_gender,      
 			@RequestParam("user_address") String user_address,
 			Model model,
 			UsersDto dto) {	
-	
+		
+		System.out.println(user_email_receive);
 		if(user_email_receive == null) {
 			user_email_receive = "0";
 		}else {
@@ -813,6 +920,7 @@ public class MyController {
 		model.addAttribute("mainPage", "Member/join_action.jsp");
 		int result = iUsersdao.signUp(dto);
 		
+		System.out.println(user_email_receive);
 		
 		return "index";
 	}

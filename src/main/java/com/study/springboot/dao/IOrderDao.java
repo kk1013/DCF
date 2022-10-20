@@ -22,4 +22,7 @@ public interface IOrderDao {
 	public List<OrderDto> payments_product_check( String str );
 	public int order_insert(OrderDto dto);
 	public int order_detail_insert(OrderDto dto);
+	public List<OrderDto> myOrderList(int user_idx);
+	public List<OrderDto> orderdetail(int order_idx, int idx);
+	
 }

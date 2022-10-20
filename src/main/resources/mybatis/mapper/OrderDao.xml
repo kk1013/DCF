@@ -115,5 +115,34 @@
 	<select id="payments_product_check" resultType="com.study.springboot.dto.OrderDto">
 	SELECT * FROM dcf_basket, dcf_product WHERE ${ param1 }
 	</select>
+
+	<select id="myOrderList" resultType="com.study.springboot.dto.OrderDto">
+	    select * from dcf_order where order_user_idx=#{param1} 
+	</select>
+	
+	<select id="list" resultType="com.study.springboot.dto.OrderDetailDto">
+	 select * from dcf_order_detail d join dcf_order o on d.order_idx = o.order_idx where d.order_idx = {order_idx}
+	</select>
+
+	<delete id="order_list_delete">
+	  DELETE FROM dcf_order WHERE order_idx = #{ param1 }
+	</delete>
+
+	<select id="orderdetail" resultType="com.study.springboot.dto.OrderDto">
+	    select *
+        from dcf_order o inner join dcf_order_detail d on o.order_idx = d.order_idx
+        inner join dcf_product p on d.order_pd_idx = p.product_idx
+        where o.order_user_idx =  ${param2} and o.order_idx = ${ param1 }
+        order by d.order_idx  
+	</select>
+
+	<select id="orderUserDetail" resultType="com.study.springboot.dto.OrderDto">
+	    select *
+        from dcf_order o inner join dcf_order_detail d on o.order_idx = d.order_idx
+        inner join dcf_product p on d.order_pd_idx = p.product_idx
+        where o.order_user_idx =  ${param2} and o.order_idx = ${ param1 }
+        order by d.order_idx  
+	</select>
+
 	
 </mapper>

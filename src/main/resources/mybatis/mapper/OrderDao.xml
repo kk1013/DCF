@@ -34,23 +34,29 @@
 	
 
 	<select id="order_list" resultType="com.study.springboot.dto.OrderDto">
-	SELECT 
-	a.*,
+    SELECT * FROM (
+        SELECT temp_table.*, ROWNUM as rnum FROM (
+                  	SELECT 
+	o.*,
+	d.order_detail_idx,
 	p.PRODUCT_NAME,
 	p.PRODUCT_PRICE,
 	u.USER_NAME
-	FROM DCF_ORDER a,
+	FROM 
+    DCF_ORDER o,
+    DCF_ORDER_DETAIL d,
 	DCF_PRODUCT p,
 	DCF_USERS u
-	WHERE 
-	a.ORDER_PD_IDX = p.PRODUCT_IDX
-	AND a.ORDER_USER_IDX = u.USER_IDX
-	ORDER BY a.ORDER_IDX ASC
+	WHERE o.order_idx = d.order_idx 
+    AND	d.ORDER_PD_IDX = p.PRODUCT_IDX
+	AND o.ORDER_USER_IDX = u.USER_IDX
+	ORDER BY o.ORDER_IDX ASC
+               ) temp_table ) WHERE RNUM BETWEEN #{param1} AND #{param2}
 	</select>
 	
 	<select id="single_select" resultType="com.study.springboot.dto.OrderDto">
 	SELECT 
-	a.*,
+	o.*,
 	u.USER_NAME,
 	u.USER_ID,
 	u.USER_PHONE,
@@ -59,19 +65,21 @@
 	p.PRODUCT_NAME,
 	p.PRODUCT_IMAGE,
 	p.PRODUCT_PRICE
-	FROM DCF_ORDER a,
+	FROM DCF_ORDER o,
+	DCF_ORDER_DETAIL d,
 	DCF_PRODUCT p,
 	DCF_USERS u 
 	WHERE
-	a.ORDER_PD_IDX = p.PRODUCT_IDX 
-	AND a.ORDER_USER_IDX = u.USER_IDX 
-	AND a.ORDER_IDX = #{param1}
-	ORDER BY a.ORDER_IDX ASC
+	d.order_idx = o.order_idx 
+	AND d.ORDER_PD_IDX = p.PRODUCT_IDX 
+	AND o.ORDER_USER_IDX = u.USER_IDX 
+	AND d.order_detail_idx = #{param1}
+	ORDER BY d.ORDER_DETAIL_IDX ASC
 	</select>
 
 	<select id="product" resultType="com.study.springboot.dto.OrderDto">
 	SELECT 
-	a.*,
+	o.*,
 	u.USER_NAME,
 	u.USER_ID,
 	u.USER_PHONE,
@@ -80,14 +88,16 @@
 	p.PRODUCT_NAME,
 	p.PRODUCT_IMAGE,
 	p.PRODUCT_PRICE
-	FROM DCF_ORDER a,
+	FROM DCF_ORDER o,
+	DCF_ORDER_DETAIL d,
 	DCF_PRODUCT p,
 	DCF_USERS u 
 	WHERE
-	a.ORDER_PD_IDX = p.PRODUCT_IDX 
-	AND a.ORDER_USER_IDX = u.USER_IDX 
-	AND a.ORDER_IDX = #{param1}
-	ORDER BY a.ORDER_IDX ASC
+	d.order_idx = o.order_idx 
+	AND	d.ORDER_PD_IDX = p.PRODUCT_IDX 
+	AND o.ORDER_USER_IDX = u.USER_IDX 
+	AND o.ORDER_IDX = #{param1}
+	ORDER BY o.ORDER_IDX ASC
 	</select>
 	
 	<update id="order_status_update">

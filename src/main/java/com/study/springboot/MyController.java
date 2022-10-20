@@ -642,7 +642,6 @@ public class MyController {
 	public String adminMemberDeleteAction(
 			@RequestParam("user_idx") List<String> user_idx,
 			HttpServletRequest request) {
-		System.out.println(user_idx);
 		for(int i = 0; i<user_idx.size();i++) {
 			int result = iUsersdao.adminMemberDeleteAction(Integer.parseInt(user_idx.get(i)));
 		}
@@ -657,9 +656,7 @@ public class MyController {
 			@RequestParam ("user_name") String user_name,			
 			@RequestParam (value="user_email", required = false) String user_email,
 			@RequestParam (value="user_phone", required = false) String user_phone,
-			Model model) {		
-		System.out.println(user_email);
-		System.out.println(user_phone);		
+			Model model) {	
 		UsersDto userId = iUsersdao.userId(user_name, user_email, (user_phone.equals("")) ? 1 : Integer.parseInt(user_phone) );
 		model.addAttribute("mainPage", "Member/idfind.jsp");
 		if(userId==null){
@@ -678,9 +675,7 @@ public class MyController {
 			@RequestParam ("user_name") String user_name,			
 			@RequestParam (value="user_email", required = false) String user_email,
 			@RequestParam (value="user_phone", required = false) String user_phone,
-			Model model) {		
-		System.out.println(user_email);
-		System.out.println(user_phone);		
+			Model model) {	
 		UsersDto userPw = iUsersdao.userPw(user_id, user_name, user_email, (user_phone.equals("")) ? 1 : Integer.parseInt(user_phone) );
 		model.addAttribute("mainPage", "Member/pwfind.jsp");
 		if(userPw==null){
@@ -736,12 +731,14 @@ public class MyController {
 	
 	@RequestMapping("/admin_order_action")
 	public String admin_order_action(
+			@RequestParam(value = "order_detail_idx", required = false, defaultValue = "") String order_detail_idx,
 			@RequestParam(value = "order_idx", required = false, defaultValue = "") String order_idx,
 			HttpServletResponse resp,
 			Model model) throws IOException {
 		int total_quantity = 0;
 		int total_price = 0;
-		OrderDto result = iOrderdao.single_select(Integer.parseInt(order_idx));
+		System.out.println(order_detail_idx);
+		OrderDto result = iOrderdao.single_select(Integer.parseInt(order_detail_idx));
 		model.addAttribute("dto", result);
 		
 		List<OrderDto> product = iOrderdao.product(Integer.parseInt(order_idx));
@@ -896,8 +893,21 @@ public class MyController {
 	}
 
 	@RequestMapping("/admin_order_list")
-	public String admin_order_list(Model model) {
-		List<OrderDto> order_list = iOrderdao.order_list();
+	public String admin_order_list(
+			@RequestParam(value="page",required=false) String page,
+			Model model) {
+		if( page == null ) {
+			page = "1";
+		}
+		
+		System.out.println("page:" + page);
+		model.addAttribute("page", page);
+		
+		int num_page_no = Integer.parseInt( page ); //page번호 1,2,3,4
+		int num_page_size = 5; //한페이지당 Row갯수
+		int startRowNum = (num_page_no - 1) * num_page_size + 1; // 1, 6, 11 페이지 시작 줄번호
+		int endRowNum = (num_page_no * num_page_size);           // 5, 10, 15 페이지 끝 줄번호
+		List<OrderDto> order_list = iOrderdao.order_list( String.valueOf(startRowNum), String.valueOf(endRowNum) );
 		for(int i = 0; i<order_list.size(); i++) {
 			if(order_list.get(i).getOrder_status().equals("0")) {
 				order_list.get(i).setOrder_status("배송전");
@@ -982,9 +992,17 @@ public class MyController {
 			@RequestParam(value = "name", required = false, defaultValue = "") String name,
 			@RequestParam(value = "chooseFile", required=false) MultipartFile file,
 			@RequestParam(value = "price", required = false, defaultValue = "") String price,
-			@RequestParam(value = "bo_content", required = false, defaultValue = "") String content) {
-		String upload_url = fileUploadService.restore(file);
+			@RequestParam(value = "bo_content", required = false, defaultValue = "") String content,
+			HttpServletRequest request) {
 		ProductDto dto = new ProductDto();
+		
+		if(file.isEmpty()) {
+			String original_image = request.getParameter("original_image");
+			dto.setProduct_image(original_image);
+		}else {
+			String upload_url = fileUploadService.restore(file);
+			dto.setProduct_image(upload_url);
+		}
 		dto.setProduct_idx(Integer.parseInt(product_idx));
 		dto.setProduct_animal(Integer.parseInt(animal));
 		dto.setProduct_age(Integer.parseInt(age));
@@ -1000,7 +1018,6 @@ public class MyController {
 		dto.setProduct_size(Integer.parseInt(size));
 		dto.setProduct_price(Integer.parseInt(price));
 		dto.setProduct_name(name);
-		dto.setProduct_image(upload_url);
 		dto.setProduct_content(content);
 		
 		int update = iProductdao.update(dto);

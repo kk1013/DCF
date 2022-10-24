@@ -8,6 +8,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link rel="stylesheet" href="/css/Admin/admin_notice.css">    
+    
+    <link rel="stylesheet" href="/css/pagenav.css">
     <div class="boardwrap">
 
         <div class="board-title">
@@ -52,8 +54,38 @@
                 </tr>
                 </c:forEach>
 
-                
             </table>
+   <div id="pagenav">
+    <div class="container-fluid">
+		<div class="row">
+		  <ul class="pagination">
+		   
+		    <li class="<c:if test="${ page == 1 } ">disabled</c:if>">
+		    	<a href="/admin_order_list?page=${page-1}">&#60;</a>
+		    </li>
+		   
+		    <li class="<c:if test="${ page == 1 }">pageNaveClick</c:if>">
+		    	<a class="" href="/admin_order_list?page=1">1</a>
+		    </li>
+		    <li class="<c:if test="${ page == 2 }">pageNaveClick</c:if>">
+		    	<a class="" href="/admin_order_list?page=2">2</a>
+		    </li>
+		    <li class="<c:if test="${ page == 3 }">pageNaveClick</c:if>">
+		    	<a class="" href="/admin_order_list?page=3">3</a>
+		    </li>
+		    <li class="<c:if test="${ page == 4 }">pageNaveClick</c:if>">
+		    	<a class="" href="/admin_order_list?page=4">4</a>
+		    </li>
+		    <li class="<c:if test="${ page == 5 }">pageNaveClick</c:if>">
+		    	<a class="" href="/admin_order_list?page=5">5</a>
+		    </li>
+		    <li class="<c:if test="${ page == 5 }">disabled</c:if>">
+		    	<a class="" href="/admin_order_list?page=${page+1}">&gt;</a>
+		    </li>
+		  </ul>
+		</div>
+	</div>
+	</div><!--content-wrap-->
         </div>	
         </form>    
     </div>

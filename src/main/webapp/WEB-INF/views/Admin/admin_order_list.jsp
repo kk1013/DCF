@@ -33,14 +33,14 @@
             </thead>
             <tbody>
         <c:forEach var="dto" items="${ list }">
-	  	<tr onclick="location.href='admin_order_action?order_idx=${dto.order_idx}&order_detail_idx=${ dto.order_detail_idx }'">
+	  	<tr onclick="location.href='admin_order_action?order_idx=${dto.order_idx}'">
            <td><fmt:formatDate value="${ dto.order_date }" pattern = "yyyy-MM-dd"/></td>
            <td>${ dto.order_idx }</td>
            <td>${ dto.user_name }</td>
            <td>${ dto.product_name }</td>
            <td>${ dto.order_status }</td>
            <td>${ dto.order_quantity }</td>
-           <td><span>총액</span>${ dto.product_price }<span>원</span></td>
+           <td><span>총액</span>${ dto.order_price }<span>원</span></td>
 	  	</tr>
 		</c:forEach>               
             </tbody>

@@ -12,11 +12,14 @@
 	</select>
 	
 	<select id="list" resultType="com.study.springboot.dto.NoticeDto">
-		select * from DCF_NOTICE order by notice_idx desc
+		    SELECT * FROM (
+        SELECT temp_table.*, ROWNUM as rnum FROM (
+               select * from DCF_NOTICE order by notice_idx desc
+               ) temp_table )  WHERE RNUM BETWEEN #{ param1 } AND #{ param2 }
 	</select>
 	<insert id="adminWriteNoticeformAction">
     	insert into dcf_notice (notice_idx, notice_title, notice_content, notice_date) 
-		values (notice_idx.nextval, #{ param1 }, #{ param2 }, sysdate)
+		values (notice_idx_seq.nextval, #{ param1 }, #{ param2 }, sysdate)
     </insert>
 	<select id="noticedto" resultType="com.study.springboot.dto.NoticeDto">
     	select * from dcf_notice where notice_idx=#{ param1 }

@@ -1,6 +1,9 @@
 package com.study.springboot;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +32,7 @@ import com.study.springboot.dao.IProductDao;
 import com.study.springboot.dao.IReviewDao;
 import com.study.springboot.dao.IUsersDao;
 import com.study.springboot.dto.BasketDto;
+import com.study.springboot.dto.DeliveryDto;
 import com.study.springboot.dto.FaqDto;
 import com.study.springboot.dto.NoticeDto;
 import com.study.springboot.dto.One2OneDto;
@@ -241,8 +245,21 @@ public class MyController {
 	}
 
 	@RequestMapping("/notice")
-	public String notice(Model model) {
-		List<NoticeDto> noticelist = iNoticedao.list();
+	public String notice(
+			@RequestParam(value="page",required=false) String page,
+			Model model) {
+		if( page == null ) {
+			page = "1";
+		}
+		
+		System.out.println("page:" + page);
+		model.addAttribute("page", page);
+		
+		int num_page_no = Integer.parseInt( page ); //page번호 1,2,3,4
+		int num_page_size = 5; //한페이지당 Row갯수
+		int startRowNum = (num_page_no - 1) * num_page_size + 1; // 1, 6, 11 페이지 시작 줄번호
+		int endRowNum = (num_page_no * num_page_size);           // 5, 10, 15 페이지 끝 줄번호
+		List<NoticeDto> noticelist = iNoticedao.list( String.valueOf(startRowNum), String.valueOf(endRowNum) );
 		model.addAttribute("list", noticelist);
 		model.addAttribute("mainPage", "Customer/notice.jsp");
 		return "index";
@@ -433,6 +450,7 @@ public class MyController {
 			@RequestParam(value="name", required = false, defaultValue = "") String name,
 			@RequestParam(value="phone", required = false, defaultValue = "") String phone,
 			@RequestParam(value="address", required = false, defaultValue = "") String address,			
+			@RequestParam(value="basket_idx", required = false) List<String> basket_idx,
 			@RequestParam(value="product_idx", required = false) List<String> idx,
 			@RequestParam(value="product_name", required = false) List<String> pdname,
 			@RequestParam(value="product_count", required = false) List<String> pdcout,
@@ -460,6 +478,17 @@ public class MyController {
 			dto.setProduct_price(Integer.parseInt(pdprice.get(i)));
 			int order_detail = iOrderdao.order_detail_insert(dto);
 		}
+		for(int i = 0 ; i < idx.size();i++) {
+			int order_delete = iOrderdao.delete(Integer.parseInt(basket_idx.get(i)));
+		}
+		
+        LocalDate now = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        String formatedNow = now.format(formatter);
+        System.out.println(formatedNow);
+
+		model.addAttribute("date", formatedNow);
+		model.addAttribute("order_idx", idx_name);
 		model.addAttribute("mainPage", "Order/order_action.jsp");
 		return "index";
 	}
@@ -780,9 +809,21 @@ public class MyController {
 
 	@RequestMapping("/admin_notice")
 	public String admin_notice(
+			@RequestParam(value="page",required=false) String page,
 			Model model,
 			HttpServletRequest request) {
-			List<NoticeDto> list = iNoticedao.list();
+		if( page == null ) {
+			page = "1";
+		}
+		
+		System.out.println("page:" + page);
+		model.addAttribute("page", page);
+		
+		int num_page_no = Integer.parseInt( page ); //page번호 1,2,3,4
+		int num_page_size = 5; //한페이지당 Row갯수
+		int startRowNum = (num_page_no - 1) * num_page_size + 1; // 1, 6, 11 페이지 시작 줄번호
+		int endRowNum = (num_page_no * num_page_size);           // 5, 10, 15 페이지 끝 줄번호
+			List<NoticeDto> list = iNoticedao.list( String.valueOf(startRowNum), String.valueOf(endRowNum) );
 			model.addAttribute("list", list);
 		model.addAttribute("adminPage", "../Admin/admin_notice.jsp");
 		return "Admin/admin_index";
@@ -806,13 +847,13 @@ public class MyController {
 
 	@RequestMapping("/admin_order_action")
 	public String admin_order_action(
-			@RequestParam(value = "order_detail_idx", required = false, defaultValue = "") String order_detail_idx,
 			@RequestParam(value = "order_idx", required = false, defaultValue = "") String order_idx,
 			HttpServletResponse resp,
 			Model model) throws IOException {
 		int total_quantity = 0;
 		int total_price = 0;
-		OrderDto result = iOrderdao.single_select(Integer.parseInt(order_detail_idx));
+		OrderDto result = iOrderdao.single_select(Integer.parseInt(order_idx));
+		System.out.println("etesta"+result);
 		model.addAttribute("dto", result);
 		
 		List<OrderDto> product = iOrderdao.product(Integer.parseInt(order_idx));
@@ -854,7 +895,7 @@ public class MyController {
 			Model model,
 			UsersDto dto) {	
 		
-		System.out.println(user_email_receive);
+		System.out.println("jello"+user_email_receive);
 		if(user_email_receive == null) {
 			user_email_receive = "0";
 		}else {
@@ -983,29 +1024,58 @@ public class MyController {
 		int startRowNum = (num_page_no - 1) * num_page_size + 1; // 1, 6, 11 페이지 시작 줄번호
 		int endRowNum = (num_page_no * num_page_size);           // 5, 10, 15 페이지 끝 줄번호
 		List<OrderDto> order_list = iOrderdao.order_list( String.valueOf(startRowNum), String.valueOf(endRowNum) );
-		for(int i = 0; i<order_list.size(); i++) {
+		List<DeliveryDto> _new = new ArrayList<DeliveryDto>();
+		int total_price = 0;
+		int total_quantity = 0;
+		for(int i = 0; i < order_list.size();i++) {
+			DeliveryDto dto = new DeliveryDto();
+			List<DeliveryDto> product = iOrderdao.product_select(order_list.get(i).getOrder_idx());
+			dto.setOrder_idx(order_list.get(i).getOrder_idx());
+			dto.setOrder_date(order_list.get(i).getOrder_date());
+			dto.setUser_name(order_list.get(i).getOrder_user_name());
+			dto.setProduct_name(product.get(0).getProduct_name());
 			if(order_list.get(i).getOrder_status().equals("0")) {
-				order_list.get(i).setOrder_status("배송전");
+				dto.setOrder_status("배송전");
 			}
 			else if(order_list.get(i).getOrder_status().equals("1")) {
-				order_list.get(i).setOrder_status("배송중");
+				dto.setOrder_status("배송중");
 			}
 			else if(order_list.get(i).getOrder_status().equals("2")) {
-				order_list.get(i).setOrder_status("배송완료");
+				dto.setOrder_status("배송완료");
 			}
 			else if(order_list.get(i).getOrder_status().equals("3")) {
-				order_list.get(i).setOrder_status("배송전");
+				dto.setOrder_status("배송전");
 			}
+			List<OrderDto> _Etc = iOrderdao.Etc_(order_list.get(i).getOrder_idx());
+			for(int j = 0 ; j < _Etc.size(); j++) {
+				total_price += _Etc.get(j).getOrder_price();
+				total_quantity += _Etc.get(j).getOrder_quantity();
+			}
+			dto.setOrder_price(total_price);
+			dto.setOrder_quantity(total_quantity);
+			_new.add(dto);
 		}
-		
-		model.addAttribute("list", order_list);
+		model.addAttribute("list", _new);
 		
 		model.addAttribute("adminPage", "../Admin/admin_order_list.jsp");
 		return "Admin/admin_index";
 	}
 	@RequestMapping("/admin_product")
-	public String admin_product(Model model) {
-		List<ProductDto>list = iProductdao.list();
+	public String admin_product(
+			@RequestParam(value="page",required=false) String page,
+			Model model) {
+		if( page == null ) {
+			page = "1";
+		}
+		
+		System.out.println("page:" + page);
+		model.addAttribute("page", page);
+		
+		int num_page_no = Integer.parseInt( page ); //page번호 1,2,3,4
+		int num_page_size = 5; //한페이지당 Row갯수
+		int startRowNum = (num_page_no - 1) * num_page_size + 1; // 1, 6, 11 페이지 시작 줄번호
+		int endRowNum = (num_page_no * num_page_size);           // 5, 10, 15 페이지 끝 줄번호
+		List<ProductDto>list = iProductdao.list( String.valueOf(startRowNum), String.valueOf(endRowNum) );
 		model.addAttribute("list", list);
 		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
 		return "Admin/admin_index";
@@ -1048,11 +1118,7 @@ public class MyController {
 		dto.setProduct_content(content);
 		
 		int result = iProductdao.insertProduct( dto );
-		
-		List<ProductDto>list = iProductdao.list();
-		model.addAttribute("list", list);
-		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
-		return "Admin/admin_index";
+		return "redirect:/admin_product";
 	}
 
 	@RequestMapping(value="/admin_product_update_form", method = RequestMethod.POST)

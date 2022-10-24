@@ -90,7 +90,6 @@
 .customer-search {
     display: flex;
     flex-direction: row;
-    justify-content: center;
 }
 .searchbar {
     width: 200px;
@@ -109,3 +108,8 @@
     margin-bottom: 50px;
     cursor: pointer;
 }
+
+/* div#bottom-wrap{
+	display: flex;
+	flex-direction: row;
+} */

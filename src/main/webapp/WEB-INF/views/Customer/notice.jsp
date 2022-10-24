@@ -10,6 +10,8 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <link rel="stylesheet" href="/css/Customer/notice.css">
 
+    <link rel="stylesheet" href="/css/pagenav.css">
+
 <div id="page-nav-wrap">
         <div id="page-nav">
             HOME > 공지사항
@@ -26,7 +28,10 @@
             <input type="button" class="customerservice" id="left-button" value="공지사항">
             <input onClick="location.href='faq'" type="button" class="customerservice" id="right-button" value="FAQ">
         </div>
-        
+            <div class="customer-search">
+                <input type="text" class="searchbar">
+                <input type="button" class="searchbutton" value="검색">
+            </div>
         
         <div id="notice">
             <table class="customer-table">
@@ -43,10 +48,38 @@
                 </tr>
                 </c:forEach>
             </table>
-
-            <div class="customer-search">
-                <input type="text" class="searchbar">
-                <input type="button" class="searchbutton" value="검색">
+        <div id="bottom-wrap">
+			<div id="pagenav">
+    			<div class="container-fluid">
+					<div class="row">
+		  			<ul class="pagination">
+		   
+		    			<li class="<c:if test="${ page == 1 } ">disabled</c:if>">
+		    				<a href="/notice?page=${page-1}">&#60;</a>
+		    			</li>
+		   
+		    			<li class="<c:if test="${ page == 1 }">pageNaveClick</c:if>">
+		    				<a class="" href="/notice?page=1">1</a>
+		    			</li>
+		    			<li class="<c:if test="${ page == 2 }">pageNaveClick</c:if>">
+		    				<a class="" href="/notice?page=2">2</a>
+		    			</li>
+		    			<li class="<c:if test="${ page == 3 }">pageNaveClick</c:if>">
+		    				<a class="" href="/notice?page=3">3</a>
+		    			</li>
+		    			<li class="<c:if test="${ page == 4 }">pageNaveClick</c:if>">
+		    				<a class="" href="/notice?page=4">4</a>
+		   		 		</li>
+		   		 		<li class="<c:if test="${ page == 5 }">pageNaveClick</c:if>">
+		    				<a class="" href="/notice?page=5">5</a>
+		    			</li>
+		    			<li class="<c:if test="${ page == 5 }">disabled</c:if>">
+		    				<a class="" href="/notice?page=${page+1}">&gt;</a>
+		    			</li>
+		  			</ul>
+					</div>
+				</div>
+			</div><!--content-wrap-->
             </div>
         </div>
     </div>

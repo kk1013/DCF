@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="/css/product/product.css">
+  <link rel="stylesheet" href="/css/pagenav.css">
 <div id="product-wrap">
     <div id="page-nav-wrap">
         <div id="page-nav">
@@ -153,6 +154,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

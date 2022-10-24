@@ -83,8 +83,7 @@
                     <tr>
                         <td></td>
                         <td class="joinform-check">
-                            <input type="checkbox" name="user_email_receive" id="yellowCheckbox1" class="checkinput">
-                            
+                            <input type="checkbox" name="user_email_receive" id="yellowCheckbox1" class="checkinput" value="1">
                             <label for="yellowCheckbox1"  class="yellowCheckbox"></label> <span class="joinform-span">정보/이벤트 SMS 수신에 동의합니다.</span>
                         </td>
                     </tr>

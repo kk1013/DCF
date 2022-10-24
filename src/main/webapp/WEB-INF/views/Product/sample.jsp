@@ -4,12 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="/css/product/sample.css">
 <link rel="stylesheet" href="/css/checkbox.css">
-<div id="samplepage-wrap">
     <div id="page-nav-wrap">
         <div id="page-nav">
             <p>HOME > 샘플신청</p>
         </div> 
     </div>
+<div id="samplepage-wrap">
     <div id="samplepage-main">
         <h4>샘플신청</h4>
         <div id="samplepage-button">

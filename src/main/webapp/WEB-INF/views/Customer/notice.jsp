@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <form action="#">
+
     <div class="customerwrap">
         <div class="titlediv">
             <span class="customer-title">고객센터</span>
@@ -44,11 +44,13 @@
                 </c:forEach>
             </table>
 
+
             <div class="customer-search">
-                <input type="text" class="searchbar">
-                <input type="button" class="searchbutton" value="검색">
+                <form action="notice_search">
+                <input type="text" class="searchbar" name="keyword">
+                <input type="submit" class="searchbutton" value="검색">
+                </form>
             </div>
         </div>
     </div>
-    </form>
     

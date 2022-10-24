@@ -7,7 +7,6 @@
     
         <p class="admin-title">상품관리</p>
         <div class="btn-wrap">
-            <label><input onClick="document.getElementById('product_delete_form').submit()" type="button" id="product_delete" value="상품수정"></label> 
             <div class="customer-search">
         <form action="/admin_product_search" method="get">
                 <input name="keyword" type="text" class="searchbar">

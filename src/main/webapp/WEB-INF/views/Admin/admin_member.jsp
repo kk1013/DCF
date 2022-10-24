@@ -6,17 +6,18 @@
 <link rel="stylesheet" href="/css/Admin/admin_member.css">
 <div id="user-search-wrap">
     <h2 id="user-search-title">회원정보 조회</h2>
-    <input type="button" class="btn" onclick="location.href='admin_member_detail_inmember'" value="정보수정">
     <a><button id="" class="btn" type="button" onclick="document.getElementById('frm').submit();" value="회원삭제">회원삭제</button></a>
 	    <div class="customer-search">
+	        <form action="admin_user_search">
 	    	<select name="search" id="search">
 	    		<option value="id">아이디</option>
 	    		<option value="name">이름</option>
 	    		<option value="email">이메일</option>
 	    		<option value="phone">휴대전화</option>
 	    	</select>
-	        <input type="text" class="searchbar">
-	        <input type="button" class="searchbutton" value="검색">
+	        <input type="text" class="searchbar" name="keyword">
+	        <input type="submit" class="searchbutton" value="검색">
+	        </form>
 	    </div>
        <form action="adminMemberDeleteAction" method="get" id="frm">
 	    <table id="user-search-table">
@@ -37,7 +38,7 @@
 	           <td><fmt:formatDate value="${ dto.user_join_date }" pattern = "yyyy-MM-dd"/></td>
 	           <td><a href="admin_member_detail?user_idx=${dto.user_idx }">${ dto.user_id }</a></td>
 	           <td><a href="admin_member_detail?user_idx=${dto.user_idx }">${ dto.user_name }</a></td>
-	           <td>${ dto.user_phone }</td>
+	           <td>0${ dto.user_phone }</td>
 	           <td>${ dto.user_gender }</td>
 	           <td>${ dto.user_email }</td>
 	           <td>

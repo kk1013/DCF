@@ -38,7 +38,7 @@
                 </tr>
                 <tr>
                     <td class="td-title"><p class="bold">휴대폰 번호</p></td>
-                    <td class="td-input"><input type="text" class="inputs" style="width: 60%;" name="phone" value="${ item.user_phone }" placeholder="숫자만 입력(11자리)"></td>
+                    <td class="td-input"><input type="text" class="inputs" style="width: 60%;" name="phone" value="0${ item.user_phone }" placeholder="숫자만 입력(11자리)"></td>
                 </tr>
                 <tr>
                     <td class="td-title"><p class="bold">주소</p></td>

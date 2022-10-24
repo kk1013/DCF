@@ -35,12 +35,7 @@
             	<% if( session.getAttribute("user_id") != null){ %>
 		            <input type="submit" id="basket" value="장바구니 담기">
 		        <% } else { %>
-		        	<input type="button" id="basket" value="장바구니 담기" onclick="login(); location.href='login';">
-		        <script>
-		        function login() {
-		        alert("로그인후 이용해주세요");
-		        }
-		        </script>
+		        	<input type="button" id="basket" value="장바구니 담기" onclick="alert('로그인후 이용해주세요'); location.href='login';">
 		        <% } %>
             </div>
         </div>
@@ -53,6 +48,7 @@
     </div>
     <div id="content-wrap">
         <div id="product-content">
+        <img src="/img/product-img/unknown.jpg">
        	${ product.product_content }
         </div>
         <table id="review">
@@ -72,6 +68,7 @@
                         </div>
                     </div>
                 </td>
+                <td><img src="img/product-img/${ list.review_image }" style="width: 90%"></td>
                 <td>
                     ${ list.review_content }
                 </td>

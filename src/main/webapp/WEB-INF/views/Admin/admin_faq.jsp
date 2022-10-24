@@ -15,24 +15,24 @@
         </div>
 
         <div class="board-sub">
-            -공지사항
+            -FAQ
         </div>       
         <div class="board-buttondiv">
             <div>
-                <a href="admin_notice_write">
-                	<input class="board-btn btn1" onclick="location.href='admin_notice_write'" type="button" value="글등록">
+                <a href="admin_faq_write">
+                	<input class="board-btn btn1" onclick="location.href='admin_faq_write'" type="button" value="글등록">
                 </a>
 	           	 <input class="board-btn btn2" type="button" onclick="document.getElementById('admindelete').submit();" value="글삭제">
             </div>
             <div class="searchdiv">
-            	<form action="admin_notice_search">
+            	<form action="admin_faq_search">
                 <input class="searchbar" type="text" name="keyword">
                 <input class="searchbutton" type="submit" value="검색">
                 </form>
             </div>
         </div>
 
-        <form action="adminnoticeDeleteAction"  method="get" id="admindelete">
+        <form action="adminfaqDeleteAction"  method="get" id="admindelete">
         <div>
             <table class="noticeAdmin-table">
                 <tr>
@@ -44,12 +44,12 @@
                 </tr>
                 <c:forEach var="dto" items="${ list }">
                 <tr>
-                    <td class="noticeAdmin-td1"><input type="checkbox" name="notice_idx" value="${ dto.notice_idx }"></td>
-                    <td class="noticeAdmin-td2">${ dto.notice_idx }</td>
-                    <td class="noticeAdmin-td3"><a class="notice-view" href="admin_notice_detail?notice_idx=${ dto.notice_idx }">${ dto.notice_title }</a></td>
-                    <td class="noticeAdmin-td4"><a class="notice-modify" href="admin_notice_detail?notice_idx=${ dto.notice_idx }">수정</a></td>
+                    <td class="noticeAdmin-td1"><input type="checkbox" name="faq_idx" value="${ dto.faq_idx }"></td>
+                    <td class="noticeAdmin-td2">${ dto.faq_idx }</td>
+                    <td class="noticeAdmin-td3"><a class="notice-view" href="admin_faq_detail?faq_idx=${ dto.faq_idx }">${ dto.faq_title }</a></td>
+                    <td class="noticeAdmin-td4"><a class="notice-modify" href="admin_faq_detail?faq_idx=${ dto.faq_idx }">수정</a></td>
                     <td class="noticeAdmin-td5">
-						<c:set var="dateVar" value="${ dto.notice_date }" />
+						<c:set var="dateVar" value="${ dto.faq_date }" />
 						<fmt:formatDate value="${dateVar}" pattern="yyyy-MM-dd" /></td>
                 </tr>
                 </c:forEach>

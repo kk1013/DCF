@@ -14,5 +14,5 @@ public interface INoticeDao {
 	public NoticeDto noticedto(int notice_idx);
 	public int adminnoticeDeleteAction(int notice_idx);
 	public int adminUpdateAction (int notice_idx, String notice_title, String notice_content);
-	
+	public List<NoticeDto> search(String keyword);
 }

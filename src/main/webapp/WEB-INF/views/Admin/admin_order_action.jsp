@@ -36,7 +36,7 @@
             <div class="orderActiondiv oa-height oa-div7">
                 <div class="orderActiondiv orderActiondiv7-1">
                     <div class="oa-div7-1">휴대전화</div>
-                    <div class="oa-div7-2">${ dto.user_phone }</div>
+                    <div class="oa-div7-2">0${ dto.user_phone }</div>
                 </div>
                 <div class="orderActiondiv orderActiondiv7-2">
                     <div class="oa-div7-3">이메일</div>

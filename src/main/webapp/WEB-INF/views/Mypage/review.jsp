@@ -18,7 +18,7 @@
     <form action="reviewWriteAction" method="post" enctype="multipart/form-data">
     <div class="reviewwrap">
         <div class="review-title">
-            <span>리뷰작성</span>${viewproductinfo[0].product_idx }테스트
+            <span>리뷰작성</span>
         </div>
         <div class="review-star">
             <div class="imgdiv">

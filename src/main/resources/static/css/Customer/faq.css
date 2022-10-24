@@ -30,26 +30,31 @@
     margin-top: 40px;
     margin-bottom: 20px;
     width: 310px;
-    height: 35px;
+    height: 40px;
+   
+}
+.customerservice:nth-child(2){
+	 border-bottom-right-radius:20px;
+	 border-top-right-radius:20px;
 }
 #left-button{
     border:0;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-    font-weight: bold;
-    line-height: 5px;
-    padding-top: 5px;
+    height:40px; line-height:40px;
+    border-top-left-radius:20px;
+    border-bottom-left-radius:20px;
     background-color: #ebebeb;
     cursor: pointer;
 }
 #right-button{
+    height:40px; line-height:40px;
     margin-left: -6px;
     border:0;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-top-right-radius:20x;
+    border-bottom-right-radius:20px;
     background-color: #fee469;
-    padding-top: 5px;
     cursor: pointer;
+    overflow:hidden;
+    font-weight:bold;
 }
 .customer-table {
     width: 1080px;

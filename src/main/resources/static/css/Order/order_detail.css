@@ -31,7 +31,7 @@
     height: 40px;
     font-size: 16px;
     color: #292929;
-    background-color: #ebebeb;
+    background-color: #fee469;
     border-radius: 5px;
 }
 .orderDetail2-1 {
@@ -51,7 +51,12 @@
     width: 130px;
     height: 130px;
     margin-right: 80px;
+    overflow:hidden;
 }
+.orderDetail3-1 img{
+	width:100%; height:100%;
+}
+
 .orderDetail3-2 {
     width: 430px;
     font-size: 18px;
@@ -72,10 +77,12 @@
     text-decoration: 1px underline;
     text-underline-position: under;
     margin-bottom: 10px;
+    font-weight:bold;
 }
 .orderDetail3-3-2 {
     font-size: 18px;
     color: #292929;
+    font-weight:bold;
 }
 .orderDetail3-3-3 {
     font-size: 14px;
@@ -128,6 +135,7 @@
     height: 100%;
     width: 90px;
     color: #292929;
+    padding:10px 0px; box-sizing:border-box; font-weight:bold;
 }
 .orderDetail5-2-sp1 {
     font-size: 24px;
@@ -151,6 +159,7 @@
     margin-top: 10px;
     font-size: 16px;
     height: 133px;
+   
 }
 .orderDetail7-1 {
     display: flex;
@@ -160,20 +169,25 @@
     background-color: #ebebeb;
     color: #292929;
 }
-.orderDetail7-1-1, .orderDetail7-1-2 {
+.orderDetail7-1-1{
     display: flex;
     align-items: center;
-    height: 30px;
+
+}
+.orderDetail7-1-2{
+	padding:10px 0px; box-sizing:border-box; font-weight:bold;
+	
 }
 .orderDetail7-1-1 {
-    margin-top: 5px;
+    padding:10px 0px; box-sizing:border-box; font-weight:bold;
 }
 .orderDetail7-1-3 {
-    margin-top: 5px;
+    padding:10px 0px; box-sizing:border-box; font-weight:bold;
 }
 .orderDetail7-2 {
     padding-left: 20px;
     color: #505050;
+     width:100%;
 }
 .orderDetail7-2-1, .orderDetail7-2-2 {
     display: flex;

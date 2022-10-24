@@ -8,14 +8,16 @@
         <p class="admin-title">전체 주문 목록</p>
         <div class="btn-wrap">
             <div class="customer-search">
+                <form action="order_list_search">
                 <select name="search" id="search">
                     <option value="id">아이디</option>
                     <option value="name">이름</option>
                     <option value="email">이메일</option>
                     <option value="phone">휴대전화</option>
                 </select>
-                <input type="text" class="searchbar">
-                <input type="button" class="searchbutton" value="검색">
+                <input type="text" class="searchbar" name="keyword">
+                <input type="submit" class="searchbutton" value="검색">
+                </form>
             </div>
         </div>
 
@@ -33,7 +35,7 @@
             </thead>
             <tbody>
         <c:forEach var="dto" items="${ list }">
-	  	<tr onclick="location.href='admin_order_action?order_idx=${dto.order_idx}'">
+	  	<tr onclick="location.href='admin_order_action?order_idx=${dto.order_idx}&order_detail_idx=${ dto.order_detail_idx }'">
            <td><fmt:formatDate value="${ dto.order_date }" pattern = "yyyy-MM-dd"/></td>
            <td>${ dto.order_idx }</td>
            <td>${ dto.user_name }</td>

@@ -32,5 +32,9 @@
 	<update id="adminUpdateAction">
 	update dcf_notice set notice_title=#{param2}, notice_content=#{param3} where notice_idx=#{param1}
     </update>
+    
+    <select id="search" resultType="com.study.springboot.dto.NoticeDto">
+	  SELECT * FROM dcf_notice WHERE notice_title LIKE '%'||#{ param1 }||'%' OR notice_content LIKE '%'||#{ param1 }||'%' ORDER BY notice_idx DESC
+	</select>
 
 </mapper>

@@ -21,6 +21,6 @@ public interface IUsersDao {
 	public int pwfindAction (String user_id, String user_name, String user_email, int user_phone);
 	public UsersDto userPw (String user_id, String user_name, String user_email, int user_phone);
 	public int signUp(UsersDto dto);
-
-	
+	public List<UsersDto> search( String str );
+	public List<UsersDto> mypage( int user_idx );
 }

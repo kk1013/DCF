@@ -4,13 +4,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ page trimDirectiveWhitespaces="true" %>
 <link rel="stylesheet" href="/css/Mypage/mypage.css">
-
+<% session = request.getSession(); %>
 <div id="page-nav-wrap">
         <div id="page-nav">
             HOME > 마이페이지
         </div>
     </div>
-    <form action="#">
     <div class="mypagewrap">
         <div class="mypage-title">
             <div>
@@ -18,8 +17,9 @@
                 <span class="mypage2">마이페이지</span>
             </div>
             <div class="mypage-status">
-                <span class="mypage2">이도현님</span><br>
-                <button class="mypage-logout">LOGOUT</button>
+
+            	<span class="mypage2">${mypage_name[0].user_name}님</span><br> 	
+                <button class="mypage-logout" onclick="location.href='logout'">LOGOUT</button>
             </div>
         </div>
         <div class="mypage-condition">
@@ -27,24 +27,19 @@
         </div>
         <div class="mypage-order-condition">
             <div class="order-condition1">
-                <div class="condition-num"><span>4</span></div>
+                <div class="condition-num"><span>${before}</span></div>
             </div>
             <img src="/img/icons/arrow.png" class="condition-next" width="7px" height="18px">
             <div class="order-condition2">
-                <div class="condition-num"><span>4</span></div>
+                <div class="condition-num"><span>${during}</span></div>
             </div>
             <img src="/img/icons/arrow.png" class="condition-next" width="7px" height="18px">
             <div class="order-condition2">
-                <div class="condition-num"><span>4</span></div>
-            </div>
-            <img src="/img/icons/arrow.png" class="condition-next" width="7px" height="18px">
-            <div class="order-condition2">
-                <div class="condition-num"><span>10</span></div>
+                <div class="condition-num"><span>${after}</span></div>
             </div>
         </div>
         <div class="order-condition">
-            <div><span class="condition-status condition-status1">결제완료</span></div>
-            <div><span class="condition-status condition-status2">상품준비중</span></div>
+            <div><span class="condition-status condition-status2">배송전</span></div>
             <div><span class="condition-status condition-status3">배송중</span></div>
             <div><span class="condition-status condition-status4">배송완료</span></div>
         </div>
@@ -61,4 +56,3 @@
             <a href="info_change"><span>회원정보변경</span></a>
         </div>
     </div>
-    </form>

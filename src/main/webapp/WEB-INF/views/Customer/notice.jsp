@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <form action="#">
+
     <div class="customerwrap">
         <div class="titlediv">
             <span class="customer-title">고객센터</span>
@@ -29,8 +29,10 @@
             <input onClick="location.href='faq'" type="button" class="customerservice" id="right-button" value="FAQ">
         </div>
             <div class="customer-search">
-                <input type="text" class="searchbar">
-                <input type="button" class="searchbutton" value="검색">
+                <form action="notice_search">
+                <input type="text" class="searchbar" name="keyword">
+                <input type="submit" class="searchbutton" value="검색">
+                </form>
             </div>
         
         <div id="notice">
@@ -80,8 +82,9 @@
 					</div>
 				</div>
 			</div><!--content-wrap-->
-            </div>
+
+
+            
         </div>
     </div>
-    </form>
     

@@ -45,6 +45,7 @@
             <a href="admin_notice" class="bold">게시판관리</a>
             <ul class="asidebar">
                 <li><a href="admin_notice">공지사항</a></li>
+                <li><a href="admin_faq">FAQ</a></li>
                 <li><a href="admin_one2one">1:1문의</a></li>
             </ul>
             </li>

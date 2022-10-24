@@ -17,7 +17,6 @@
         </div>
     </div>
 
-    <form action="#">
     <div class="customerwrap">
         <div class="titlediv">
             <span class="customer-title">고객센터</span>
@@ -49,13 +48,14 @@
             </table>
 
             <div class="customer-search">
-                <input type="text" class="searchbar">
-                <input type="button" class="searchbutton" value="검색">
+			    <form action="faq_search">
+                <input type="text" class="searchbar" name="keyword">
+                <input type="submit" class="searchbutton" value="검색">
+		        </form>
                 <input onClick="location.href='one2one'" type="button" class="onetoone" value="1:1문의하기">
             </div>
         </div>
     </div>
-        </form>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
         	$(".table-tr").click(function (){

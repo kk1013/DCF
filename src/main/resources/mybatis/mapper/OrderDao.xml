@@ -143,4 +143,9 @@
 	<delete id="delete">
 	DELETE FROM DCF_BASKET WHERE BASKET_IDX = #{ param1 }
 	</delete>
+	
+	<select id="order_list_search" resultType="com.study.springboot.dto.OrderDto">
+	  SELECT * FROM dcf_users, dcf_order WHERE dcf_users.user_idx = dcf_order.order_user_idx AND dcf_users.${ param1 }
+	</select>
+	
 </mapper>

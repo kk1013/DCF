@@ -243,6 +243,14 @@ public class MyController {
 		model.addAttribute("mainPage", "Customer/faq.jsp");
 		return "index";
 	}
+	
+	@RequestMapping("/faq_search")
+	public String faq_search(@RequestParam("keyword") String keyword, Model model) {
+		List<FaqDto> search = iFaqdao.search(keyword);
+		model.addAttribute("list", search);
+		model.addAttribute("mainPage", "Customer/faq.jsp");
+		return "index";
+	}
 
 	@RequestMapping("/notice")
 	public String notice(
@@ -261,6 +269,14 @@ public class MyController {
 		int endRowNum = (num_page_no * num_page_size);           // 5, 10, 15 페이지 끝 줄번호
 		List<NoticeDto> noticelist = iNoticedao.list( String.valueOf(startRowNum), String.valueOf(endRowNum) );
 		model.addAttribute("list", noticelist);
+		model.addAttribute("mainPage", "Customer/notice.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/notice_search")
+	public String notice_search(@RequestParam("keyword") String keyword, Model model) {
+		List<NoticeDto> search = iNoticedao.search(keyword);
+		model.addAttribute("list", search);
 		model.addAttribute("mainPage", "Customer/notice.jsp");
 		return "index";
 	}
@@ -527,7 +543,16 @@ public class MyController {
 	}
 
 	@RequestMapping("/mypage")
-	public String mypage(Model model) {
+	public String mypage(HttpServletRequest request, Model model) {
+		int idx = (int) request.getSession().getAttribute("user_idx");
+		int order_status0 = iOrderdao.beforeDTO();
+		int order_status1 = iOrderdao.duringDTO();
+		int order_status2 = iOrderdao.afterDTO();
+		List<UsersDto> mypage = iUsersdao.mypage(idx);
+		model.addAttribute("mypage_name", mypage);
+		model.addAttribute("before", order_status0 );
+		model.addAttribute("during", order_status1 );
+		model.addAttribute("after", order_status2 );
 		model.addAttribute("mainPage", "Mypage/mypage.jsp");
 		return "index";
 	}
@@ -632,30 +657,46 @@ public class MyController {
 							   @RequestParam("user_pw") String user_pw,
 							   HttpServletRequest request, Model model) {
 		List<UsersDto> list = iUsersdao.list_member();
-		System.out.println("hello");
-		request.setAttribute("list", list);
-		UsersDto result = iUsersdao.login(user_id, user_pw);
-		request.getSession().setAttribute("user_id", user_id);
-		request.getSession().setAttribute("user_idx", result.getUser_idx());
-		request.getSession().setAttribute("user_name", result.getUser_name());
-		if(result != null) {
-			if(user_id.equals("admin")) {
-				for(int i = 0; i<list.size(); i++) {
-					if(list.get(i).getUser_gender().equals("0")) {
-						list.get(i).setUser_gender("여자");
-					}else if(list.get(i).getUser_gender().equals("1")) {
-						list.get(i).setUser_gender("남자");
+		ArrayList<String> list_id = new ArrayList<String>();
+		ArrayList<String> list_pw = new ArrayList<String>();
+		for(int i=0; i<list.size(); i++) {
+			list_id.add(i, list.get(i).getUser_id());
+			list_pw.add(i, list.get(i).getUser_pw());
+		}
+			if(list_id.contains(user_id)) {
+				if(list_pw.contains(user_pw)) {
+					request.setAttribute("list", list);
+					UsersDto result = iUsersdao.login(user_id, user_pw);
+					request.getSession().setAttribute("user_id", user_id);
+					request.getSession().setAttribute("user_idx", result.getUser_idx());
+					request.getSession().setAttribute("user_name", result.getUser_name());
+					if(result != null) {
+						if(user_id.equals("admin")) {
+							for(int j = 0; j<list.size(); j++) {
+								if(list.get(j).getUser_gender().equals("0")) {
+									list.get(j).setUser_gender("여자");
+								}else if(list.get(j).getUser_gender().equals("1")) {
+									list.get(j).setUser_gender("남자");
+								}
+							}
+							request.setAttribute("list", list);
+							model.addAttribute("adminPage", "../Admin/admin_member.jsp");
+							return "Admin/admin_index";
+						}else {
+							model.addAttribute("mainPage", "main.jsp");
+							return "index";
+						}
 					}
+				}else {
+					model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+					model.addAttribute("mainPage", "Member/login.jsp");
+					return "index";
 				}
-				request.setAttribute("list", list);
-				model.addAttribute("adminPage", "../Admin/admin_member.jsp");
-				return "Admin/admin_index";
 			}else {
-				model.addAttribute("mainPage", "main.jsp");
+				model.addAttribute("msg", "입력한 아이디가 존재하지 않습니다.");
+				model.addAttribute("mainPage", "Member/login.jsp");
 				return "index";
 			}
-			
-		}
 		model.addAttribute("mainPage", "main.jsp");
 		return "index";
 	}
@@ -754,6 +795,26 @@ public class MyController {
 		}
 		return "redirect:/admin_user";
 	}
+	//회원관리 검색기능
+	@RequestMapping("/admin_user_search")
+	public String admin_user_search(@RequestParam("keyword") String keyword, 
+									@RequestParam("search") String search, Model model) {
+		String str = "";
+		System.out.println(search);
+		if(search.equals("id") ) {
+			str = "user_id LIKE '%"+keyword+"%' ORDER BY user_idx DESC";
+		}else if(search.equals("name")) {
+			str = "user_name LIKE '%"+keyword+"%' ORDER BY user_idx DESC";
+		}else if(search.equals("email")) {
+			str = "user_email LIKE '%"+keyword+"%' ORDER BY user_idx DESC";
+		}else if(search.equals("phone")) {
+			str = "user_phone LIKE '%"+keyword+"%' ORDER BY user_idx DESC";
+		}
+		List<UsersDto> user_search = iUsersdao.search(str);
+		model.addAttribute("list", user_search);
+		model.addAttribute("adminPage", "../Admin/admin_member.jsp");
+		return "Admin/admin_index";
+	}
 	//아이디찾기
 	
 	@RequestMapping("/idfindAction")
@@ -828,6 +889,16 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_notice.jsp");
 		return "Admin/admin_index";
 	}
+	
+	@RequestMapping("/admin_notice_search")
+	public String admin_notice_search(@RequestParam("keyword") String keyword, Model model) {
+		List<NoticeDto> search = iNoticedao.search(keyword);
+		model.addAttribute("list", search);
+		model.addAttribute("adminPage", "../Admin/admin_notice.jsp");
+		return "Admin/admin_index";
+	}
+	
+	
 	@RequestMapping("/admin_notice_detail")
 	public String admin_notice_detail(
 			@RequestParam("notice_idx") String notice_idx,
@@ -844,9 +915,76 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_notice_write.jsp");
 		return "Admin/admin_index";
 	}
+	
+	@RequestMapping("/admin_faq")
+	public String admin_faq(
+			Model model,
+			HttpServletRequest request) {
+			List<FaqDto> list = iFaqdao.list();
+			model.addAttribute("list", list);
+		model.addAttribute("adminPage", "../Admin/admin_faq.jsp");
+		return "Admin/admin_index";
+	}
+	
+	@RequestMapping("/admin_faq_search")
+	public String admin_faq_search(@RequestParam("keyword") String keyword, Model model) {
+		List<FaqDto> search = iFaqdao.search(keyword);
+		model.addAttribute("list", search);
+		model.addAttribute("adminPage", "../Admin/admin_faq.jsp");
+		return "Admin/admin_index";
+	}
+	
+	@RequestMapping("/admin_faq_detail")
+	public String admin_faq_detail(
+			@RequestParam("faq_idx") String faq_idx,
+			Model model,
+			HttpServletRequest request) {		
+
+		FaqDto faqDto = iFaqdao.faqdto( Integer.parseInt(faq_idx) );
+		model.addAttribute("faqdto", faqDto);
+		model.addAttribute("adminPage", "../Admin/admin_faq_detail.jsp");
+		return "Admin/admin_index";
+	}
+	
+	@RequestMapping("/admin_faq_write")
+	public String admin_faq_write(Model model) {
+		model.addAttribute("adminPage", "../Admin/admin_faq_write.jsp");
+		return "Admin/admin_index";
+	}
+	
+	@RequestMapping("/adminWritefaqformAction")
+	public String adminWritefaqformAction (
+									@RequestParam("faq_title") String faq_title,
+									@RequestParam("faq_content") String faq_content,
+									HttpServletRequest request, 
+									Model model) {
+		int result = iFaqdao.adminWritefaqformAction(faq_title, faq_content);
+		return "redirect:/admin_faq";
+	}
+	@RequestMapping("/adminfaqUpdateAction")
+	public String adminfaqUpdateAction(
+			@RequestParam("faq_idx") String faq_idx,
+			@RequestParam("faq_title") String faq_title,
+			@RequestParam("faq_content") String faq_content,
+			Model model,
+			HttpServletRequest request
+			) {
+		int result = iFaqdao.adminfaqUpdateAction(Integer.parseInt(faq_idx), faq_title, faq_content);
+		return "redirect:/admin_faq_detail?faq_idx="+faq_idx;
+	}
+	@RequestMapping("/adminfaqDeleteAction")
+	public String adminfaqDeleteAction(
+			@RequestParam("faq_idx") List<String> faq_idx,		
+			HttpServletRequest request) {
+		for(int i=0; i<faq_idx.size(); i++) {		
+			int result = iFaqdao.adminfaqDeleteAction(Integer.parseInt(faq_idx.get(i)));
+		}
+		return "redirect:/admin_faq";
+	}
 
 	@RequestMapping("/admin_order_action")
 	public String admin_order_action(
+			@RequestParam(value = "order_detail_idx", required = false, defaultValue = "") String order_detail_idx,
 			@RequestParam(value = "order_idx", required = false, defaultValue = "") String order_idx,
 			HttpServletResponse resp,
 			Model model) throws IOException {
@@ -895,7 +1033,6 @@ public class MyController {
 			Model model,
 			UsersDto dto) {	
 		
-		System.out.println("jello"+user_email_receive);
 		if(user_email_receive == null) {
 			user_email_receive = "0";
 		}else {
@@ -968,7 +1105,6 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_one2one.jsp");
 		return "Admin/admin_index";
 	}
-
 
 	@RequestMapping("/admin_one2one_detail")
 	public String admin_one2one_detail(@RequestParam("one2one_idx") int one2one_idx, Model model) {
@@ -1060,6 +1196,26 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_order_list.jsp");
 		return "Admin/admin_index";
 	}
+	//전체주문목록 검색기능
+	@RequestMapping("/order_list_search")
+	public String order_list_search(@RequestParam("keyword") String keyword, 
+									@RequestParam("search") String search, Model model) {
+		String str = "";
+		if(search.equals("id") ) {
+			str = "user_id LIKE '%"+keyword+"%' ORDER BY user_idx DESC";
+		}else if(search.equals("name")) {
+			str = "user_name LIKE '%"+keyword+"%' ORDER BY user_idx DESC";
+		}else if(search.equals("email")) {
+			str = "user_email LIKE '%"+keyword+"%' ORDER BY user_idx DESC";
+		}else if(search.equals("phone")) {
+			str = "user_phone LIKE '%"+keyword+"%' ORDER BY user_idx DESC";
+		}
+		List<OrderDto> order_list_search = iOrderdao.order_list_search(str);
+		model.addAttribute("list", order_list_search);
+		model.addAttribute("adminPage", "../Admin/admin_order_list.jsp");
+		return "Admin/admin_index";
+	}
+	
 	@RequestMapping("/admin_product")
 	public String admin_product(
 			@RequestParam(value="page",required=false) String page,
@@ -1080,7 +1236,15 @@ public class MyController {
 		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
 		return "Admin/admin_index";
 	}
-
+	//상품관리 검색기능
+	@RequestMapping("/admin_product_search")
+	public String admin_product_search(@RequestParam("keyword") String keyword, Model model) {
+		List<ProductDto> list = iProductdao.search(keyword);
+		model.addAttribute("list", list);
+		model.addAttribute("adminPage", "../Admin/admin_product.jsp");
+		return "Admin/admin_index";
+	}
+	
 	@Autowired
 	fileUploadService fileUploadService;
 	@RequestMapping(value="/admin_product_registration_form", method = RequestMethod.POST)
@@ -1176,4 +1340,8 @@ public class MyController {
 		int result = iOrderdao.order_status_update(Integer.parseInt(order_status),Integer.parseInt(order_idx));
 		return "redirect:/admin_order_action?order_idx="+Integer.parseInt(order_idx);
 	}
+	
+
+	
+	
 }

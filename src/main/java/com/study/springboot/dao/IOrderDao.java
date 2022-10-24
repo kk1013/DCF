@@ -28,5 +28,5 @@ public interface IOrderDao {
 	public int order_detail_insert(OrderDto dto);
 	public List<OrderDto> myOrderList(int user_idx);
 	public List<OrderDto> orderdetail(int order_idx, int idx);
-	
+	public List<OrderDto> order_list_search(String str);
 }

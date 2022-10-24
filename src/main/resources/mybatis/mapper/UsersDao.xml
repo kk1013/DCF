@@ -22,6 +22,10 @@
 		SELECT * FROM DCF_USERS WHERE user_idx = #{ param1 }
 	</select>
 	
+	<select id="mypage" resultType="com.study.springboot.dto.UsersDto">
+		SELECT * FROM DCF_USERS WHERE user_idx = #{ param1 }
+	</select>
+	
 	<update id="update" parameterType="com.study.springboot.dto.UsersDto">
 	  	UPDATE dcf_users SET
 	  	user_name=#{ user_name },
@@ -81,6 +85,11 @@
     <select id="idCheck" parameterType="com.study.springboot.dao.IUsersDao" resultType="int">
     	select count(*) from dcf_users where user_id=#{user_id}
     </select>
+    
+    <select id="search" resultType="com.study.springboot.dto.UsersDto">
+	  SELECT * FROM dcf_users WHERE ${ param1 }
+	</select>
+	
 </mapper>
 
 

@@ -41,7 +41,12 @@
                     <li><a href="order_list">주문목록</a></li>
                     <li><a href="one2one_list">1:1문의</a></li>
                     <li><a href="info_change">회원정보변경</a></li>
-                    <li><a href="mypage">마이페이지</a></li>
+                    <% if(session.getAttribute("user_id") != null) {
+						if( session.getAttribute("user_id").equals("admin") ){ %>
+	                    <li><a href="admin_user">관리자페이지</a></li>
+		       		<% } else { %>
+	                    <li><a href="mypage">마이페이지</a></li>
+	                <% } } %>
                 </ul>
             </div>
         </li>

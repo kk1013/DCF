@@ -98,18 +98,6 @@ public class MyController {
 		return "index";
 	}
 
-	@RequestMapping("/product")
-	public String product(Model model) {
-		List<ProductDto> all = iProductdao.list();
-		List<ProductDto> snack = iProductdao.product_list_snack();
-		List<ProductDto> food = iProductdao.product_list_food();
-		model.addAttribute("all", all);
-		model.addAttribute("snack", snack);
-		model.addAttribute("food", food);
-		model.addAttribute("mainPage", "Product/product.jsp");
-		return "index";
-	}
-	
 	@RequestMapping("/product_search")
 	public String product_search(@RequestParam("keyword") String keyword, Model model) {
 		List<ProductDto> search = iProductdao.search(keyword);

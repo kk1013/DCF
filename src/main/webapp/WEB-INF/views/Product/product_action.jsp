@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/css/product/product_action.css"> 
 <div id="productActionpage-wrap">
 	<form action="basket_action" method="get">
+	<input type="hidden" name="product_idx" value="${ product.product_idx }">
     <div id="productActionpage-topwrap">
         <div id="productActionpage-img">
             <img src="/img/product-img/${ product.product_image }" alt="">
@@ -19,19 +20,23 @@
                 <div id="countbar-in">
                     <div id="count-button">
                         <input type="button" id="minus" value="-">
-                        <input type="hidden" name="count" value="0">
+                        <input type="hidden" name="count" value="1">
                         <p id="count">1</p>
                         <input type="button" id="plus" value="+">
                     </div>
                     <div id="count-price">
-                    	<input type="hidden" name="price" value="0">
                         <p id="productActionpage-price2">${ product.product_price }원</p>
                         <input type="button" id="reset" value="x">
                     </div>
                 </div>
             </div>
             <div>
-                <input type="submit" id="basket" value="장바구니 담기">
+            	<% session = request.getSession(); %>
+            	<% if( session.getAttribute("user_id") != null){ %>
+		            <input type="submit" id="basket" value="장바구니 담기">
+		        <% } else { %>
+		        	<input type="button" id="basket" value="장바구니 담기" onclick="alert('로그인후 이용해주세요'); location.href='login';">
+		        <% } %>
             </div>
         </div>
     </div>
@@ -43,6 +48,7 @@
     </div>
     <div id="content-wrap">
         <div id="product-content">
+        <img src="/img/product-img/unknown.jpg">
        	${ product.product_content }
         </div>
         <table id="review">
@@ -50,7 +56,6 @@
                 <th>구매후기 <span id="blue">( ${ count } )</span> </th>
             </tr>
         <c:forEach var="list" items="${ review_list }">
-        
             <tr>
                 <td id="first-td">            
                     <div class="star-ratings">                    
@@ -63,6 +68,7 @@
                         </div>
                     </div>
                 </td>
+                <td><img src="img/product-img/${ list.review_image }" style="width: 90%"></td>
                 <td>
                     ${ list.review_content }
                 </td>
@@ -116,7 +122,7 @@
             var new_price = price.split("원");
             new_price = new_price[0].replace(",", "");
             var result2 = Number(new_price) + ${ product.product_price };
-            document.getElementsByName("price")[0].value = result2;
+            document.getElementsByName("count")[0].value = result;
             $("#productActionpage-price2")[0].innerHTML = result2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원";
             count[0].innerHTML = result;
             

@@ -88,6 +88,7 @@
                         <div class="wd-80" id="image-show">
                             <img src="../img/product-img/${ dto.product_image }" id="product-image" class="wd-80"/>
                         </div>
+                        <input type="hidden" name="original_image" value="${ dto.product_image }">
                         <label class="uploadlabel" for="chooseFile">첨부</label><input type="button" class="uploadlabel" id="deletebtn" onclick="deletefile()" value="삭제">
                         <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
                     </div>

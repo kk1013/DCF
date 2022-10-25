@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ page trimDirectiveWhitespaces="true" %>
 <link rel="stylesheet" href="/css/Member/join_action.css">
-
     <div id="page-nav-wrap">
         <div id="page-nav">
                 HOME > 회원가입
@@ -23,5 +22,5 @@
             <span id="welcome">WELCOME!</span>
             <span id="action">회원가입이 완료 되었습니다.</span>
             <img src="/img/icons/login_logo.png" width="147" height="60">
-            <button class="joinAction-button" onclick="location.href='index'">메인으로</button>
+            <a href="index"><button class="joinAction-button">메인으로</button></a>
         </div>

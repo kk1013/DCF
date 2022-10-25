@@ -14,7 +14,15 @@
 	SELECT * FROM DCF_PRODUCT WHERE product_sample = 1 AND product_animal = 1
 	</select>
 	<select id="list" resultType="com.study.springboot.dto.ProductDto">
-	  SELECT * FROM dcf_product ORDER BY product_idx DESC
+	  		SELECT * FROM
+	    (
+	        SELECT 
+	            ROWNUM AS RNUM, dcf_product.*
+	        FROM
+	            dcf_product
+	        ORDER BY product_idx desc
+	    )
+		WHERE RNUM BETWEEN #{param1} AND #{param2}
 	</select>
 	<select id="product_list_snack" resultType="com.study.springboot.dto.ProductDto">
 	SELECT * FROM DCF_PRODUCT WHERE product_category_type=1
@@ -26,14 +34,71 @@
 	SELECT * FROM DCF_PRODUCT WHERE product_idx=#{param1}
 	</select>
 	
-	
-	
 	<delete id="product_delete">
 	  DELETE FROM dcf_product WHERE product_idx=#{ param1 }
 	</delete>
+	
 	<select id="search" resultType="com.study.springboot.dto.ProductDto">
-	  SELECT * FROM dcf_product WHERE product_name LIKE '%'||#{ param1 }||'%' OR product_price LIKE '%'||#{ param1 }||'%' ORDER BY product_idx DESC
+	  SELECT * FROM dcf_product WHERE product_name LIKE '%'||#{ param1 }||'%'
 	</select>
+	
+	<select id="newlist_dog" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_new=1 AND product_animal = 0
+	</select>
+	
+	<select id="newlist_cat" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_new=1 AND product_animal = 1
+	</select>
+	
+	<select id="product_list_dog" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_animal = 0
+	</select>
+	
+	<select id="product_list_dog_food" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_animal = 0 AND product_category_type = 0
+	</select>
+	
+	<select id="product_list_dog_snack" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_animal = 0 AND product_category_type = 1
+	</select>
+	
+	<select id="product_list_best" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_best = 1
+	</select>
+	
+	<select id="product_list_best_food" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_best = 1 AND product_category_type = 0
+	</select>
+	
+	<select id="product_list_best_snack" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_best = 1 AND product_category_type = 1
+	</select>
+	
+	<select id="product_list_cat" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_animal = 1
+	</select>
+	
+	<select id="product_list_cat_food" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_animal = 1 AND product_category_type = 0
+	</select>
+	
+	<select id="product_list_cat_snack" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE product_animal = 1 AND product_category_type = 1
+	</select>
+	
+	<select id="product_condition" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE (${ param1 }
+	</select>
+	
+	<select id="product_condition_food" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE (${ param1 } AND product_category_type = 0
+	</select>
+	
+	<select id="product_condition_snack" resultType="com.study.springboot.dto.ProductDto">
+	  SELECT * FROM dcf_product WHERE (${ param1 } AND product_category_type = 1
+	</select>
+
+
 	<insert id="insertProduct" parameterType="com.study.springboot.dto.ProductDto">
 		INSERT INTO DCF_PRODUCT 
 		VALUES( product_idx_seq.nextval, 

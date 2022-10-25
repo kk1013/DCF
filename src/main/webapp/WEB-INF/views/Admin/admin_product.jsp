@@ -3,11 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="/css/Admin/admin_product.css">
+<link rel="stylesheet" href="/css/pagenav.css">
     <div class="content-wrap">
     
         <p class="admin-title">상품관리</p>
         <div class="btn-wrap">
-            <label><input onClick="document.getElementById('product_delete_form').submit()" type="button" id="product_delete" value="상품수정"></label> 
             <div class="customer-search">
         <form action="/admin_product_search" method="get">
                 <input name="keyword" type="text" class="searchbar">
@@ -45,6 +45,35 @@
             </tbody>
 		
         </table>
+        <div class="container-fluid">
+		<div class="row">
+		  <ul class="pagination">
+		   
+		    <li class="<c:if test="${ page == 1 } ">disabled</c:if>">
+		    	<a href="/admin_product?page=${page-1}">&#60;</a>
+		    </li>
+		   
+		    <li class="<c:if test="${ page == 1 }">pageNaveClick</c:if>">
+		    	<a class="" href="/admin_product?page=1">1</a>
+		    </li>
+		    <li class="<c:if test="${ page == 2 }">pageNaveClick</c:if>">
+		    	<a class="" href="/admin_product?page=2">2</a>
+		    </li>
+		    <li class="<c:if test="${ page == 3 }">pageNaveClick</c:if>">
+		    	<a class="" href="/admin_product?page=3">3</a>
+		    </li>
+		    <li class="<c:if test="${ page == 4 }">pageNaveClick</c:if>">
+		    	<a class="" href="/admin_product?page=4">4</a>
+		    </li>
+		    <li class="<c:if test="${ page == 5 }">pageNaveClick</c:if>">
+		    	<a class="" href="/admin_product?page=5">5</a>
+		    </li>
+		    <li class="<c:if test="${ page == 5 }">disabled</c:if>">
+		    	<a class="" href="/admin_product?page=${page+1}">&gt;</a>
+		    </li>
+		  </ul>
+		</div>
+	</div>
 			</form>
     </div><!--content-wrap-->
     

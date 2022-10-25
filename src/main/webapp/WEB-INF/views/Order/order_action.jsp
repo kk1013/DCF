@@ -14,10 +14,10 @@
         <div id="orderActionwrap">
             <span id="confirm">주문완료!</span>
             <div id="orderinfo">
-                <span id="action">주문번호 : 20220913 ..</span>
-                <span id="action2">주문일자 : sysdate</span>
+                <span id="action">주문번호 : ${ order_idx }</span>
+                <span id="action2">주문일자 : ${ date }</span>
             </div>
             <img src="/img/icons/login_logo.png" width="147" height="60">
-            <a href="#"><button class="orderAction-button">주문상세보기</button></a>
+            <a href="index"><button class="orderAction-button">메인으로가기</button></a>
 
         </div>

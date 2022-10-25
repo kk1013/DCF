@@ -27,14 +27,14 @@
             <span class="step-font">STEP3.가입완료</span>
         </div>
         <!-- -------------------------------------------------------------------------------------------------------- -->
-        <form action="join_form" method="POST" id="form_wrap">
+        <form action="join_form" method="POST" id="form_wrap" onsubmit="return checkbox_Check();" >
         <div class="join-check">
             <div id="join-agree">
                 <input type="checkbox" name="yellowCheckbox1" id="yellowCheckbox1">
                 <label for="yellowCheckbox1" class="yellowCheckbox"></label>
                 <span>가입 약관 모두 동의</span>
             </div>
-            <div class="join-agree">
+            <div class="join-agree testcss" id="testcss">
                 <input type="checkbox" name="checkBox" id="yellowCheckbox2" value="0">
                 <label for="yellowCheckbox2" class="yellowCheckbox"></label>
                 <span>멍냥남매 서비스 이용약관 (필수)</span>
@@ -70,8 +70,7 @@
 
 </body>
 
-<script type="text/javascript">
-	
+<script type="text/javascript">	
 	$(document).ready(function() {
 		$("#yellowCheckbox1").click(function() {
       var provision = document.getElementsByClassName("join-provision");
@@ -117,6 +116,15 @@
       }
 		});
 	});
+  
+  function checkbox_Check(){    	
+      if ($("input:checkbox[name=yellowCheckbox1]").is(":checked") == true) {
+        if ($("input:checkbox[name=yellowCheckbox2]").is(":checked") == true){
+          $(".join-agree:nth-child(1)").css("border-top","none");
+        }else{$(".join-agree:nth-child(1)").css("border-top","1px solid #292929;");}
+        return true;  
+      } alert("모두 동의후 회원가입 가능합니다."); return false;   }
 	
-	</script>
+</script>
+
 </html>

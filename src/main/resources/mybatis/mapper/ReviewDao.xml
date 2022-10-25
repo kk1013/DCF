@@ -9,4 +9,10 @@
 	<select id="review" resultType="com.study.springboot.dto.ReviewDto">
 	SELECT r.*, u.USER_NAME FROM DCF_REVIEW r, DCF_USERS u WHERE r.REVIEW_USER_IDX = u.USER_IDX AND REVIEW_PD_IDX=#{param1}
 	</select>
+	<select id="viewproductinfo" resultType="com.study.springboot.dto.ReviewDto">
+	 select * from dcf_product p join dcf_review r on review_pd_idx = product_idx where review_pd_idx=#{param1}
+	</select>
+	<insert id="reviewInsert"  parameterType="com.study.springboot.dto.ReviewDto">
+	insert into dcf_review values(review_idx_seq.nextval, #{review_content}, #{review_image}, sysdate, #{review_score}, #{review_pd_idx}, #{review_user_idx})
+	</insert>
 </mapper>

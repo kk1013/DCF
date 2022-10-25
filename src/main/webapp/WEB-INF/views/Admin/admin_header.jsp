@@ -8,10 +8,17 @@
     </div>
     <div class="square ds-none">
         <div class="user-type">
-            <p>대표운영자님</p>
+        <% session = request.getSession(); %>
+        <% if( session.getAttribute("user_name") != null){ %>
+            <p><%= session.getAttribute("user_name") %>님</p>
+        <% } %>     	
         </div>
-        <p class="user-name">admin님</p>
-        <a href="#">쇼핑몰정보</a><br>
+        <p class="user-name">
+        <% session = request.getSession(); %>
+        <% if( session.getAttribute("user_id") != null){ %>
+            <p><%= session.getAttribute("user_id") %>님</p>
+        <% } %>
+        <a href="index">쇼핑몰정보</a><br>
         <a href="logout">로그아웃</a>
     </div>
 <div id="aside-wrap">
@@ -19,7 +26,7 @@
         <img src="/img/logo.png" id="aside-logo">
         <ul class="aside-menu">
             <li class="aside-menu-item">
-                <a href="loginAction" class="bold">회원관리</a>
+                <a href="admin_user" class="bold">회원관리</a>
             </li>
             <li class="aside-menu-item">
                 <a href="admin_product" class="bold">상품관리</a>
@@ -38,6 +45,7 @@
             <a href="admin_notice" class="bold">게시판관리</a>
             <ul class="asidebar">
                 <li><a href="admin_notice">공지사항</a></li>
+                <li><a href="admin_faq">FAQ</a></li>
                 <li><a href="admin_one2one">1:1문의</a></li>
             </ul>
             </li>
@@ -57,4 +65,5 @@
             }
 		});
     });
+    
 </script>

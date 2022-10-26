@@ -35,7 +35,7 @@
             </thead>
             <tbody>
         <c:forEach var="dto" items="${ list }">
-	  	<tr onclick="location.href='admin_order_action?order_idx=${dto.order_idx}&order_detail_idx=${ dto.order_detail_idx }'">
+	  	<tr onclick="location.href='admin_order_action?order_idx=${dto.order_idx}'">
            <td><fmt:formatDate value="${ dto.order_date }" pattern = "yyyy-MM-dd"/></td>
            <td>${ dto.order_idx }</td>
            <td>${ dto.user_name }</td>

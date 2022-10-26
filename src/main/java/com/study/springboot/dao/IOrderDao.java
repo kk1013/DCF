@@ -29,7 +29,4 @@ public interface IOrderDao {
 	public List<OrderDto> myOrderList(int user_idx);
 	public List<OrderDto> orderdetail(int order_idx, int idx);
 	public List<OrderDto> order_list_search(String str);
-	public int before( int user_idx );
-	public int during( int user_idx );
-	public int after( int user_idx );
 }

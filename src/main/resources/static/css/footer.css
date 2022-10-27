@@ -17,17 +17,18 @@
     color: white;
 }
 .footer-content:nth-child(1){
-	width:33%;
+	width:30%;
 	height:220px;float:left;
     display:flex;
 	flex-direction:column;
     justify-content:center;
+    margin-left:30px;
 }
 .footer-content>img{	
 	width:147px; height:60px;
 }
 .footer-content:nth-child(2){
-	width:33%;
+	width:50%;
 	height:200px;
 	float:left;
     display:flex;
@@ -36,7 +37,7 @@
     align-items:center;
 }
 .footer-content:nth-child(3){
-	width:33%;
+	width:15%;
 	float:left;
 	margin-top:60px;
 }
@@ -62,4 +63,6 @@
     margin-right: 5px;
 }
 #sns {
+	display:flex;
+	flex-direction:column;
 }

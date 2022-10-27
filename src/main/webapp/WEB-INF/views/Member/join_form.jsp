@@ -194,7 +194,7 @@
 				
 				$.ajax({
 					type : "POST", // http 방식 
-					url : "/join_form", // ajax 통신 url
+					url : "http://3.39.54.14:8090/join_form", // ajax 통신 url
 					data : { // ajax 내용 => 파라미터 : 값 이라고 생각해도 무방
 						"type" : "user_id",
 						"id" : $("#user_id").val()

@@ -51,7 +51,7 @@
             <div>
                 <input type="submit" value="정보변경">                
                 <a href="adminMemberDeleteAction?user_idx=${usersdto.user_idx}"><button id="delete" type="button" value="회원삭제">회원삭제</button></a>
-                <a href="loginAction"><input type="button" value="목록"></a>
+                <a href="admin_member"><input type="button" value="목록"></a>
             </div>
             <input type="hidden" name="user_idx" value="${usersdto.user_idx}"></input>
         </form>

@@ -168,7 +168,7 @@
              }
              $.ajax({
 					type: "POST",
-					url: "/cart_update_plus?status_value="+status_value+"&result_text="+result_text
+					url: "http://3.39.54.14:8090/cart_update_plus?status_value="+status_value+"&result_text="+result_text
 			 })
         } else if(id == 'minus'){
              if(result.innerHTML == 1){
@@ -183,7 +183,7 @@
              }
              $.ajax({
 					type: "POST",
-					url: "/cart_update_minus?status_value="+status_value+"&result_text="+result_text
+					url: "http://3.39.54.14:8090/cart_update_minus?status_value="+status_value+"&result_text="+result_text
 			 })
         }
         	

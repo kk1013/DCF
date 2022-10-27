@@ -6,8 +6,6 @@
 <c:import url="./header.jsp" />
 
 <!-- main.jsp, login.jsp, ... -->
-<c:import url="../${ mainPage }" />
+<c:import url="${ mainPage }" />
 
 <c:import url="./footer.jsp" />
-
-

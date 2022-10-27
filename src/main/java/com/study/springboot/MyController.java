@@ -840,6 +840,12 @@ public class MyController {
 		return "index";
 	}
 	
+	//어드민 회원정보
+		@RequestMapping("/admin_member")
+		public String admin_member(Model model) {
+			model.addAttribute("mainPage", "../Admin/admin_member.jsp");
+			return "index";
+		}
 	//회원정보연결_상세보기 페이지
 	@RequestMapping("/admin_member_detail")
 	public String admin_member_detail(

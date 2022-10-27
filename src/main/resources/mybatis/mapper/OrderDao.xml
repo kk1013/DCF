@@ -148,4 +148,15 @@
 	  SELECT * FROM dcf_users, dcf_order WHERE dcf_users.user_idx = dcf_order.order_user_idx AND dcf_users.${ param1 }
 	</select>
 	
+	<select id="before" resultType="_int">
+	  SELECT COUNT(order_status) FROM dcf_order WHERE order_status=0 AND order_user_idx=#{ param1 }
+	</select>
+	
+	<select id="during" resultType="_int">
+	  SELECT COUNT(order_status) FROM dcf_order WHERE order_status=1 AND order_user_idx=#{ param1 }
+	</select>
+	
+	<select id="after" resultType="_int">
+	  SELECT COUNT(order_status) FROM dcf_order WHERE order_status=2 AND order_user_idx=#{ param1 }
+	</select>
 </mapper>

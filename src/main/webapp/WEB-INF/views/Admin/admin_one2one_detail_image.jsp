@@ -6,4 +6,4 @@
 
 <%-- 	<% session = request.getSession(); %>
 	<%= session.getAttribute("list")%> --%>
-	<img src="../img/product-img/${list.one2one_image}">
+	<img src="../upload/${list.one2one_image}">

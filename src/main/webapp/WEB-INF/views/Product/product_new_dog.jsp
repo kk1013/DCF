@@ -24,7 +24,7 @@
                 <tr style="width:25%; float:left;" >
                     <td>
                         <div class="sample-product">
-                            <img src="/img/product-img/${ list.product_image }" alt="사료1">
+                            <img src="../upload/${ list.product_image }" alt="사료1">
                         </div>
                         <p class="product-name">${ list.product_name }</p>
                         <p class="price">${ list.product_price }원</p>

@@ -117,7 +117,7 @@
                 <tr style="width: 33.3%; float: left;" onclick="location.href='product_action?product_idx=${ all.product_idx }'">
                 	<td>
                         <div class="sample-product">
-                            <img src="/img/product-img/${ all.product_image }" class="product" alt="사료8">
+                            <img src="../upload/${ all.product_image }" class="product" alt="사료8">
                         </div>
                         <p class="product-name">${ all.product_name }</p>
                         <p class="price">${ all.product_price }</p>
@@ -130,7 +130,7 @@
                 <tr style="width: 33%; float: left;" onclick="location.href='product_action?product_idx=${ food.product_idx }'">
                 	<td>
                         <div class="sample-product">
-                            <img src="/img/product-img/${ food.product_image }" class="product" alt="사료8">
+                            <img src="../upload/${ food.product_image }" class="product" alt="사료8">
                         </div>
                         <p class="product-name">${ food.product_name }</p>
                         <p class="price">${ food.product_price }</p>
@@ -143,7 +143,7 @@
                 <tr style="width: 33%; float: left;" onclick="location.href='product_action?product_idx=${ snack.product_idx }'">
                 	<td>
                         <div class="sample-product">
-                            <img src="/img/product-img/${ snack.product_image }" class="product" alt="사료8">
+                            <img src="../upload/${ snack.product_image }" class="product" alt="사료8">
                         </div>
                         <p class="product-name">${ snack.product_name }</p>
                         <p class="price">${ snack.product_price }</p>
@@ -151,6 +151,37 @@
                 </tr>
 					</c:forEach>
                     </table>
+                       <div id="pagenav">
+    <div class="container-fluid">
+		<div class="row">
+		  <ul class="pagination">
+		   
+		    <li class="<c:if test="${ page == 1 } ">disabled</c:if>">
+		    	<a href="/${ pagenav }?page=${page-1}">&#60;</a>
+		    </li>
+		   
+		    <li class="<c:if test="${ page == 1 }">pageNaveClick</c:if>">
+		    	<a class="" href="/${ pagenav }?page=1">1</a>
+		    </li>
+		    <li class="<c:if test="${ page == 2 }">pageNaveClick</c:if>">
+		    	<a class="" href="/${ pagenav }?page=2">2</a>
+		    </li>
+		    <li class="<c:if test="${ page == 3 }">pageNaveClick</c:if>">
+		    	<a class="" href="/${ pagenav }?page=3">3</a>
+		    </li>
+		    <li class="<c:if test="${ page == 4 }">pageNaveClick</c:if>">
+		    	<a class="" href="/${ pagenav }?page=4">4</a>
+		    </li>
+		    <li class="<c:if test="${ page == 5 }">pageNaveClick</c:if>">
+		    	<a class="" href="/${ pagenav }?page=5">5</a>
+		    </li>
+		    <li class="<c:if test="${ page == 5 }">disabled</c:if>">
+		    	<a class="" href="/${ pagenav }?page=${page+1}">&gt;</a>
+		    </li>
+		  </ul>
+		</div>
+	</div>
+	</div><!--content-wrap-->
                 </div>
             </div>
         </div>

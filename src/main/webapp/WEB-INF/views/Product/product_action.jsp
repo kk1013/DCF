@@ -8,7 +8,7 @@
 	<input type="hidden" name="product_idx" value="${ product.product_idx }">
     <div id="productActionpage-topwrap">
         <div id="productActionpage-img">
-            <img src="/img/product-img/${ product.product_image }" alt="">
+            <img src="../upload/${ product.product_image }" alt="">
         </div>
         <div id="productActionpage-productcontent">
             <div id="productActionpage-name">
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </td>
-                <td><img src="img/product-img/${ list.review_image }" style="width: 90%"></td>
+                <td><img src="../upload/${ list.review_image }" style="width: 90%"></td>
                 <td>
                     ${ list.review_content }
                 </td>

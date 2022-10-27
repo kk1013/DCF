@@ -320,10 +320,24 @@ public class MyController {
 	
 	// 반려견 페이지
 	@RequestMapping("/product_dog")
-	public String product_dog(HttpServletRequest request, Model model) {
-		List<ProductDto> dog = iProductdao.product_list_dog();
-		List<ProductDto> dog_food = iProductdao.product_list_dog_food();
-		List<ProductDto> dog_snack = iProductdao.product_list_dog_snack();
+	public String product_dog(
+			HttpServletRequest request,
+			@RequestParam(value="page",required=false) String page,
+			Model model) {
+		if( page == null ) {
+			page = "1";
+		}
+		
+		model.addAttribute("page", page);
+		
+		int num_page_no = Integer.parseInt( page ); //page번호 1,2,3,4
+		int num_page_size = 15; //한페이지당 Row갯수
+		int startRowNum = (num_page_no - 1) * num_page_size + 1; // 1, 6, 11 페이지 시작 줄번호
+		int endRowNum = (num_page_no * num_page_size);           // 5, 10, 15 페이지 끝 줄번호
+		List<ProductDto> dog = iProductdao.product_list_dog( String.valueOf(startRowNum), String.valueOf(endRowNum) );
+		List<ProductDto> dog_food = iProductdao.product_list_dog_food( String.valueOf(startRowNum), String.valueOf(endRowNum) );
+		List<ProductDto> dog_snack = iProductdao.product_list_dog_snack( String.valueOf(startRowNum), String.valueOf(endRowNum) );
+		model.addAttribute("pagenav", "product_dog");
 		model.addAttribute("all", dog);
 		model.addAttribute("food", dog_food);
 		model.addAttribute("snack", dog_snack);		
@@ -333,10 +347,23 @@ public class MyController {
 	
 	// 반려묘 페이지
 	@RequestMapping("/product_cat")
-	public String product_cat(HttpServletRequest request, Model model) {
-		List<ProductDto> cat = iProductdao.product_list_cat();
-		List<ProductDto> cat_food = iProductdao.product_list_cat_food();
-		List<ProductDto> cat_snack = iProductdao.product_list_cat_snack();
+	public String product_cat(HttpServletRequest request,
+			@RequestParam(value="page",required=false) String page,
+			Model model) {
+		if( page == null ) {
+			page = "1";
+		}
+		
+		model.addAttribute("page", page);
+		
+		int num_page_no = Integer.parseInt( page ); //page번호 1,2,3,4
+		int num_page_size = 15; //한페이지당 Row갯수
+		int startRowNum = (num_page_no - 1) * num_page_size + 1; // 1, 6, 11 페이지 시작 줄번호
+		int endRowNum = (num_page_no * num_page_size);           // 5, 10, 15 페이지 끝 줄번호
+		List<ProductDto> cat = iProductdao.product_list_cat( String.valueOf(startRowNum), String.valueOf(endRowNum) );
+		List<ProductDto> cat_food = iProductdao.product_list_cat_food( String.valueOf(startRowNum), String.valueOf(endRowNum) );
+		List<ProductDto> cat_snack = iProductdao.product_list_cat_snack( String.valueOf(startRowNum), String.valueOf(endRowNum) );
+		model.addAttribute("pagenav", "product_cat");
 		model.addAttribute("all", cat);
 		model.addAttribute("food", cat_food);
 		model.addAttribute("snack", cat_snack);		

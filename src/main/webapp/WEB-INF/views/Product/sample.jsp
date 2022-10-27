@@ -22,7 +22,7 @@
                 <tr style="width: 20%; float: left;" onclick="location.href='product_action?product_idx=${ dog.product_idx }'">
                 	<td>
                         <div class="sample-product">
-                            <img src="/img/product-img/${ dog.product_image }" class="product" alt="사료8">
+                            <img src="../upload/${ dog.product_image }" class="product" alt="사료8">
                         </div>
                         <p class="product-name">${ dog.product_name }</p>
                         <p class="price">${ dog.product_price }</p>
@@ -30,12 +30,12 @@
                 </tr>
 					</c:forEach>
             </table>
-             <table class="table cat ds-none" style="width: 1080px;">
+             <table class="table cat ds-none">
                 	<c:forEach var="cat" items="${ cat }">
-                <tr  style="width: 20%; float: left;" onclick="location.href='product_action?product_idx=${ cat.product_idx }'">
+                <tr onclick="location.href='product_action?product_idx=${ cat.product_idx }'">
                 	<td>
                         <div class="sample-product">
-                            <img src="/img/product-img/${ cat.product_image }" class="product" alt="사료8">
+                            <img src="../upload/${ cat.product_image }" class="product" alt="사료8">
                         </div>
                         <p class="product-name">${ cat.product_name }</p>
                         <p class="price">${ cat.product_price }</p>

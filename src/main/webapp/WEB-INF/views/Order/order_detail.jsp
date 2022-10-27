@@ -27,7 +27,7 @@
             <c:set var="sum" value="0" />
             <c:forEach var="list" items="${orderdetail}">
             <div class="orderDetail3">
-                <div class="orderDetail3-1"><img src="../img/product-img/${list.product_image}" alt="" width="130px" height="130px"></div>
+                <div class="orderDetail3-1"><img src="../upload/${list.product_image}" alt="" width="130px" height="130px"></div>
                 <div class="orderDetail3-2">${list.product_name}</div>
                 <div class="orderDetail3-3">
                     <div class="orderDetail3-3-1">

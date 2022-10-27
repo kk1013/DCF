@@ -22,7 +22,7 @@
         </div>
         <div class="review-star">
             <div class="imgdiv">
-                <img src="../img/product-img/${viewproductinfo[0].product_image}" width="300px" height="300px">
+                <img src="../upload/${viewproductinfo[0].product_image}" width="300px" height="300px">
             </div><input type="hidden" name="review_pd_idx" value="${viewproductinfo[0].product_idx }">
             <div class="stardiv">
                 <span class="product-name">${viewproductinfo[0].product_name}</span><br>

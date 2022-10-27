@@ -39,7 +39,7 @@
                 </tr>
                 <tr>
                     <td class="onetoone-td1 onetoone-td-img">사진</td>
-                    <td colspan='4' class="onetoone-td2"><img src="../img/product-img/${ dto.one2one_image }" alt="" width="70px" height="70px" onClick="view()" style="cursor:pointer;"></td>
+                    <td colspan='4' class="onetoone-td2"><img src="../upload/${ dto.one2one_image }" alt="" width="70px" height="70px" onClick="view()" style="cursor:pointer;"></td>
                 </tr>
             </table>
         </div>

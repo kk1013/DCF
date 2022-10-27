@@ -39,7 +39,7 @@
 
 
                 <div class="imgdiv">
-                    <img src="../img/product-img/${list.product_image}" alt="상품이미지" width="120px" height="120px">
+                    <img src="../upload/${list.product_image}" alt="상품이미지" width="120px" height="120px">
                 </div>
 
                 <div class="productname">${list.product_name}</div>

@@ -67,7 +67,7 @@
             <div class="orderActiondiv oa-div11">
                 <div class="oa-div11-1"><input type="checkbox"></div>
                 <div class="oa-div11-2"><p>${ list.order_idx }</p></div>
-                <div class="oa-div11-3"><img src="/img/product-img/${ list.product_image }" alt="" width="80px" height="80px"></div>
+                <div class="oa-div11-3"><img src="../upload/${ list.product_image }" alt="" width="80px" height="80px"></div>
                 <div class="oa-div11-4">${ list.product_name }</div>
                 <div class="oa-div11-5">
                     <select class="oa-select" name="delivery" id="delivery">

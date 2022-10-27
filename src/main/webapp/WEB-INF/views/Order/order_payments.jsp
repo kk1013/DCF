@@ -61,7 +61,7 @@
                     <td>
                         <div class="product">
                             <div class="product-image">
-                                <img src="../img/product-img/${product.product_image}" id="product-img">
+                                <img src="../upload/${product.product_image}" id="product-img">
                             </div>
                             <input type="hidden" name="basket_idx" value="${ product.basket_idx }"/>
                             <input type="hidden" name="product_idx" value="${ product.basket_pd_idx }"/>

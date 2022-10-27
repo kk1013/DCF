@@ -31,7 +31,7 @@
                     <td>사진</td>
                     <td>
                         <div class="one2one-answer-img">
-                            <img src="../img/product-img/${ dto.one2one_image }" alt="" width="70px" height="70px" onClick="view()" style="cursor:pointer;">
+                            <img src="../upload/${ dto.one2one_image }" alt="" width="70px" height="70px" onClick="view()" style="cursor:pointer;">
                         </div>
                     </td>
                 </tr>               

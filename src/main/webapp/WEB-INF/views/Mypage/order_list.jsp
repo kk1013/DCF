@@ -36,7 +36,7 @@
 					<c:set var="productnum" value="${productnum+product.order_pd_idx}" />
 					<div class="order-product">
 		            <div class="imgdiv">
-		                <img src="../img/product-img/${product.product_image}">
+		                <img src="../upload/${product.product_image}">
 		            </div>
 		            <div class="product-namediv">
 		                <span class="product-name">${product.product_name}</span>

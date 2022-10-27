@@ -12,8 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class fileUploadService {
 	
-	private static String SAVE_PATH = "/img/product-img/";
-	private static String PREFIX_URL = "/img/product-img/";
+	private static String SAVE_PATH = "/home/ubuntu/sbb/upload/";
+	private static String PREFIX_URL = "/upload/";
 	
 	public String restore(MultipartFile multipartFile) {
 		
@@ -23,17 +23,11 @@ public class fileUploadService {
 		//C:\Users\Gi7A-00\Documents\sprintboot\ex13_FileUploadWithParam\bin\main\static\img/product-img
 		//C:\Users\Gi7A-00\Documents\sprintboot\ex13_FileUploadWithParam\src\main\resources\static\img/product-img
 		try {
-			String savepath = ResourceUtils.getFile("classpath:static/img/product-img").toPath().toString();
-			System.out.println("savepath:" + savepath);
-			
-			savepath = savepath.replace("\\", "/");
-			System.out.println("savepath2 : " + savepath);
-			savepath = savepath.replace("/bin/main/static", "/src/main/resources/static");
-			System.out.println("savepath3 : " + savepath);
+			String savepath = ResourceUtils.getFile("/upload/").toPath().toString();
+
 			//C:/Users/i7D/Documents/springboot/ex13_FileUploadWithParam/src/main/resources/static/img/product-img
-			SAVE_PATH = savepath;
-			PREFIX_URL = savepath;
-			
+			SAVE_PATH = "/home/ubuntu/sbb/upload";
+			PREFIX_URL = "/upload/";
 			// 파일 정보
 			String originFilename = multipartFile.getOriginalFilename();
 			String extName

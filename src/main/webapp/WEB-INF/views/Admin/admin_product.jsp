@@ -34,7 +34,7 @@
                     <td onclick="location.href='/admin_product_update?product_idx=${ list.product_idx }';">${ list.product_idx }</td>
                     <td onclick="location.href='/admin_product_update?product_idx=${ list.product_idx }';">
                         <div class="admin-product-img">
-                            <span><img src="../img/product-img/${ list.product_image }" alt=""></span>
+                            <span><img src="../upload/${ list.product_image }" alt=""></span>
                             <span>${ list.product_name }</span>
                         </div>
                     </td>

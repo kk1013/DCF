@@ -23,7 +23,7 @@
 .customer-title {
     font-size: 24px;
     color: #292929;
-    font-weight: bold;
+    font-weight:bold;
 }
 .customerservice{
     font-size: 18px;
@@ -34,21 +34,22 @@
 }
 #left-button{
     border:0;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
     font-weight: bold;
-    line-height: 5px;
-    padding-top: 5px;
+    height:40px;
+    line-height:40px;
     cursor: pointer;
     background-color: #fee469;
 }
 #right-button{
     margin-left: -6px;
     border:0;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
     background-color: #ebebeb;
-    padding-top: 5px;
+    height:40px;
+    line-height:40px;
     cursor: pointer;
 }
 .customer-table {
@@ -108,4 +109,10 @@
     margin-left: 5px;
     margin-bottom: 50px;
     cursor: pointer;
+}
+.row{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    margin-bottom:40px;
 }

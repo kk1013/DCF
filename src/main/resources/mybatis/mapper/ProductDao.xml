@@ -14,7 +14,15 @@
 	SELECT * FROM DCF_PRODUCT WHERE product_sample = 1 AND product_animal = 1
 	</select>
 	<select id="list" resultType="com.study.springboot.dto.ProductDto">
-	  SELECT * FROM dcf_product ORDER BY product_idx DESC
+	  		SELECT * FROM
+	    (
+	        SELECT 
+	            ROWNUM AS RNUM, dcf_product.*
+	        FROM
+	            dcf_product
+	        ORDER BY product_idx desc
+	    )
+		WHERE RNUM BETWEEN #{param1} AND #{param2}
 	</select>
 	<select id="product_list_snack" resultType="com.study.springboot.dto.ProductDto">
 	SELECT * FROM DCF_PRODUCT WHERE product_category_type=1

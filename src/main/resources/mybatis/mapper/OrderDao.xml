@@ -36,22 +36,17 @@
 	<select id="order_list" resultType="com.study.springboot.dto.OrderDto">
     SELECT * FROM (
         SELECT temp_table.*, ROWNUM as rnum FROM (
-                  	SELECT 
-	o.*,
-	d.order_detail_idx,
-	p.PRODUCT_NAME,
-	p.PRODUCT_PRICE,
-	u.USER_NAME
-	FROM 
-    DCF_ORDER o,
-    DCF_ORDER_DETAIL d,
-	DCF_PRODUCT p,
-	DCF_USERS u
-	WHERE o.order_idx = d.order_idx 
-    AND	d.ORDER_PD_IDX = p.PRODUCT_IDX
-	AND o.ORDER_USER_IDX = u.USER_IDX
-	ORDER BY o.ORDER_IDX ASC
+    SELECT o.Order_idx, o.order_user_name , o.Order_date, o.order_status, COUNT(d.ORDER_IDX)
+    FROM DCF_ORDER o , DCF_ORDER_DETAIL d
+    WHERE o.ORDER_IDX = d.ORDER_IDX
+    GROUP BY o.ORDER_IDX, o.Order_date, o.order_status, o.order_user_name
                ) temp_table ) WHERE RNUM BETWEEN #{param1} AND #{param2}
+	</select>
+	<select id="product_select" resultType="com.study.springboot.dto.DeliveryDto">
+	SELECT * FROM DCF_PRODUCT WHERE PRODUCT_IDX = (SELECT ORDER_PD_IDX FROM DCF_ORDER_DETAIL WHERE ORDER_IDX = #{param1} AND ROWNUM = 1)
+	</select>
+	<select id="Etc_" resultType="com.study.springboot.dto.OrderDto">
+	SELECT * FROM DCF_ORDER_DETAIL WHERE ORDER_IDX=#{param1}
 	</select>
 	
 	<select id="single_select" resultType="com.study.springboot.dto.OrderDto">
@@ -73,7 +68,8 @@
 	d.order_idx = o.order_idx 
 	AND d.ORDER_PD_IDX = p.PRODUCT_IDX 
 	AND o.ORDER_USER_IDX = u.USER_IDX 
-	AND d.order_detail_idx = #{param1}
+	AND o.ORDER_IDX = #{param1}
+	AND ROWNUM = 1
 	ORDER BY d.ORDER_DETAIL_IDX ASC
 	</select>
 
@@ -143,6 +139,10 @@
         where o.order_user_idx =  ${param2} and o.order_idx = ${ param1 }
         order by d.order_idx  
 	</select>
+
+	<delete id="delete">
+	DELETE FROM DCF_BASKET WHERE BASKET_IDX = #{ param1 }
+	</delete>
 	
 	<select id="order_list_search" resultType="com.study.springboot.dto.OrderDto">
 	  SELECT * FROM dcf_users, dcf_order WHERE dcf_users.user_idx = dcf_order.order_user_idx AND dcf_users.${ param1 }

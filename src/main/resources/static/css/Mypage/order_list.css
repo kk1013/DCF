@@ -29,10 +29,10 @@
     border-radius: 5px;
     line-height: 40px;
 }
-.orderdate, .ordernum1{
-    font-size: 16px;
-    color: #292929;
+.orderdate{   
+    color: #292929; font-weight:bold;
 }
+.ordernum1{ color: #292929; }
 .orderdate {
     margin-left: 20px;
     margin-right: 300px;
@@ -44,10 +44,14 @@
     font-size: 16px;
     color: #3d5bf2;
 }
+.ordernum{
+	float:right; margin-right:20px;
+}
 .order-product {
     width: 1000px;
+    position:relative; left:0; right:0;
     display: flex;
-    flex-direction: row;
+    flex-direction: row; 
     border-bottom: 1px solid #ebebeb;
 }
 .imgdiv {
@@ -56,33 +60,43 @@
     overflow: hidden;
     margin: 15px 0 15px 25px;
 }
+.imgdiv img{
+	width:100%; height:100%;
+}
 .product-namediv {
     margin: 35px 0 0 70px;
 }
 .product-name {
     font-size: 20px;
     color: #292929;
+    font-weight:bold;
 }
 .product-quantitydiv {
     height: 50px;
     margin-top: 125px;
-    margin-left: 270px;
+    position:absolute; 
+    right:150px;
+
 }
 .product-quantity {
-    font-size: 16px;
     color: #505050;
+    text-align:right;
 }
 .product-price {
     font-size: 16px;
     color: #292929;
     font-weight: bold;
+    text-align:right;    
+	
 }
 .buttondiv {
     display: flex;
     flex-direction: column;
     height: 150px;
     margin-top: 25px;
-    margin-left: 55px;
+	position:absolute; right:20px;
+    float:right;
+  
 }
 .order-button {
     width: 100px;

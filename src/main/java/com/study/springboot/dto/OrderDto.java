@@ -25,6 +25,7 @@ public class OrderDto {
 	private String product_name;
 	private String product_image;
 	private int product_price;
+	private int order_price;
 	private int basket_idx;
 	private int basket_count;
 	private int basket_pd_idx;

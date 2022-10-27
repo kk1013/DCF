@@ -80,7 +80,7 @@
         
     }
     .content-wrap tbody tr td:first-child{           
-        width:60px; 
+        width:90px; 
     }
     .content-wrap tbody tr td:nth-child(2){
       width: 130px;
@@ -109,3 +109,7 @@
         border-right: none;
         width:120px; 
     } 
+    .row{
+    	margin-top:20px;
+    	margin-left:280px;
+    }

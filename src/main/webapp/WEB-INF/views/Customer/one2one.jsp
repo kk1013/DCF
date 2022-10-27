@@ -58,7 +58,7 @@
             </div>
             
             <div class="onetoone-button">
-                <button class="onetoone-cancel">취소</button>
+                <input type="button" class="onetoone-cancel" onclick="javascript:history.back();" value="취소">
                 <input type="submit" class="onetoone-submit" value="등록하기">
             </div>
 

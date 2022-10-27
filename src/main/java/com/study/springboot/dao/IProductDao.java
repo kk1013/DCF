@@ -10,7 +10,7 @@ import com.study.springboot.dto.ProductDto;
 public interface IProductDao {
 	public List<ProductDto> sample_list_dog();
 	public List<ProductDto> sample_list_cat();
-	public List<ProductDto> list();
+	public List<ProductDto> list(String startRowNum, String endRowNum);
 	public List<ProductDto> product_list_snack();
 	public List<ProductDto> product_list_food();
 	public ProductDto product_action( int product_idx);

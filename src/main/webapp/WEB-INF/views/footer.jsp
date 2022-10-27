@@ -30,11 +30,15 @@
         </div>
         
         <div id="sns" class="footer-content">
-            <a href="#"><img src="/img/icons/youtube.png" ></a>
-            <a href="#"><img src="/img/icons/facebook.png"></a><br>
-            <a href="#"><img src="/img/icons/kakao.png"></a>
-            <a href="#"><img src="/img/icons/instagram.png"></a>
-            <a href="#"><img src="/img/icons/twitter.png"></a>
+        	<div>
+	            <a href="#"><img src="/img/icons/youtube.png" ></a>
+	            <a href="#"><img src="/img/icons/facebook.png"></a><br>	
+        	</div>
+        	<div>
+	            <a href="#"><img src="/img/icons/kakao.png"></a>
+	            <a href="#"><img src="/img/icons/instagram.png"></a>
+	            <a href="#"><img src="/img/icons/twitter.png"></a>
+        	</div>
         </div>
     </div>
 </div>

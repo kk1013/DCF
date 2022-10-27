@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.study.springboot.dto.DeliveryDto;
 import com.study.springboot.dto.OrderDto;
 
 @Mapper
@@ -13,6 +14,9 @@ public interface IOrderDao {
 	public int afterDTO();
 	public int cancelDTO();
 	public int orderAllDTO();
+	public int delete( int basket_idx );
+	public List<DeliveryDto> product_select( int idx );
+	public List<OrderDto> Etc_( int idx );
 	public List<OrderDto> order_list(String startRowNum, String endRowNum);
 	public OrderDto single_select(int order_detail_idx);
 	public List<OrderDto> product(int order_idx);

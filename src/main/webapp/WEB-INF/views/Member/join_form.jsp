@@ -49,7 +49,7 @@
                             비밀번호
                         </td>
                         <td>
-                            <input class="joinform-input" type="text" name="user_pw" id="user_pw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="비밀번호 입력" ><br>
+                            <input class="joinform-input" type="text" name="user_pw" id="user_pw" pattern="(?=.*\d)(?=.*[a-z])(?=.*).{8,}" placeholder="비밀번호 입력" ><br>
                             
                         </td>
                     </tr>
@@ -69,7 +69,7 @@
                         숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식var regex = /^[A-Za-z0-9]{6,12}$/;
  -->
                         <td>
-                            <input class="joinform-input" type="text" name="user_pw_check" id="user_pw_check" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="비밀번호 재입력" >
+                            <input class="joinform-input" type="text" name="user_pw_check" id="user_pw_check" pattern="(?=.*\d)(?=.*[a-z])(?=.*).{8,}" placeholder="비밀번호 재입력" >
                         </td>
                     </tr>
                     <tr class="joinform-tr">
@@ -83,8 +83,7 @@
                     <tr>
                         <td></td>
                         <td class="joinform-check">
-                            <input type="checkbox" name="user_email_receive" id="yellowCheckbox1" class="checkinput">
-                            
+                            <input type="checkbox" name="user_email_receive" id="yellowCheckbox1" class="checkinput" value="1">
                             <label for="yellowCheckbox1"  class="yellowCheckbox"></label> <span class="joinform-span">정보/이벤트 SMS 수신에 동의합니다.</span>
                         </td>
                     </tr>

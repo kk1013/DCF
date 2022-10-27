@@ -753,9 +753,9 @@ public class MyController {
 	@RequestMapping("/mypage")
 	public String mypage(HttpServletRequest request, Model model) {
 		int idx = (int) request.getSession().getAttribute("user_idx");
-		int order_status0 = iOrderdao.beforeDTO();
-		int order_status1 = iOrderdao.duringDTO();
-		int order_status2 = iOrderdao.afterDTO();
+		int order_status0 = iOrderdao.before(idx);
+		int order_status1 = iOrderdao.during(idx);
+		int order_status2 = iOrderdao.after(idx);
 		List<UsersDto> mypage = iUsersdao.mypage(idx);
 		model.addAttribute("mypage_name", mypage);
 		model.addAttribute("before", order_status0 );

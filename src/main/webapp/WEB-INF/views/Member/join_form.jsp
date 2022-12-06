@@ -110,7 +110,7 @@
                             성별
                         </td>
                         <td class="joinform-check2">
-                            <input type="radio" name="user_gender" id="yellowCheckbox2" class="checkinput" value="0" checked />
+                            <input type="radio" name="user_gender" id="yellowCheckbox2" class="checkinput" value="0">
                             <label for="yellowCheckbox2" class="yellowCheckbox"></label> <span class="joinform-span">여자</span>
                             <input type="radio" name="user_gender" id="yellowCheckbox3" class="checkinput" value="1">
                             <label for="yellowCheckbox3" class="yellowCheckbox"></label> <span class="joinform-span">남자</span>

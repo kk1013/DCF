@@ -17,15 +17,15 @@
             <input type="button" name="type" class="type-button" id="right-button" value="cat">
         </div>
         <div id="samplepage-sample">
-            <table class="table dog " style="width: 1080px;">
+            <table class="table dog ">
                 	<c:forEach var="dog" items="${ dog }">
-                <tr style="width: 20%; float: left;" onclick="location.href='product_action?product_idx=${ dog.product_idx }'">
+                <tr onclick="location.href='product_action?product_idx=${ dog.product_idx }'">
                 	<td>
                         <div class="sample-product">
                             <img src="../upload/${ dog.product_image }" class="product" alt="사료8">
                         </div>
                         <p class="product-name">${ dog.product_name }</p>
-                        <p class="price">${ dog.product_price }</p>
+                        <p class="price"><fmt:formatNumber value="${ dog.product_price }" pattern="###,###"/></p>
                      </td>
                 </tr>
 					</c:forEach>
@@ -38,7 +38,7 @@
                             <img src="../upload/${ cat.product_image }" class="product" alt="사료8">
                         </div>
                         <p class="product-name">${ cat.product_name }</p>
-                        <p class="price">${ cat.product_price }</p>
+                        <p class="price"><fmt:formatNumber value="${cat.product_price}" pattern="###,###"/></p>
                      </td>
                 </tr>
 					</c:forEach>

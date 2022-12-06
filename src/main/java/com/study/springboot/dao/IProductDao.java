@@ -21,12 +21,12 @@ public interface IProductDao {
 	public int insertProduct( ProductDto dto );
 	public List<ProductDto> newlist_dog();
 	public List<ProductDto> newlist_cat();
-	public List<ProductDto> product_list_dog(String startRowNum, String endRowNum);
-	public List<ProductDto> product_list_dog_food(String startRowNum, String endRowNum);
-	public List<ProductDto> product_list_dog_snack(String startRowNum, String endRowNum);
-	public List<ProductDto> product_list_cat(String startRowNum, String endRowNum);
-	public List<ProductDto> product_list_cat_food(String startRowNum, String endRowNum);
-	public List<ProductDto> product_list_cat_snack(String startRowNum, String endRowNum);
+	public List<ProductDto> product_list_dog();
+	public List<ProductDto> product_list_dog_food();
+	public List<ProductDto> product_list_dog_snack();
+	public List<ProductDto> product_list_cat();
+	public List<ProductDto> product_list_cat_food();
+	public List<ProductDto> product_list_cat_snack();
 	public List<ProductDto> product_list_best();
 	public List<ProductDto> product_list_best_food();
 	public List<ProductDto> product_list_best_snack();

@@ -51,25 +51,15 @@
 	</select>
 	
 	<select id="product_list_dog" resultType="com.study.springboot.dto.ProductDto">
-	      SELECT * FROM (
-        		SELECT temp_table.*, ROWNUM as rnum FROM (
-    				SELECT * FROM dcf_product WHERE product_animal = 0
-               ) temp_table ) WHERE RNUM BETWEEN #{param1} AND #{param2}
+	  SELECT * FROM dcf_product WHERE product_animal = 0
 	</select>
 	
 	<select id="product_list_dog_food" resultType="com.study.springboot.dto.ProductDto">
-	  SELECT * FROM (
-        		SELECT temp_table.*, ROWNUM as rnum FROM (
-    				SELECT * FROM dcf_product WHERE product_animal = 0 AND product_category_type = 0
-               ) temp_table ) WHERE RNUM BETWEEN #{param1} AND #{param2}
+	  SELECT * FROM dcf_product WHERE product_animal = 0 AND product_category_type = 0
 	</select>
 	
 	<select id="product_list_dog_snack" resultType="com.study.springboot.dto.ProductDto">
-	  	  SELECT * FROM (
-        		SELECT temp_table.*, ROWNUM as rnum FROM (
-    				SELECT * FROM dcf_product WHERE product_animal = 0 AND product_category_type = 1
-               ) temp_table ) WHERE RNUM BETWEEN #{param1} AND #{param2}
-	  
+	  SELECT * FROM dcf_product WHERE product_animal = 0 AND product_category_type = 1
 	</select>
 	
 	<select id="product_list_best" resultType="com.study.springboot.dto.ProductDto">
@@ -85,26 +75,15 @@
 	</select>
 	
 	<select id="product_list_cat" resultType="com.study.springboot.dto.ProductDto">
-		  	  SELECT * FROM (
-        		SELECT temp_table.*, ROWNUM as rnum FROM (
-    				SELECT * FROM dcf_product WHERE product_animal = 1
-               ) temp_table ) WHERE RNUM BETWEEN #{param1} AND #{param2}
+	  SELECT * FROM dcf_product WHERE product_animal = 1
 	</select>
 	
 	<select id="product_list_cat_food" resultType="com.study.springboot.dto.ProductDto">
-			SELECT * FROM (
-        		SELECT temp_table.*, ROWNUM as rnum FROM (
-    				SELECT * FROM dcf_product WHERE product_animal = 1 AND product_category_type = 0
-               ) temp_table ) WHERE RNUM BETWEEN #{param1} AND #{param2}
-	  
+	  SELECT * FROM dcf_product WHERE product_animal = 1 AND product_category_type = 0
 	</select>
 	
 	<select id="product_list_cat_snack" resultType="com.study.springboot.dto.ProductDto">
-				SELECT * FROM (
-        		SELECT temp_table.*, ROWNUM as rnum FROM (
-    				SELECT * FROM dcf_product WHERE product_animal = 1 AND product_category_type = 1
-               ) temp_table ) WHERE RNUM BETWEEN #{param1} AND #{param2}
-	  
+	  SELECT * FROM dcf_product WHERE product_animal = 1 AND product_category_type = 1
 	</select>
 	
 	<select id="product_condition" resultType="com.study.springboot.dto.ProductDto">
@@ -148,7 +127,6 @@
 	  product_feed_type=#{ product_feed_type },
 	  product_size=#{ product_size },
 	  product_animal=#{ product_animal },
-	  product_category_type=#{ product_category_type },
 	  product_new=#{ product_new },
 	  product_best=#{ product_best },
 	  product_sample=#{ product_sample }

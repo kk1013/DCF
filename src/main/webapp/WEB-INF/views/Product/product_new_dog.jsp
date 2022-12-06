@@ -19,15 +19,15 @@
     </form>
         </div>
         <div id="samplepage-sample">
-            <table id="product_new-table" style="width:1080px;">
+            <table id="product_new-table">
             	<c:forEach var="list" items="${newlist}">
-                <tr style="width:25%; float:left;" >
+                <tr onclick="location.href='product_action?product_idx=${ list.product_idx }'">
                     <td>
                         <div class="sample-product">
                             <img src="../upload/${ list.product_image }" alt="사료1">
                         </div>
                         <p class="product-name">${ list.product_name }</p>
-                        <p class="price">${ list.product_price }원</p>
+                        <p class="price"><fmt:formatNumber value="${list.product_price}" pattern="###,###"/>원</p>
                     </td>                   
                 </tr>
                  </c:forEach>

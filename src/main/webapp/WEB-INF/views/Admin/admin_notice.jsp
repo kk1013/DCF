@@ -63,26 +63,26 @@
 		  <ul class="pagination">
 		   
 		    <li class="<c:if test="${ page == 1 } ">disabled</c:if>">
-		    	<a href="/admin_order_list?page=${page-1}">&#60;</a>
+		    	<a href="/admin_notice?page=${page-1}">&#60;</a>
 		    </li>
 		   
 		    <li class="<c:if test="${ page == 1 }">pageNaveClick</c:if>">
-		    	<a class="" href="/admin_order_list?page=1">1</a>
+		    	<a class="" href="/admin_notice?page=1">1</a>
 		    </li>
 		    <li class="<c:if test="${ page == 2 }">pageNaveClick</c:if>">
-		    	<a class="" href="/admin_order_list?page=2">2</a>
+		    	<a class="" href="/admin_notice?page=2">2</a>
 		    </li>
 		    <li class="<c:if test="${ page == 3 }">pageNaveClick</c:if>">
-		    	<a class="" href="/admin_order_list?page=3">3</a>
+		    	<a class="" href="/admin_notice?page=3">3</a>
 		    </li>
 		    <li class="<c:if test="${ page == 4 }">pageNaveClick</c:if>">
-		    	<a class="" href="/admin_order_list?page=4">4</a>
+		    	<a class="" href="/admin_notice?page=4">4</a>
 		    </li>
 		    <li class="<c:if test="${ page == 5 }">pageNaveClick</c:if>">
-		    	<a class="" href="/admin_order_list?page=5">5</a>
+		    	<a class="" href="/admin_notice?page=5">5</a>
 		    </li>
 		    <li class="<c:if test="${ page == 5 }">disabled</c:if>">
-		    	<a class="" href="/admin_order_list?page=${page+1}">&gt;</a>
+		    	<a class="" href="/admin_notice?page=${page+1}">&gt;</a>
 		    </li>
 		  </ul>
 		</div>

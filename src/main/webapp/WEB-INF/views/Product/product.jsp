@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <link rel="stylesheet" href="/css/product/product.css">
   <link rel="stylesheet" href="/css/pagenav.css">
 <div id="product-wrap">
@@ -112,7 +113,7 @@
             </div>
             <div id="productpage-product">
                 <div id="product-product">
-            <table class="table all" style="width: 710px;">
+            <table class="table all">
                  <c:forEach var="all" items="${ all }">
                 <tr style="width: 33.3%; float: left;" onclick="location.href='product_action?product_idx=${ all.product_idx }'">
                 	<td>
@@ -120,12 +121,12 @@
                             <img src="../upload/${ all.product_image }" class="product" alt="사료8">
                         </div>
                         <p class="product-name">${ all.product_name }</p>
-                        <p class="price">${ all.product_price }</p>
+                        <p class="price"><fmt:formatNumber value="${all.product_price}" pattern="###,###"/>원</p>
                      </td>
                 </tr>
 					</c:forEach>
             </table>
-           <table class="table food ds-none" style="width: 710px;">
+           <table class="table food ds-none">
                  <c:forEach var="food" items="${ food }">
                 <tr style="width: 33%; float: left;" onclick="location.href='product_action?product_idx=${ food.product_idx }'">
                 	<td>
@@ -133,12 +134,12 @@
                             <img src="../upload/${ food.product_image }" class="product" alt="사료8">
                         </div>
                         <p class="product-name">${ food.product_name }</p>
-                        <p class="price">${ food.product_price }</p>
+                        <p class="price"><fmt:formatNumber value="${food.product_price}" pattern="###,###"/>원</p>
                      </td>
                 </tr>
 					</c:forEach>
             </table>
-             <table class="table snack ds-none" style="width: 710px;">
+             <table class="table snack ds-none">
                 	<c:forEach var="snack" items="${ snack }">
                 <tr style="width: 33%; float: left;" onclick="location.href='product_action?product_idx=${ snack.product_idx }'">
                 	<td>
@@ -146,7 +147,7 @@
                             <img src="../upload/${ snack.product_image }" class="product" alt="사료8">
                         </div>
                         <p class="product-name">${ snack.product_name }</p>
-                        <p class="price">${ snack.product_price }</p>
+                        <p class="price"><fmt:formatNumber value="${snack.product_price}" pattern="###,###"/>원</p>
                      </td>
                 </tr>
 					</c:forEach>
@@ -226,189 +227,189 @@
 			if(dog == 0 && cat == 0){
 				if(type_0_chk == false && type_1_chk == false || type_0_chk == true && type_1_chk == true ){
 					if(size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
 					}else if(size_0_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1";
-					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=2";
-					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=3";
-					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2";
-					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=4";
-					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=3&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1";
-					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2";
-					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=3";
-					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=3";
-					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=4";
-					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=5";
+					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=4&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2";
-					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=3";
-					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=4";
-					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=3&product_size=5";
+					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=3";
-					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=3&product_size=4";
-					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=3&product_size=5";
+					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=3&product_size=4&product_size=5";
+					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=4";
+					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=4&product_size=5";
+					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=5";
 					}
 				}else if(type_0_chk == true && type_1_chk == false){
 					if(size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
 					}else if(size_0_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1";
-					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=2";
-					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=3";
-					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2";
-					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=4";
-					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=3&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=1";
-					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=2";
-					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=3";
-					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=3";
-					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=4";
-					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=5";
+					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=4&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=2";
-					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=2&product_size=3";
-					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=2&product_size=4";
-					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=2&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=2&product_size=3&product_size=4";
-					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=2&product_size=3&product_size=5";
+					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=2&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=3";
-					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=3&product_size=4";
-					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=3&product_size=5";
+					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=3&product_size=4&product_size=5";
+					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=4";
+					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=4&product_size=5";
+					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=0&product_size=5";
 					}
 				}else if(type_1_chk == true && type_0_chk == false){
 					if(size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
 					}else if(size_0_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1";
-					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=2";
-					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=3";
-					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2";
-					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=4";
-					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=3&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
-						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=1";
-					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=2";
-					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=3";
-					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=3";
-					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=4";
-					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=5";
+					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=4&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=2";
-					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=2&product_size=3";
-					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=2&product_size=4";
-					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=2&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=2&product_size=3&product_size=5";
+					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=2&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=3";
-					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=3&product_size=4";
-					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=3&product_size=5";
+					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=3&product_size=4&product_size=5";
+					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=4";
+					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=4&product_size=5";
+					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_animal=1&product_age="+age+"&product_type=1&product_size=5";
 					}
 				}
 			}
@@ -418,189 +419,189 @@
 			if(dog == 1){
 				if(type_0_chk == false && type_1_chk == false || type_0_chk == true && type_1_chk == true ){
 					if(size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
 					}else if(size_0_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1";
-					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=2";
-					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=3";
-					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2";
-					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=4";
-					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=3&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=1";
-					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2";
-					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=3";
-					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=3";
-					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=4";
-					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=5";
+					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=4&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=2";
-					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=3";
-					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=4";
-					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=3&product_size=5";
+					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=3";
-					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=3&product_size=4";
-					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=3&product_size=5";
+					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=3&product_size=4&product_size=5";
+					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=4";
+					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=4&product_size=5";
+					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_type=1&product_size=5";
 					}
 				}else if(type_0_chk == true && type_1_chk == false){
 					if(size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
 					}else if(size_0_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0&product_size=1";
-					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0&product_size=2";
-					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0&product_size=3";
-					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2";
-					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=4";
-					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0&product_size=3&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=1";
-					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=1&product_size=2";
-					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=1&product_size=3";
-					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=1&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=1&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=3";
-					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=4";
-					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=5";
+					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=1&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=1&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=1&product_size=4&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=2";
-					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=2&product_size=3";
-					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=2&product_size=4";
-					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=2&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=2&product_size=3&product_size=4";
-					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=2&product_size=3&product_size=5";
+					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=2&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=3";
-					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=3&product_size=4";
-					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=3&product_size=5";
+					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=3&product_size=4&product_size=5";
+					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=4";
+					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=4&product_size=5";
+					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=0&product_size=5";
 					}
 				}else if(type_1_chk == true && type_0_chk == false){
 					if(size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
 					}else if(size_0_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0&product_size=1";
-					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0&product_size=2";
-					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0&product_size=3";
-					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2";
-					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=4";
-					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0&product_size=3&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
-						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=1";
-					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=1&product_size=2";
-					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=1&product_size=3";
-					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=1&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=1&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=3";
-					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=4";
-					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=5";
+					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=1&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=1&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=1&product_size=4&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=2";
-					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=2&product_size=3";
-					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=2&product_size=4";
-					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=2&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=2&product_size=3&product_size=5";
+					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=2&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=3";
-					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=3&product_size=4";
-					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=3&product_size=5";
+					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=3&product_size=4&product_size=5";
+					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=4";
+					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=4&product_size=5";
+					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=0&product_age="+age+"&product_type=1&product_size=5";
 					}
 				}
 			}
@@ -610,189 +611,189 @@
 			if(cat ==1){
 				if(type_0_chk == false && type_1_chk == false || type_0_chk == true && type_1_chk == true ){
 					if(size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
 					}else if(size_0_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1";
-					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=2";
-					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=3";
-					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2";
-					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=4";
-					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=3&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1";
-					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2";
-					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=3";
-					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=3";
-					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=4";
-					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=5";
+					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=4&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2";
-					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=3";
-					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=4";
-					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=3&product_size=5";
+					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=3";
-					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=3&product_size=4";
-					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=3&product_size=5";
+					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=3&product_size=4&product_size=5";
+					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=4";
+					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=4&product_size=5";
+					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_type=1&product_size=5";
 					}
 				}else if(type_0_chk == true && type_1_chk == false){
 					if(size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
 					}else if(size_0_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1";
-					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=2";
-					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=3";
-					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2";
-					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=4";
-					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=3&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=1";
-					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=2";
-					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=3";
-					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=3";
-					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=4";
-					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=5";
+					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=4&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=2";
-					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=2&product_size=3";
-					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=2&product_size=4";
-					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=2&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=2&product_size=3&product_size=4";
-					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=2&product_size=3&product_size=5";
+					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=2&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=3";
-					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=3&product_size=4";
-					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=3&product_size=5";
+					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=3&product_size=4&product_size=5";
+					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=4";
+					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=4&product_size=5";
+					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=0&product_size=5";
 					}
 				}else if(type_1_chk == true && type_0_chk == false){
 					if(size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
 					}else if(size_0_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1";
-					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=2";
-					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=3";
-					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2";
-					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=4";
-					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=3&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2&product_size=4";
-					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
-						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=0&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=1";
-					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=2";
-					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=3";
-					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_3_chk == true && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=3";
-					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_3_chk == true && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=4";
-					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_4_chk == true && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=5";
+					}else if(size_0_chk == true && size_2_chk == true && size_3_chk == true && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=3&product_size=4";
-					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+					}else if(size_0_chk == true && size_2_chk == true && size_4_chk == true && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_3_chk == true && size_4_chk == true && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=4&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_4_chk == true && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=3&product_size=5";
+					}else if(size_0_chk == true && size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=1&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=2";
-					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_0_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=2&product_size=3";
-					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+					}else if(size_1_chk == true && size_3_chk == true && size_0_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=2&product_size=4";
-					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+					}else if(size_1_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=2&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_0_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=2&product_size=3&product_size=4";
-					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
+					}else if(size_1_chk == true && size_2_chk == true && size_4_chk == true && size_0_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=2&product_size=3&product_size=5";
+					}else if(size_1_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=2&product_size=4&product_size=5";
+					}else if(size_1_chk == true && size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=2&product_size=3&product_size=4&product_size=5";
+					}else if(size_2_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=3";
-					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+					}else if(size_2_chk == true && size_3_chk == true && size_0_chk == false && size_1_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=3&product_size=4";
-					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+					}else if(size_2_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=3&product_size=5";
+					}else if(size_2_chk == true && size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=3&product_size=4&product_size=5";
+					}else if(size_3_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_4_chk == false){
 						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=4";
+					}else if(size_3_chk == true && size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=4&product_size=5";
+					}else if(size_4_chk == true && size_0_chk == false && size_1_chk == false && size_2_chk == false && size_3_chk == false){
+						location.href="product_condition?product_animal=1&product_age="+age+"&product_type=1&product_size=5";
 					}
 				}
 			}

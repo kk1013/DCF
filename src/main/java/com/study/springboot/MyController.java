@@ -280,9 +280,23 @@ public class MyController {
 									@RequestParam("product_size") List<String> size, HttpServletRequest request, Model model) {
 		if(age >= 1 & age <=19){age = 1;} else if(age >= 20 & age <= 31){age = 2;} else if(age == 32){age = 3;}	else if(age == 33){age = 4;} else if(age == 34){age = 5;} else if(age == 35){age = 6;} else if(age == 36){age = 7;}	else if(age == 37){age = 8;} else if(age == 38){age = 9;} else if(age == 39){age = 10;} else if(age == 40){age = 11;}
 		String str = "";
-		for(int i=0; i<animal.size(); i++) {if(Integer.parseInt(animal.get(i)) == 0 || Integer.parseInt(animal.get(i)) == 1) {str += "product_animal = " + animal.get(i); if(i != animal.size()-1) {str += " OR ";}	}	} str += ") ";
+		for(int i=0; i<animal.size(); i++) {
+			if(Integer.parseInt(animal.get(i)) == 0 || Integer.parseInt(animal.get(i)) == 1) {
+				str += "product_animal = " + animal.get(i); 
+				if(i != animal.size()-1) {
+					str += " OR ";
+				}	
+			}	
+		} str += ") ";
 		if(age == 0) {str += "AND (";	for(int j=0; j<type.size(); j++) {if(Integer.parseInt(type.get(j)) == 0 || Integer.parseInt(type.get(j)) == 1) {str += "product_feed_type = " + type.get(j);	if(j != type.size()-1) {str += " OR ";}	}	} str += ") AND (";
-		for(int k=0; k<size.size(); k++) {if(Integer.parseInt(size.get(k)) == 0 || Integer.parseInt(size.get(k)) == 1 || Integer.parseInt(size.get(k)) == 2 || Integer.parseInt(size.get(k)) == 3 || Integer.parseInt(size.get(k)) == 4) {str += "product_size = " + size.get(k);	if(k != size.size()-1) {str += " OR ";}	}	}str += ")";}
+		for(int k=0; k<size.size(); k++) {
+			if(Integer.parseInt(size.get(k)) == 0 || Integer.parseInt(size.get(k)) == 1 || Integer.parseInt(size.get(k)) == 2 || Integer.parseInt(size.get(k)) == 3 || Integer.parseInt(size.get(k)) == 4 || Integer.parseInt(size.get(k)) == 5){
+				str += "product_size = " + size.get(k);	
+				if(k != size.size()-1) {
+					str += " OR ";
+				}	
+			}
+		}str += ")";}
 		else {str += "AND product_age = " + age + " AND (";	for(int j=0; j<type.size(); j++) {if(Integer.parseInt(type.get(j)) == 0 || Integer.parseInt(type.get(j)) == 1) {str += "product_feed_type = " + type.get(j);	if(j != type.size()-1) {str += " OR ";}	}	} str += ") AND (";
 		for(int k=0; k<size.size(); k++) {if(Integer.parseInt(size.get(k)) == 0 || Integer.parseInt(size.get(k)) == 1 || Integer.parseInt(size.get(k)) == 2 || Integer.parseInt(size.get(k)) == 3 || Integer.parseInt(size.get(k)) == 4) {str += "product_size = " + size.get(k);	if(k != size.size()-1) {str += " OR ";}	}	}str += ")";}
 		List<ProductDto> product_condition = iProductdao.product_condition(str);		
@@ -320,24 +334,10 @@ public class MyController {
 	
 	// 반려견 페이지
 	@RequestMapping("/product_dog")
-	public String product_dog(
-			HttpServletRequest request,
-			@RequestParam(value="page",required=false) String page,
-			Model model) {
-		if( page == null ) {
-			page = "1";
-		}
-		
-		model.addAttribute("page", page);
-		
-		int num_page_no = Integer.parseInt( page ); //page번호 1,2,3,4
-		int num_page_size = 15; //한페이지당 Row갯수
-		int startRowNum = (num_page_no - 1) * num_page_size + 1; // 1, 6, 11 페이지 시작 줄번호
-		int endRowNum = (num_page_no * num_page_size);           // 5, 10, 15 페이지 끝 줄번호
-		List<ProductDto> dog = iProductdao.product_list_dog( String.valueOf(startRowNum), String.valueOf(endRowNum) );
-		List<ProductDto> dog_food = iProductdao.product_list_dog_food( String.valueOf(startRowNum), String.valueOf(endRowNum) );
-		List<ProductDto> dog_snack = iProductdao.product_list_dog_snack( String.valueOf(startRowNum), String.valueOf(endRowNum) );
-		model.addAttribute("pagenav", "product_dog");
+	public String product_dog(HttpServletRequest request, Model model) {
+		List<ProductDto> dog = iProductdao.product_list_dog();
+		List<ProductDto> dog_food = iProductdao.product_list_dog_food();
+		List<ProductDto> dog_snack = iProductdao.product_list_dog_snack();
 		model.addAttribute("all", dog);
 		model.addAttribute("food", dog_food);
 		model.addAttribute("snack", dog_snack);		
@@ -347,23 +347,10 @@ public class MyController {
 	
 	// 반려묘 페이지
 	@RequestMapping("/product_cat")
-	public String product_cat(HttpServletRequest request,
-			@RequestParam(value="page",required=false) String page,
-			Model model) {
-		if( page == null ) {
-			page = "1";
-		}
-		
-		model.addAttribute("page", page);
-		
-		int num_page_no = Integer.parseInt( page ); //page번호 1,2,3,4
-		int num_page_size = 15; //한페이지당 Row갯수
-		int startRowNum = (num_page_no - 1) * num_page_size + 1; // 1, 6, 11 페이지 시작 줄번호
-		int endRowNum = (num_page_no * num_page_size);           // 5, 10, 15 페이지 끝 줄번호
-		List<ProductDto> cat = iProductdao.product_list_cat( String.valueOf(startRowNum), String.valueOf(endRowNum) );
-		List<ProductDto> cat_food = iProductdao.product_list_cat_food( String.valueOf(startRowNum), String.valueOf(endRowNum) );
-		List<ProductDto> cat_snack = iProductdao.product_list_cat_snack( String.valueOf(startRowNum), String.valueOf(endRowNum) );
-		model.addAttribute("pagenav", "product_cat");
+	public String product_cat(HttpServletRequest request, Model model) {
+		List<ProductDto> cat = iProductdao.product_list_cat();
+		List<ProductDto> cat_food = iProductdao.product_list_cat_food();
+		List<ProductDto> cat_snack = iProductdao.product_list_cat_snack();
 		model.addAttribute("all", cat);
 		model.addAttribute("food", cat_food);
 		model.addAttribute("snack", cat_snack);		
@@ -867,12 +854,6 @@ public class MyController {
 		return "index";
 	}
 	
-	//어드민 회원정보
-		@RequestMapping("/admin_member")
-		public String admin_member(Model model) {
-			model.addAttribute("mainPage", "../Admin/admin_member.jsp");
-			return "index";
-		}
 	//회원정보연결_상세보기 페이지
 	@RequestMapping("/admin_member_detail")
 	public String admin_member_detail(

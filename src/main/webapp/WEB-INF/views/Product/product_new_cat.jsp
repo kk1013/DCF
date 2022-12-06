@@ -21,7 +21,7 @@
         <div id="samplepage-sample">
             <table id="product_new-table" style="width:1080px;">
             	<c:forEach var="list" items="${newlist}">
-                <tr style="width:25%; float:left;">
+                <tr style="width:25%; float:left;" onclick="location.href='product_action?product_idx=${ list.product_idx }'">
                     <td>
                         <div class="sample-product">
                             <img src="../upload/${ list.product_image }" alt="사료1">

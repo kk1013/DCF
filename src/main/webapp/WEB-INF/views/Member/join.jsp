@@ -77,21 +77,13 @@
 			if($("#yellowCheckbox1").is(":checked")){
         $("input[name=checkBox]").prop("checked", true);
         for(var i = 0 ; i < provision.length; i++){
-          if(provision[i].classList.contains('display-none') == false){
-            provision[i].classList.add('display-none');
-          }else{
-            provision[i].classList.remove('display-none');
-          }
+        	provision[i].classList.add('display-none');
         }
       }
 			else{
         $("input[name=checkBox]").prop("checked", false); 
         for(var i = 0 ; i < provision.length; i++){
-          if(provision[i].classList.contains('display-none') == false){
-            provision[i].classList.add('display-none');
-          }else{
-            provision[i].classList.remove('display-none');
-          }
+        	provision[i].classList.remove('display-none');
         }
       }
 		});

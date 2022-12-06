@@ -90,7 +90,7 @@
             </div>
         </div>
         <div class="orderbuttondiv oa-div13">
-            <input class="oa-div13-button oa-div13-1" type="button" value="목록">
+            <input class="oa-div13-button oa-div13-1" type="button" onclick="location.href='admin_order_list'" value="목록">
             <input class="oa-div13-button oa-div13-2" type="button" value="정보수정">
         </div>
     </div>
